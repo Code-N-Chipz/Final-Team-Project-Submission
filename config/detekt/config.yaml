@@ -1,0 +1,212 @@
+# config/detekt/config.yml
+# Strict, commented Detekt configuration for Android/Kotlin multi-module repos.
+
+config:
+  # Validate that this file references existing rules/options.
+  validation: true
+
+build:
+  # Fail the build on any finding (set >0 to allow some debt in CI).
+  maxIssues: 0
+  # Also count findings that could be auto-corrected by formatting.
+  excludeCorrectable: false
+
+# Enable standard reports for CI and local review.
+reports:
+  xml:
+    enabled: true
+  html:
+    enabled: true
+  sarif:
+    enabled: true
+
+# Optional (prefer per-module baselines):
+# baseline:
+#   path: detekt-baseline.xml
+
+# Common glob for test and build folders to reduce noise.
+_test_excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+
+# ---- Rule sets ----
+
+potential-bugs:
+  active: true
+  # equals() without matching hashCode()
+  EqualsHashCode:
+    active: true
+  # Locale-sensitive ops without specifying Locale
+  ImplicitDefaultLocale:
+    active: true
+  # when-expression not exhaustive for sealed/enums
+  MissingWhenCase:
+    active: true
+  # Dangerous lateinit uses (commonly noisy on Android) -> off by default
+  LateinitUsage:
+    active: false
+
+performance:
+  active: true
+  # Avoid spread operator on varargs (creates copies)
+  SpreadOperator:
+    active: true
+  # Prefer forEachIndexed or simple for loops on ranges
+  ForEachOnRange:
+    active: false
+  # Avoid unnecessary wrapper objects
+  UnnecessaryTemporaryInstantiation:
+    active: true
+
+exceptions:
+  active: true
+  # Avoid catching overly generic exceptions
+  TooGenericExceptionCaught:
+    active: true
+    # Allow in tests to simplify fixtures
+    excludes: *test_excludes
+    exceptionNames:
+      - Exception
+      - RuntimeException
+      - Throwable
+  # Avoid throwing overly generic exceptions
+  TooGenericExceptionThrown:
+    active: true
+    excludes: *test_excludes
+    exceptionNames:
+      - Exception
+      - RuntimeException
+      - Throwable
+
+style:
+  active: true
+
+  # Discourage magic literals; allow common small values and in tests
+  MagicNumber:
+    active: true
+    excludes: *test_excludes
+    ignoreNumbers: [ -1, 0, 1, 2 ]
+    ignoreHashCodeFunction: true
+    ignoreAnnotation: true
+    ignorePropertyDeclaration: false
+
+  # Prefer explicit imports; handled by formatting plugin instead -> disable here
+  WildcardImport:
+    active: false
+
+  # Enforce one top-level declaration per file naming
+  Filename:
+    active: true
+
+  # Core line length rule disabled to avoid conflict with formatting.MaximumLineLength
+  MaxLineLength:
+    active: false
+
+  # Prefer explicit Unit return types only when meaningful
+  OptionalUnitReturn:
+    active: true
+
+  # Flag unused private members (helps remove dead code)
+  UnusedPrivateMember:
+    active: true
+    excludes: *test_excludes
+    allowedNames: [ '_', 'ignored', 'expected' ]
+
+naming:
+  active: true
+
+  # Function names in lowerCamelCase; allow @Composable for UI preview flexibility
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: [ 'Composable', 'Preview' ]
+    functionPattern: '^[a-z][A-Za-z0-9]*$'
+
+  # Top-level vals/vars naming
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '^[A-Z][_A-Z0-9]*$'
+    propertyPattern: '^[a-z][A-Za-z0-9]*$'
+
+  # Class/object/interface names in PascalCase
+  ClassNaming:
+    active: true
+    classPattern: '^[A-Z][A-Za-z0-9]*$'
+
+  # Package names in lower.case
+  PackageNaming:
+    active: true
+    packagePattern: '^[a-z]+(\.[a-z][a-z0-9]*)*$'
+
+complexity:
+  active: true
+
+  # Limit function length (lines)
+  LongMethod:
+    active: true
+    excludes: *test_excludes
+    threshold: 60
+    ignoreAnnotated: [ 'Composable' ]
+
+  # Limit number of parameters
+  LongParameterList:
+    active: true
+    excludes: *test_excludes
+    threshold: 6
+    ignoreDefaultParameters: true
+    ignoreAnnotated: [ 'Composable' ]
+
+  # Limit branching complexity
+  CyclomaticComplexMethod:
+    active: true
+    excludes: *test_excludes
+    threshold: 15
+
+  # Too many functions in files/classes increases cognitive load
+  TooManyFunctions:
+    active: true
+    excludes: *test_excludes
+    thresholdInFiles: 20
+    thresholdInClasses: 15
+    ignoreOverridden: true
+
+  # Complex boolean conditions hard to read
+  ComplexCondition:
+    active: true
+    threshold: 4
+
+coroutines:
+  active: true
+  # Avoid using GlobalScope
+  GlobalCoroutineUsage:
+    active: true
+  # Remove redundant suspend where not needed
+  RedundantSuspendModifier:
+    active: true
+
+# Formatting rules require the detekt-formatting plugin on the classpath:
+# detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
+formatting:
+  active: true
+  android: true
+  autoCorrect: true
+
+  # Enforce import order
+  ImportOrdering:
+    active: true
+
+  # Disallow wildcard imports (replaces style.WildcardImport)
+  NoWildcardImports:
+    active: true
+
+  # Enforce indentation and line length
+  Indentation:
+    active: true
+  MaximumLineLength:
+    active: true
+    maxLineLength: 120
+
+  # Keep a newline at end of file
+  FinalNewline:
+    active: true
+
+  # Consistent string template formatting
+  StringTemplate:
+    active: true
