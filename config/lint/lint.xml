@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+    <!-- Apply to all checks: ignore generated/build outputs -->
+    <issue id="all">
+        <ignore path="**/build/**" />
+        <ignore path="**/generated/**" />
+    </issue>
+
+    <!-- Fail CI on left-over debug markers like // STOPSHIP -->
+    <issue id="StopShip" severity="error" />
+
+    <!-- API level: using APIs above minSdk without guards -->
+    <issue id="NewApi" severity="error" />
+    <!-- API level: using inlined constants requiring higher API -->
+    <issue id="InlinedApi" severity="error" />
+    <!-- API level: obsolete or redundant SDK version checks -->
+    <issue id="ObsoleteSdkInt" severity="warning" />
+
+    <!-- Permissions: calling APIs that need permissions not declared/checked -->
+    <issue id="MissingPermission" severity="error" />
+    <!-- Permissions: using restricted/permission-protected APIs incorrectly -->
+    <issue id="ProtectedPermissions" severity="error" />
+
+    <!-- Security/manifest: exported components without proper protection -->
+    <issue id="ExportedReceiver" severity="error" />
+    <issue id="ExportedService" severity="error" />
+    <issue id="ExportedContentProvider" severity="error" />
+
+    <!-- Security: backups may leak user data; enforce opting out unless required -->
+    <issue id="AllowBackup" severity="error" />
+    <!-- Security: cleartext network traffic permitted in manifest/network config -->
+    <issue id="CleartextTrafficPermitted" severity="error" />
+    <!-- Security: creating world-readable files -->
+    <issue id="WorldReadableFiles" severity="error" />
+    <!-- Security: creating world-writable files -->
+    <issue id="WorldWritableFiles" severity="error" />
+    <!-- Security: ignoring SSL errors in WebView clients -->
+    <issue id="WebViewClientOnReceivedSslError" severity="error" />
+    <!-- Security: using deprecated GET_SIGNATURES instead of GET_SIGNING_CERTIFICATES -->
+    <issue id="PackageManagerGetSignatures" severity="error" />
+
+    <!-- i18n: hardcoded UI text instead of string resources -->
+    <issue id="HardcodedText" severity="error"/>
+    <!-- i18n: string concatenation instead of resources/format args -->
+    <issue id="SetTextI18n" severity="error" />
+    <!-- i18n/RTL: hardcoded LTR attributes like left/right -->
+    <issue id="RtlHardcoded" severity="error" />
+    <!-- i18n/RTL: missing supportsRtl in manifest or related issues -->
+    <issue id="RtlEnabled" severity="warning" />
+
+    <!-- Accessibility: missing contentDescription on non-decorative images -->
+    <issue id="ContentDescription" severity="error" />
+    <!-- Accessibility: labelFor relationships for form fields -->
+    <issue id="LabelFor" severity="error" />
+    <!-- Accessibility: clickable views without role/feedback helpers -->
+    <issue id="ClickableViewAccessibility" severity="warning" />
+    <!-- Accessibility: touch target size below recommended minimum -->
+    <issue id="TouchTargetSize" severity="warning" />
+
+    <!-- Resources: unused drawables, strings, layouts, etc. -->
+    <issue id="UnusedResources" severity="warning" />
+    <!-- Resources: unused view IDs -->
+    <issue id="UnusedIds" severity="warning" />
+    <!-- Resources: missing density-specific launcher icons -->
+    <issue id="IconMissingDensityFolder" severity="warning" />
+
+    <!-- Correctness: locale-sensitive ops without specifying Locale -->
+    <issue id="DefaultLocale" severity="error" />
+
+    <!-- Performance: prefer SparseArray over HashMap for int keys -->
+    <issue id="UseSparseArrays" severity="warning" />
+    <!-- Performance/correctness: not recycling TypedArray, Cursors, etc. -->
+    <issue id="Recycle" severity="error" />
+    <!-- Performance: object allocations inside drawing methods -->
+    <issue id="DrawAllocation" severity="warning" />
+
+    <!-- AndroidX/compat: prefer ContextCompat/AppCompat helpers for drawables -->
+    <issue id="UseCompatLoadingForDrawables" severity="warning" />
+
+    <!-- Build/Gradle: incompatible plugin/tooling versions -->
+    <issue id="GradleCompatible" severity="error" />
+    <!-- Build/Gradle: outdated dependencies available (informational) -->
+    <issue id="GradleDependency" severity="warning" />
+
+</lint>

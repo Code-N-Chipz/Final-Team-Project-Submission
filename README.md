@@ -259,7 +259,7 @@ CLEAN
 DATA + DOMAIN + UI (presentation)
 ## Data
 - fake data -> grab it from a repositoryImpl
-  - fake data -> called dto
+- fake data -> called dto
 - dto -> model mapper
 
 ## Domain
