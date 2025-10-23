@@ -18,10 +18,6 @@ build:
 
 
 # ---- Rule sets ----
-ktlint:
-  NewLineAtEndOfFile:
-    active: false
-
 potential-bugs:
   active: true
   # equals() without matching hashCode()
@@ -85,6 +81,9 @@ style:
     ignoreHashCodeFunction: true
     ignoreAnnotation: true
     ignorePropertyDeclaration: true # might need to be false
+
+  NewLineAtEndOfFile:
+    active: false
 
   # Prefer explicit imports; handled by formatting plugin instead -> disable here
   WildcardImport:
