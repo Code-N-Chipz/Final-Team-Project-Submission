@@ -115,9 +115,9 @@ naming:
 
   # Top-level vals/vars naming
   TopLevelPropertyNaming:
-    active: false
-    constantPattern: '^[A-Z][_A-Z0-9]*$'
-    propertyPattern: '^[a-z][A-Za-z0-9]*$'
+    active: true
+    constantPattern: '^[A-Z][_A-Z0-9]*'
+    propertyPattern: '^[a-z][A-Za-z0-9]*'
 
   # Class/object/interface names in PascalCase
   ClassNaming:
