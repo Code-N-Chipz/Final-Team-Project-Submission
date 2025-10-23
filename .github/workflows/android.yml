@@ -12,16 +12,16 @@ on:
 # permissions -> contents: read Sets the default GITHUB_TOKEN scope for this workflow to read‑only repo contents. 
 # It follows least‑privilege: actions can check out code and read files, but cannot push commits, create releases, or modify repo content via API.
 
-permissions:
-  contents: read
+#permissions:
+#  contents: read
 
 # concurrency Ensures only one run of this workflow per branch/tag executes at a time.
 # group: android-ci-${{ github.ref }} -> groups runs by ref (e.g., refs/heads/feature/pet), so different branches don’t cancel each other.
 # cancel-in-progress: true -> when a new run starts for the same group, any in‑progress run is canceled. This avoids wasting CI on outdated pushes.
 
-concurrency:
-  group: android-ci-${{ github.ref }}
-  cancel-in-progress: true
+#concurrency:
+#  group: android-ci-${{ github.ref }}
+#  cancel-in-progress: true
 
 jobs:
   lint:
@@ -56,6 +56,7 @@ jobs:
 
   detekt:
     name: Detekt
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
