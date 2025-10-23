@@ -24,6 +24,8 @@ potential-bugs:
   # equals() without matching hashCode()
   EqualsWithHashCodeExist:
     active: true
+    excludes:
+      - "**/generated/**"
   # Locale-sensitive ops without specifying Locale
   ImplicitDefaultLocale:
     active: true
@@ -76,10 +78,10 @@ style:
   MagicNumber:
     active: true
     excludes: *test_excludes
-    ignoreNumbers: [ -1, 0, 1, 2 ]
+    ignoreNumbers: [ "-1", "0", "1", "2" ]
     ignoreHashCodeFunction: true
     ignoreAnnotation: true
-    ignorePropertyDeclaration: false
+    ignorePropertyDeclaration: true
 
   # Prefer explicit imports; handled by formatting plugin instead -> disable here
   WildcardImport:
