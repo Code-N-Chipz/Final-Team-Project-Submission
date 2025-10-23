@@ -93,7 +93,7 @@ style:
   UnusedPrivateMember:
     active: true
     excludes: *test_excludes
-    allowedNames: [ '_', 'ignored', 'expected' ]
+    allowedNames: '^(?:_|ignored|expected)$'
 
 naming:
   active: true
