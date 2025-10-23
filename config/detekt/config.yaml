@@ -37,9 +37,6 @@ potential-bugs:
   # Locale-sensitive ops without specifying Locale
   ImplicitDefaultLocale:
     active: true
-  # when-expression not exhaustive for sealed/enums
-  MissingWhenCase:
-    active: true
   # Dangerous lateinit uses (commonly noisy on Android) -> off by default
   LateinitUsage:
     active: false
@@ -143,12 +140,13 @@ complexity:
     ignoreAnnotated: [ 'Composable' ]
 
   # Limit number of parameters
-  LongParameterList:
-    active: true
-    excludes: *test_excludes
-    threshold: 6
-    ignoreDefaultParameters: true
-    ignoreAnnotated: [ 'Composable' ]
+  # Deprecated -> functionThreshold and constructorThreshold
+#  LongParameterList:
+#    active: true
+#    excludes: *test_excludes
+#    threshold: 6
+#    ignoreDefaultParameters: true
+#    ignoreAnnotated: [ 'Composable' ]
 
   # Limit branching complexity
   CyclomaticComplexMethod:
