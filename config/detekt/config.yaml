@@ -101,6 +101,7 @@ style:
 
 naming:
   active: true
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
 
 #  # Ensure declaration names match configured patterns
   # might need to set a custom pattern for test functions if used
@@ -116,6 +117,7 @@ naming:
   # Top-level vals/vars naming
   TopLevelPropertyNaming:
     active: true
+    excludes: *test_excludes
     constantPattern: '^[A-Z][_A-Z0-9]*'
     propertyPattern: '^[a-z][A-Za-z0-9]*'
 
