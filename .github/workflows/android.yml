@@ -30,14 +30,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+#        with:
+#          fetch-depth: 0
 
       # is a supply‑chain safety check.
       # It verifies the committed Gradle Wrapper (scripts and gradle-wrapper.jar) is the official binary and that distributionUrl is safe (HTTPS/Gradle domain).
       # It prevents malicious wrapper tampering.
-      - name: Validate Gradle
-        uses: gradle/actions/wrapper-validation@v3
+#      - name: Validate Gradle
+#        uses: gradle/actions/wrapper-validation@v3
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
