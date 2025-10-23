@@ -12,7 +12,7 @@ build:
   excludeCorrectable: false
 
 # Enable standard reports for CI and local review.
-reports:
+outputReports:
   xml:
     enabled: true
   html:
@@ -25,14 +25,14 @@ reports:
 #   path: detekt-baseline.xml
 
 # Common glob for test and build folders to reduce noise.
-_test_excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
 
 # ---- Rule sets ----
 
 potential-bugs:
   active: true
   # equals() without matching hashCode()
-  EqualsHashCode:
+  EqualsWithHashCodeExists:
     active: true
   # Locale-sensitive ops without specifying Locale
   ImplicitDefaultLocale:
@@ -92,17 +92,9 @@ style:
   WildcardImport:
     active: false
 
-  # Enforce one top-level declaration per file naming
-  Filename:
-    active: true
-
   # Core line length rule disabled to avoid conflict with formatting.MaximumLineLength
   MaxLineLength:
     active: false
-
-  # Prefer explicit Unit return types only when meaningful
-  OptionalUnitReturn:
-    active: true
 
   # Flag unused private members (helps remove dead code)
   UnusedPrivateMember:
@@ -112,6 +104,11 @@ style:
 
 naming:
   active: true
+
+#  # Ensure declaration names match configured patterns
+  # might need to set a custom pattern for test functions if used
+#  MatchingDeclarationName:
+#    active: true
 
   # Function names in lowerCamelCase; allow @Composable for UI preview flexibility
   FunctionNaming:
@@ -183,30 +180,30 @@ coroutines:
 
 # Formatting rules require the detekt-formatting plugin on the classpath:
 # detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
-formatting:
-  active: true
-  android: true
-  autoCorrect: true
-
-  # Enforce import order
-  ImportOrdering:
-    active: true
-
-  # Disallow wildcard imports (replaces style.WildcardImport)
-  NoWildcardImports:
-    active: true
-
-  # Enforce indentation and line length
-  Indentation:
-    active: true
-  MaximumLineLength:
-    active: true
-    maxLineLength: 120
-
-  # Keep a newline at end of file
-  FinalNewline:
-    active: true
-
-  # Consistent string template formatting
-  StringTemplate:
-    active: true
+#formatting:
+#  active: true
+#  android: true
+#  autoCorrect: true
+#
+#  # Enforce import order
+#  ImportOrdering:
+#    active: true
+#
+#  # Disallow wildcard imports (replaces style.WildcardImport)
+#  NoWildcardImports:
+#    active: true
+#
+#  # Enforce indentation and line length
+#  Indentation:
+#    active: true
+#  MaximumLineLength:
+#    active: true
+#    maxLineLength: 120
+#
+#  # Keep a newline at end of file
+#  FinalNewline:
+#    active: true
+#
+#  # Consistent string template formatting
+#  StringTemplate:
+#    active: true
