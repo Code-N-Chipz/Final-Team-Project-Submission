@@ -11,28 +11,18 @@ build:
   # Also count findings that could be auto-corrected by formatting.
   excludeCorrectable: false
 
-# Enable standard reports for CI and local review.
-outputReports:
-  xml:
-    enabled: true
-  html:
-    enabled: true
-  sarif:
-    enabled: true
 
 # Optional (prefer per-module baselines):
 # baseline:
 #   path: detekt-baseline.xml
 
-# Common glob for test and build folders to reduce noise.
-excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
 
 # ---- Rule sets ----
 
 potential-bugs:
   active: true
   # equals() without matching hashCode()
-  EqualsWithHashCodeExists:
+  EqualsWithHashCodeExist:
     active: true
   # Locale-sensitive ops without specifying Locale
   ImplicitDefaultLocale:
@@ -43,6 +33,7 @@ potential-bugs:
 
 performance:
   active: true
+
   # Avoid spread operator on varargs (creates copies)
   SpreadOperator:
     active: true
@@ -56,6 +47,9 @@ performance:
 exceptions:
   active: true
   # Avoid catching overly generic exceptions
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+
+
   TooGenericExceptionCaught:
     active: true
     # Allow in tests to simplify fixtures
@@ -75,6 +69,8 @@ exceptions:
 
 style:
   active: true
+
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
 
   # Discourage magic literals; allow common small values and in tests
   MagicNumber:
