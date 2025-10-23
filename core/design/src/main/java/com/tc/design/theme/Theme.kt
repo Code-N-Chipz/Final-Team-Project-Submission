@@ -10,26 +10,26 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryColor,
-    secondary = SecondaryColor,
-    background = BackgroundColor,
-    onPrimary = TextPrimary,
-    onSecondary = TextPrimary,
-    surface = BackgroundColor,
-    onSurface = TextQuaternary,
-    tertiary = ButtonTertiary
+private val darkColorScheme = darkColorScheme(
+    primary = primaryColor,
+    secondary = secondaryColor,
+    background = backgroundColor,
+    onPrimary = textPrimary,
+    onSecondary = textPrimary,
+    surface = backgroundColor,
+    onSurface = textQuaternary,
+    tertiary = buttonTertiary
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColor,
-    secondary = SecondaryColor,
-    background = BackgroundColor,
-    onPrimary = TextPrimary,
-    onSecondary = TextPrimary,
-    surface = BackgroundColor,
-    onSurface = TextQuaternary,
-    tertiary = ButtonTertiary
+private val lightColorScheme = lightColorScheme(
+    primary = primaryColor,
+    secondary = secondaryColor,
+    background = backgroundColor,
+    onPrimary = textPrimary,
+    onSecondary = textPrimary,
+    surface = backgroundColor,
+    onSurface = textQuaternary,
+    tertiary = buttonTertiary
 )
 
 
@@ -44,13 +44,13 @@ fun ICLICKIPAYTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = typography,
         content = content
     )
 }

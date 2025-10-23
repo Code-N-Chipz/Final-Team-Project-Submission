@@ -3,23 +3,23 @@ package theme
 import androidx.compose.ui.graphics.Color
 
 // Primary brand colors
-val PrimaryColor = Color(0xFFFF791BL)       // #ff791b
-val SecondaryColor = Color(0xFF14C972L)     // #14c972
+val primaryColor = Color(0xFFFF791BL)       // #ff791b
+val secondaryColor = Color(0xFF14C972L)     // #14c972
 
 // Icon & slider
-val PrimaryIconColor = Color(0xFFFFFFFFL)   // #ffffff
-val SliderPrimary = Color(0xFF0DC970L)      // #0dc970
+val primaryIconColor = Color(0xFFFFFFFFL)   // #ffffff
+val sliderPrimary = Color(0xFF0DC970L)      // #0dc970
 
 // Background
-val BackgroundColor = Color(0xFFF9FAFBL)    // #f9fafb
+val backgroundColor = Color(0xFFF9FAFBL)    // #f9fafb
 
 // Buttons
-val ButtonPrimary = Color(0xFFFF791BL)      // Primary Progressive Button Color
-val ButtonSecondary = Color(0xFF0DC970L)    // Second Progressive Button Color
-val ButtonTertiary = Color(0xFF027DFFL)     // Tertiary button color
+val buttonPrimary = Color(0xFFFF791BL)      // Primary Progressive Button Color
+val buttonSecondary = Color(0xFF0DC970L)    // Second Progressive Button Color
+val buttonTertiary = Color(0xFF027DFFL)     // Tertiary button color
 
 // Text colors
-val TextPrimary = Color(0xFFFFFFFFL)        // Primary text color (white)
-val TextSecondary = Color(0xFFFF791BL)      // Secondary text color (orange)
-val TextTertiary = Color(0xFFC4C8CFL)       // Tertiary text color (grey)
-val TextQuaternary = Color(0xFF000000L)     // Quaternary text (black)
+val textPrimary = Color(0xFFFFFFFFL)        // Primary text color (white)
+val textSecondary = Color(0xFFFF791BL)      // Secondary text color (orange)
+val textTertiary = Color(0xFFC4C8CFL)       // Tertiary text color (grey)
+val textQuaternary = Color(0xFF000000L)     // Quaternary text (black)

@@ -81,7 +81,7 @@ style:
     ignoreNumbers: [ "-1", "0", "1", "2" ]
     ignoreHashCodeFunction: true
     ignoreAnnotation: true
-    ignorePropertyDeclaration: true
+    ignorePropertyDeclaration: true # might need to be false
 
   # Prefer explicit imports; handled by formatting plugin instead -> disable here
   WildcardImport:
