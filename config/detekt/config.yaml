@@ -115,7 +115,7 @@ naming:
 
   # Top-level vals/vars naming
   TopLevelPropertyNaming:
-    active: true
+    active: false
     constantPattern: '^[A-Z][_A-Z0-9]*$'
     propertyPattern: '^[a-z][A-Za-z0-9]*$'
 
