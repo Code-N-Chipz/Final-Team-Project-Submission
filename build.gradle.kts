@@ -12,9 +12,13 @@ plugins {
 
 subprojects {
     plugins.apply("io.gitlab.arturbosch.detekt")
+    dependencies {
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
+    }
     extensions.configure(io.gitlab.arturbosch.detekt.extensions.DetektExtension::class) {
         config.setFrom(files("$rootDir/config/detekt/config.yaml"))
         buildUponDefaultConfig = true
         parallel = true
+        autoCorrect = true
     }
 }
