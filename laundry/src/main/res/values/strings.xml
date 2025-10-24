@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- START PAGE -->
+    <string name="laundry_start_page">Laundry</string>
+    <string name="laundry_info_start_page">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis sit amet odio in egestas. Pellen tesque ultricies justo.</string>
+    <string name="laundry_button_start_page">Let\'s go</string>
+
+    <!-- HOME PAGE -->
+    <string name="laundry_favorites_home_page">Favorites</string>
+    <string name="laundry_orders_home_page">Orders</string>
+</resources>
