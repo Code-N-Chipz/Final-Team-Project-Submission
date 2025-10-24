@@ -75,7 +75,7 @@ style:
 
   # Discourage magic literals; allow common small values and in tests
   MagicNumber:
-    active: true
+    active: false
     excludes: *test_excludes
     ignoreNumbers: [ "-1", "0", "1", "2" ]
     ignoreHashCodeFunction: true
