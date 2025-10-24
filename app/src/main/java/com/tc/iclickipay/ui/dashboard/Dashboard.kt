@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -27,8 +28,9 @@ fun Dashboard(
     modifier: Modifier = Modifier,
     navController: NavController
 ){
+
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(fixedColumns),
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalArrangement = Arrangement.spacedBy(2.dp),
         modifier = modifier
@@ -48,7 +50,8 @@ fun Dashboard(
                     painter = painterResource(item.drawableResId),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .size(120.dp),
                     contentScale = ContentScale.Fit
                 )
             }
@@ -87,3 +90,5 @@ val iconItems = listOf(
     IconItem("screen_babysitter", R.drawable.babysitter),
     IconItem("screen_house_clean", R.drawable.house_clean)
 )
+
+const val fixedColumns = 2
