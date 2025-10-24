@@ -28,7 +28,7 @@ fun Dashboard(
 ){
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(fixedColumns),
+        columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalArrangement = Arrangement.spacedBy(2.dp),
         modifier = modifier
@@ -81,5 +81,3 @@ val iconItems = listOf(
     IconItem("screen_babysitter", R.drawable.babysitter),
     IconItem("screen_house_clean", R.drawable.house_clean)
 )
-
-const val fixedColumns = 2
