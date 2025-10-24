@@ -17,12 +17,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,31 +36,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.primaryColor
 import com.tc.design.R
 import com.tc.eat.domain.Restaurant
-import theme.textTertiary
 import theme.ICLICKIPAYTheme
+import theme.primaryColor
 import theme.textPrimary
+import theme.textTertiary
 
 
-@Preview
 @Composable
 fun SearchScreen() {
     ICLICKIPAYTheme {
@@ -95,9 +87,11 @@ private fun SearchTopBar() {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = {}) {
+        IconButton(
+            onClick = {}) {
             Icon(
-                painter = painterResource(R.drawable.arrow_right_white_icon),
+                modifier = Modifier.size(30.dp),
+                painter = painterResource(R.drawable.arrow_left_white_icon),
                 contentDescription = "",
                 tint = Color.Unspecified
             )
@@ -110,7 +104,8 @@ private fun SearchTopBar() {
         )
         IconButton(onClick = {}) {
             Icon(
-                painter = painterResource(R.drawable.arrow_right_white_icon),
+                modifier = Modifier.size(30.dp),
+                painter = painterResource(R.drawable.options_sliders_orange_icon),
                 contentDescription = "",
                 tint = Color.Unspecified
             )
@@ -119,7 +114,7 @@ private fun SearchTopBar() {
 }
 
 @Composable
-fun RestaurantResults(modifier: Modifier = Modifier) {
+fun RestaurantResults() {
     Text(
         text = buildAnnotatedString {
             append(stringResource(com.tc.eat.R.string.restaurants))
