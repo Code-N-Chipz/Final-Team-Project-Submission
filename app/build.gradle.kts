@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,7 +10,9 @@ android {
     compileSdk {
         version = release(36)
     }
-
+    lint{
+        lintConfig = rootProject.file("config/lint/lint.xml")
+    }
     defaultConfig {
         applicationId = "com.tc.iclickipay"
         minSdk = 27
