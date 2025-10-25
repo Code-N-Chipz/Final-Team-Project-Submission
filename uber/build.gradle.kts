@@ -5,6 +5,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "com.tc.uber"
     compileSdk {
