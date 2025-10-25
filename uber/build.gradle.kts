@@ -42,9 +42,9 @@ android {
 dependencies {
     implementation("com.tc:tcmap:1.0.0")
     implementation(project(":core:design"))
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0")
-    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
