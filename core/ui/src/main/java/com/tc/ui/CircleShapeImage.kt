@@ -18,7 +18,7 @@ import com.tc.design.R as Design
 @Composable
 fun CircleShapeImage(
     imageUrl: String? = null,
-    size: Dp = 64.dp,
+    size: Dp = 60.dp,
     contentDescription: String? = "Personal Image",
     modifier: Modifier = Modifier
 ) {
