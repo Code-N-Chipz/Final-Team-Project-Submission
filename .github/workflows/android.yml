@@ -110,6 +110,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Assemble Debug APKs (all Android modules)
+        run: ./gradlew --no-daemon --stacktrace assembleDebug
 
   unit-tests:
     name: Unit Tests
