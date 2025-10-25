@@ -1,6 +1,5 @@
-package com.tc.network
+package com.tc.network.auth
 
-import com.tc.auth.data.ApiDetails
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -34,12 +33,12 @@ class NetworkModule {
             .build()
     }
 
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(ApiDetails.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-    }
+//    @Provides
+//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(ApiDetails.BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(okHttpClient)
+//            .build()
+//    }
 }
