@@ -1,5 +1,6 @@
 package com.tc.auth.signup.signupscreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,8 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
@@ -28,6 +32,18 @@ fun SignupFormScreen(viewModel: SignUpScreenViewModel, modifier: Modifier = Modi
 
     Column (modifier = modifier.padding(16.dp)) {
         Text("Complete the form", style = MaterialTheme.typography.h6)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
+        Image(
+            painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
+            contentDescription = "Signup Illustration",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp),
+            contentScale = ContentScale.Crop
+        )
 
         OutlinedTextField(
             value = firstName,
@@ -57,6 +73,7 @@ fun SignupFormScreen(viewModel: SignUpScreenViewModel, modifier: Modifier = Modi
 
         Spacer(modifier = Modifier.height(16.dp))
 
+//       todo: need to make the button from commonUI
         Button (
             onClick = { /* wait for navigation changes or need to add internal */ },
             modifier = Modifier.fillMaxWidth()) {

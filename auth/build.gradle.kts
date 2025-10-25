@@ -54,6 +54,10 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.material)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
