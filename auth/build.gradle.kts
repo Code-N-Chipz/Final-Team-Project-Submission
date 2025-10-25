@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -58,8 +59,29 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
 
+    implementation(libs.firebase.auth.ktx)
+//    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.runtime.livedata)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+
+    implementation("com.google.dagger:hilt-android:2.57.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+//    implementation(platform("androidx.compose:compose-bom:2024.09.00"))
+//
+    // Firebase Authentication
+    implementation(libs.firebase.auth)
+    implementation(platform (libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.kotlinx.coroutines.play.services)
+    debugImplementation(libs.androidx.ui.tooling)
+
 }
