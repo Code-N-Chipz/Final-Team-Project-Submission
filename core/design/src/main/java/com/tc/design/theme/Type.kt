@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.tc.design.R // adjust to your module/package R
 
-private val poppins = FontFamily(
+val poppins = FontFamily(
     Font(R.font.poppins_regular, weight = FontWeight.Normal),
     Font(R.font.poppins_medium, weight = FontWeight.Medium),
     Font(R.font.poppins_semibold, weight = FontWeight.SemiBold),
