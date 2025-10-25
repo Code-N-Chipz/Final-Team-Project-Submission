@@ -1,4 +1,4 @@
-package com.tc.auth.signup.signupscreen
+package com.tc.auth.ui.signup.signupscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,28 +14,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
 @Composable
-fun SignupFormScreen(viewModel: SignUpScreenViewModel, modifier: Modifier = Modifier) {
-    val firstName by viewModel.firstName.collectAsState()
-    val lastName by viewModel.lastName.collectAsState()
-    val gender by viewModel.gender.collectAsState()
-    val email by viewModel.email.collectAsState()
-    val phone by viewModel.phone.collectAsState()
+fun SignupFormScreen(
+    viewModel: SignUpScreenViewModel = hiltViewModel(),
+    onSignUpSuccess: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val state = viewModel.uiState.collectAsState().value
 
     Column (modifier = modifier.padding(16.dp)) {
         Text("Complete the form", style = MaterialTheme.typography.h6)
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
+        // Top image: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
             painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
             contentDescription = "Signup Illustration",
@@ -46,36 +47,39 @@ fun SignupFormScreen(viewModel: SignUpScreenViewModel, modifier: Modifier = Modi
         )
 
         OutlinedTextField(
-            value = firstName,
-            onValueChange = { viewModel.firstName.value = it },
+            value = state.firstName,
+            onValueChange = viewModel::updateFirstName,
             label = { Text("First Name") }
         )
         OutlinedTextField(
-            value = lastName,
-            onValueChange = { viewModel.lastName.value = it },
+            value = state.lastName,
+            onValueChange = viewModel::updateLastName,
             label = { Text("Last Name") }
         )
         OutlinedTextField(
-            value = gender,
-            onValueChange = { viewModel.gender.value = it },
+            value = state.gender,
+            onValueChange = viewModel::updateGender,
             label = { Text("Gender") }
         )
         OutlinedTextField(
-            value = email,
-            onValueChange = { viewModel.email.value = it },
-            label = { Text("Email") }
+            value = state.email,
+            onValueChange = viewModel::updateEmail,
+            label = { Text("Email") },
+            isError = state.error != null
         )
         OutlinedTextField(
-            value = phone,
-            onValueChange = { viewModel.phone.value = it },
-            label = { Text("Phone Number") }
+            value = state.phone,
+            onValueChange = viewModel::updatePhoneNumber,
+            label = { Text("Phone Number") },
+            isError = state.error != null
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-
-//       todo: need to make the button from commonUI
+        state.error?.let { Text(it, color = Color.Red) }
+//        need to make the button from commonUI
         Button (
-            onClick = { /* wait for navigation changes or need to add internal */ },
+            onClick = { viewModel.submit(onSignUpSuccess, {}) },
+            enabled = !state.isLoading,
             modifier = Modifier.fillMaxWidth()) {
             Text("Confirm")
         }
@@ -85,13 +89,10 @@ fun SignupFormScreen(viewModel: SignUpScreenViewModel, modifier: Modifier = Modi
 @Preview(showBackground = true)
 @Composable
 fun PreviewSignupFormScreen() {
-    val mockViewModel = object : SignUpScreenViewModel() {
-        override val firstName = MutableStateFlow("John")
-        override val lastName = MutableStateFlow("Doe")
-        override val gender = MutableStateFlow("Male")
-        override val email = MutableStateFlow("john@example.com")
-        override val phone = MutableStateFlow("+33 634292088")
-    }
 
-    SignupFormScreen(viewModel = mockViewModel)
+
+    SignupFormScreen(
+        onSignUpSuccess = {}
+    )
 }
+

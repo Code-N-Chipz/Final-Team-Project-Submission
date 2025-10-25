@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "ICLICKIPAY"
 include(":app")
+include(":auth")
 include(":core:ui")
 include(":core:design")
 include(":core:data")
@@ -43,5 +44,4 @@ include(":delivery")
 include(":babysitter")
 include(":houseclean")
 include(":home")
-include(":auth")
 include(":core:network")

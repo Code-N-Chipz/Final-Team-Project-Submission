@@ -1,4 +1,4 @@
-package com.tc.auth.signup.verifyphone
+package com.tc.auth.ui.signup.createcode
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,25 +21,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.tc.auth.signup.signupscreen.SignUpScreenViewModel
 
 @Composable
-fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modifier) {
-    val code by viewModel.verificationCode.collectAsState()
+fun CreateCodeScreen(viewModel: CreateCodeViewModel, modifier: Modifier = Modifier) {
+    val code by viewModel.createdCode.collectAsState()
 
     Column (modifier = modifier.padding(16.dp)) {
 
         // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
             painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
-            contentDescription = "Verify phone Illustration",
+            contentDescription = "Create your code Illustration",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(180.dp),
             contentScale = ContentScale.Crop
         )
 
-        Text("Verify your phone number", style = MaterialTheme.typography.h6)
+        Text("Create your code", style = MaterialTheme.typography.h6)
         Text("Enter a 6-digit code to authenticate")
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -48,7 +47,7 @@ fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modi
             code.forEachIndexed { index, digit ->
                 OutlinedTextField(
                     value = digit,
-                    onValueChange = { viewModel.updateCode(index, it.take(1)) },
+                    onValueChange = { viewModel.updateCreatedCode(index, it.take(1)) },
                     modifier = Modifier.width(40.dp)
                 )
             }
@@ -56,7 +55,7 @@ fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modi
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button (onClick = { /* Confirm code */ }, modifier = Modifier.fillMaxWidth()) {
+        Button (onClick = { /* Save code */ }, modifier = Modifier.fillMaxWidth()) {
             Text("Confirm")
         }
     }
@@ -64,9 +63,9 @@ fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modi
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewVerifyPhoneScreen() {
-    val mockViewModel = VerifyPhoneViewModel().apply {
-        verificationCode.value = listOf("2", "3", "6", "1")
+fun PreviewCreateCodeScreen() {
+    val mockViewModel = CreateCodeViewModel().apply {
+        createdCode.value = listOf("", "", "", "", "", "")
     }
-    VerifyPhoneScreen(viewModel = mockViewModel)
+    CreateCodeScreen(viewModel = mockViewModel)
 }

@@ -1,4 +1,4 @@
-package com.tc.auth.signup.createcode
+package com.tc.auth.ui.signup.createcode
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

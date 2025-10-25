@@ -1,4 +1,4 @@
-package com.tc.auth.signup.confirmcode
+package com.tc.auth.ui.signup.confirmcode
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.tc.auth.signup.createcode.CreateCodeViewModel
+import com.tc.auth.ui.signup.createcode.CreateCodeViewModel
 
 @Composable
 fun ConfirmCodeScreen(viewModel: ConfirmCodeViewModel, modifier: Modifier = Modifier) {

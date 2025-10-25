@@ -21,7 +21,8 @@ object FirebaseModule {
 @Module
 @InstallIn(SingletonComponent::class)
 object NavigationModule {
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun provideNavigator(): ComposeAppNavigator = ComposeAppNavigator()
 }
 

@@ -16,26 +16,7 @@ import com.tc.auth.ui.navigation.AppNavigator
 import com.tc.auth.ui.navigation.ComposeAppNavigator
 
 
-@Composable
-fun MainScreen(
-    navigator: ComposeAppNavigator = hiltViewModel()
-) {
-    val navController = rememberNavController()
 
-    LaunchedEffect(Unit) {
-        navigator.setController(navController)
-    }
-
-    NavHost(navController = navController, startDestination = "signin") {
-        composable("signin") {
-            SignInScreen(
-                navigator = navigator, // passes ComposeAppNavigator as AppNavigator
-                name = "John"
-            )
-        }
-        composable("signup") { SignUpScreen() }
-    }
-}
 
 @Composable
 fun SignUpScreen() {

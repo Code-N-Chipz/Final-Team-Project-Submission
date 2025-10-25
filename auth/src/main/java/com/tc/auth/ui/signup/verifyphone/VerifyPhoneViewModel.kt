@@ -1,4 +1,4 @@
-package com.tc.auth.signup.verifyphone
+package com.tc.auth.ui.signup.verifyphone
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

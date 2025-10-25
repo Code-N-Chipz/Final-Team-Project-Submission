@@ -1,4 +1,4 @@
-package com.tc.auth.signup.confirmcode
+package com.tc.auth.ui.signup.confirmcode
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

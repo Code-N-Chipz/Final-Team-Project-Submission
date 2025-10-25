@@ -1,4 +1,4 @@
-package com.tc.auth.signup.onboarding
+package com.tc.auth.ui.signup.onboarding
 
 import androidx.lifecycle.ViewModel
 

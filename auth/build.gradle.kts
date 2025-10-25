@@ -1,9 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
+
 
 android {
     namespace = "com.tc.auth"
@@ -40,6 +43,13 @@ android {
     }
 }
 
+//required for preview
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+}
+
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -59,7 +69,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
 
-    implementation(libs.firebase.auth.ktx)
+//    implementation(libs.firebase.auth.ktx)
 //    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.runtime.livedata)
