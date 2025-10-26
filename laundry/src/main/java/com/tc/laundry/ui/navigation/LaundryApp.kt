@@ -5,8 +5,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.tc.laundry.ui.filterspage.FiltersPage
 import com.tc.laundry.ui.homepage.LaundryHomePage
 import com.tc.laundry.ui.startpage.LaundryStartPage
+import com.tc.laundry.ui.yourlaundrypage.YourLaundryPage
 
 @Composable
 fun LaundryApp(
@@ -30,7 +32,19 @@ fun LaundryApp(
             LaundryHomePage(
                 onExitLaundry = {
                     parentNavController.popBackStack()
-                }
+                },
+                navController = navController
+            )
+        }
+        composable("your_laundry"){
+            YourLaundryPage(
+                navController = navController
+            )
+        }
+
+        composable("filters"){
+            FiltersPage(
+                navController = navController
             )
         }
     }

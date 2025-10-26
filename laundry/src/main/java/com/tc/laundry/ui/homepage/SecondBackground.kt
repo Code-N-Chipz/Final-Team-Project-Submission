@@ -27,7 +27,7 @@ fun SecondBackground(
     modifier: Modifier = Modifier
 ){
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(96.dp)
             .background(primaryColor)
@@ -46,7 +46,7 @@ fun SecondBackground(
             )
 
             ButtonInOrangeBackground(
-                icon = com.tc.design.R.drawable.receipt_icons,
+                icon = com.tc.design.R.drawable.receipt_icon,
                 text = R.string.laundry_orders_home_page_second_background,
                 modifier = Modifier
                     .weight(1f)

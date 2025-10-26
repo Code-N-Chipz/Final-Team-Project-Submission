@@ -24,17 +24,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import com.tc.laundry.R
+import com.tc.laundry.ui.comon.HorizontalSpacerGrayLine
 
 import theme.primaryColor
 
 @Composable
 fun OverlayerBox(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ){
 
     Box(
@@ -73,7 +75,9 @@ fun OverlayerBox(
 
             HorizontalSpacerGrayLine()
 
-            LaundryInfo()
+            LaundryInfo(
+                navController = navController
+            )
 
             HorizontalSpacerGrayLine()
 
@@ -100,7 +104,8 @@ fun OverlayerBox(
 
 @Composable
 private fun LaundryInfo(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ){
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -108,6 +113,11 @@ private fun LaundryInfo(
         modifier = modifier
             .fillMaxWidth()
             .height(63.dp)
+            .clickable(
+                onClick = {
+                    navController.navigate("your_laundry")
+                }
+            )
     ) {
         Info(
             text = stringResource(R.string.laundry_choose_dates_home_page_overlayer_box)
@@ -141,9 +151,6 @@ private fun Info(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .clickable(
-                onClick = {}
-            )
     ) {
         Text(
             text = text,
@@ -197,18 +204,6 @@ private fun Search(
 }
 
 @Composable
-private fun HorizontalSpacerGrayLine(
-    modifier: Modifier = Modifier
-){
-    Spacer(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(1.dp)
-            .background(Color.Gray)
-    )
-}
-
-@Composable
 private fun VerticalSpacerGrayLine(
     modifier: Modifier = Modifier
 ){
@@ -218,12 +213,4 @@ private fun VerticalSpacerGrayLine(
             .width(1.dp)
             .background(Color.Gray)
     )
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-private fun OverlayerBoxPreview(){
-    OverlayerBox()
 }

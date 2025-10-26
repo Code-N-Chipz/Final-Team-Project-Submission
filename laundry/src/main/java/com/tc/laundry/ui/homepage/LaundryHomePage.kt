@@ -3,6 +3,7 @@ package com.tc.laundry.ui.homepage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,13 +16,16 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.tc.laundry.R
-import com.tc.laundry.ui.TopBar
+import com.tc.laundry.ui.comon.TopBar
 
 @Composable
 fun LaundryHomePage(
     modifier: Modifier = Modifier,
-    onExitLaundry: () -> Unit = {}
+    onExitLaundry: () -> Unit = {},
+    navController: NavController
 ) {
 
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
@@ -60,7 +64,12 @@ fun LaundryHomePage(
             SecondBackground(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+            )
+
+            Spacer(modifier = Modifier.height(22.dp))
+
+            ThirdBackground(
+                navController = navController
             )
         }
 
@@ -69,6 +78,7 @@ fun LaundryHomePage(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .offset(y = (screenHeight / 2) - (overlayHeight / 2)), // middle between top & bottom backgrounds
+            navController = navController
         )
     }
 }
@@ -77,5 +87,5 @@ fun LaundryHomePage(
 @Preview(showBackground = true)
 @Composable
 private fun LaundryHomePagePreview(){
-    LaundryHomePage()
+    LaundryHomePage(navController = rememberNavController())
 }

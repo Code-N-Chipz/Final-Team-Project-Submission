@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.tc.laundry.R
-import com.tc.laundry.ui.TopBar
-import theme.primaryColor
+import com.tc.laundry.ui.comon.TopBar
+import com.tc.laundry.ui.comon.PrimaryButtonColour
 
 @Composable
 fun LaundryStartPage(
@@ -76,20 +73,9 @@ fun LaundryStartPage(
             modifier = Modifier.height(77.dp)
         )
 
-        Button(
-            onClick = {
-                navController.navigate("home")
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = primaryColor
-            ),
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier
-                .size(width = 258.dp, height = 56.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.laundry_button_start_page)
-            )
-        }
+        PrimaryButtonColour(
+            onClick = {navController.navigate("home")},
+            text = R.string.laundry_button_start_page
+        )
     }
 }

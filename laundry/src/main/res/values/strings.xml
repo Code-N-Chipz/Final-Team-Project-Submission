@@ -19,5 +19,20 @@
     <!-- YOUR LAUNDRY PAGE -->
     <string name="laundry_header_your_laundry_page">Your laundry</string>
     <string name="laundry_laundry_kg_your_laundry_page">laundry/kg</string>
+    <string name="laundry_dry_cleaning_your_laundry_page">Dry cleaning</string>
+    <string name="laundry_ironing_your_laundry_page">Ironing</string>
+    <string name="laundry_ironing_yes_your_laundry_page">Yes</string>
+    <string name="laundry_ironing_no_your_laundry_page">No</string>
+    <string name="laundry_availability_your_laundry_page">Availability</string>
+    <string name="laundry_next_button_your_laundry_page">Next</string>
+
+    <!-- FILTERS PAGE -->
+    <string name="laundry_header_filters_page">Filters</string>
+    <string name="laundry_header_action_clear_filters_page">Clear</string>
+    <string name="laundry_sort_by_filters_page">Sort by</string>
+    <string name="laundry_sort_by_drop_down_recommend_filters_page">Recommend</string>
+    <string name="laundry_price_kg_filters_page">Price/Kg</string>
+    <string name="laundry_Rate_filters_page">Rate</string>
+    <string name="laundry_apply_button_filters_page">Apply</string>
 
 </resources>
