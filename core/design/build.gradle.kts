@@ -39,6 +39,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+kotlin {
+    jvmToolchain(17)
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
