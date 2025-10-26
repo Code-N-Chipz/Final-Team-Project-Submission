@@ -9,6 +9,8 @@ val secondaryColor = Color(0xFF14C972L)     // #14c972
 // Icon & slider
 val primaryIconColor = Color(0xFFFFFFFFL)   // #ffffff
 val sliderPrimary = Color(0xFF0DC970L)      // #0dc970
+val dividerGray = Color(0xFFC4C8CFL)       // text color (grey)
+
 
 // Background
 val backgroundColor = Color(0xFFF9FAFBL)    // #f9fafb
@@ -23,3 +25,6 @@ val textPrimary = Color(0xFFFFFFFFL)        // Primary text color (white)
 val textSecondary = Color(0xFFFF791BL)      // Secondary text color (orange)
 val textTertiary = Color(0xFFC4C8CFL)       // Tertiary text color (grey)
 val textQuaternary = Color(0xFF000000L)     // Quaternary text (black)
+
+val textPenternary = Color(0xFF2A2A2A)     // Quaternary text (black)
+
