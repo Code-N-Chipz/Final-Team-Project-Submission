@@ -25,7 +25,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tc.design.R
 import com.tc.eat.presentation.screens.composables.RestaurantCard
@@ -34,7 +33,6 @@ import theme.primaryColor
 import theme.primaryIconColor
 import theme.textTertiary
 
-@Preview
 @Composable
 fun RestaurantScreen() {
     ICLICKIPAYTheme {

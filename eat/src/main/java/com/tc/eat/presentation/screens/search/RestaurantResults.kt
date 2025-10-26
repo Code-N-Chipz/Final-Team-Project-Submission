@@ -66,20 +66,21 @@ private fun RestaurantItem() {
         modifier = Modifier
             .padding(horizontal = 26.dp)
             .fillMaxWidth()
-            .height(120.dp),
+            .height(60.dp),
         restaurant = restaurant
     )
     HorizontalDivider(
-        Modifier
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 4.dp, horizontal = 26.dp),
         thickness = 1.dp,
         color = textTertiary
     )
     RestaurantDetailRow(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp),
+            .height(50.dp)
+            .padding(horizontal = 26.dp),
         restaurant = restaurant
     )
 }

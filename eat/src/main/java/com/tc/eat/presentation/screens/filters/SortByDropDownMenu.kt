@@ -34,7 +34,7 @@ import theme.textTertiary
 @Composable
 fun SortByDropDownMenu() {
     var expanded by remember { mutableStateOf(false) }
-    Box() {
+    Box{
         TextButton(
             modifier = Modifier
                 .fillMaxWidth()

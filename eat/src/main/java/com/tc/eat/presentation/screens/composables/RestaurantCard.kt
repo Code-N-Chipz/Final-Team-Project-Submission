@@ -39,7 +39,7 @@ fun RestaurantCard(modifier: Modifier = Modifier) {
                 restaurant = restaurant
             )
             HorizontalDivider(
-                Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp, horizontal =  12.dp),
                 thickness = 1.dp,
