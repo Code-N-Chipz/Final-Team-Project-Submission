@@ -26,7 +26,7 @@ import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
 
 @Composable
-fun EnableGeoScreen() {
+fun ConfirmationScreen(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
@@ -36,20 +36,22 @@ fun EnableGeoScreen() {
     ) {
         TopBar()
         Image(
-            painter = painterResource(R.drawable.img_enable_geo),
-            contentDescription = "Geolocation Image",
+            painter = painterResource(R.drawable.img_confirmation),
+            contentDescription = "Confirmation Image",
             modifier = Modifier.size(300.dp)
         )
-        Text(text = "Enable geolocation",
+        Text(text = "Confirmation",
             style = theme.typography.titleLarge.copy(fontSize = 40.sp))
-        Text(text = "To propose doctor near you,\n" +
-                "you must activate the localization",
+        Text(text = "You can find your appointment in the agenda section of your application.",
             style = theme.typography.bodyLarge,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.padding(vertical = 30.dp))
         Button(onClick = {}) {
-            Text("Activate")
+            Icon(
+                painter = painterResource(CoreDraw.drawable.home_icon),
+                contentDescription = "Go Home Button"
+            )
         }
     }
 }
@@ -73,6 +75,6 @@ private fun TopBar() {
 
 @Preview
 @Composable
-private fun EnableGeoScreenPreview() {
-    EnableGeoScreen()
+private fun ConfirmationScreenPreview(){
+    ConfirmationScreen()
 }
