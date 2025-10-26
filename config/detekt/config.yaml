@@ -98,6 +98,7 @@ style:
     active: true
     excludes: *test_excludes
     allowedNames: '^(?:_|ignored|expected)$'
+    ignoreAnnotated: [ 'Preview' ]
 
 naming:
   active: true
