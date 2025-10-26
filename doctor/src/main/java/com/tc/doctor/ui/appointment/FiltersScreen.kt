@@ -134,7 +134,7 @@ private fun DistanceSet() {
         ) {
             Text("1 km", style = theme.typography.bodyMedium.copy(color = textTertiary))
             Text("$distance km", style = theme.typography.bodyMedium)
-            Text("100 km", style = theme.typography.bodyMedium.copy(color = textTertiary))
+            Text("+100 km", style = theme.typography.bodyMedium.copy(color = textTertiary))
         }
 
 
