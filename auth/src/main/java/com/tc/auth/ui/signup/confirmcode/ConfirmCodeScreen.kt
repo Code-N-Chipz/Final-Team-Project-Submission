@@ -19,17 +19,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.tc.auth.R
 import com.tc.auth.ui.signup.createcode.CreateCodeViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
-fun ConfirmCodeScreen(viewModel: ConfirmCodeViewModel, modifier: Modifier = Modifier) {
+fun ConfirmCodeScreen(
+    viewModel: ConfirmCodeViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val confirmCode by viewModel.confirmedCode.collectAsState()
 
     Column (modifier = modifier.padding(16.dp)) {
         // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
-            painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
+            painter = rememberAsyncImagePainter(R.drawable.generate_code),
             contentDescription = "Create your code Illustration",
             modifier = Modifier
                 .fillMaxWidth()
@@ -56,10 +63,11 @@ fun ConfirmCodeScreen(viewModel: ConfirmCodeViewModel, modifier: Modifier = Modi
 
         Button (
             onClick = {
-                if (confirmCode == CreateCodeViewModel().createdCode.value) {
-                    // Proceed to next step
+                if (viewModel.confirmedCode.value == viewModel.createCode) {
+                    viewModel.onSubmit(onSuccess, {})
                 } else {
                     // Show error
+
                 }
             },
             modifier = Modifier.fillMaxWidth()

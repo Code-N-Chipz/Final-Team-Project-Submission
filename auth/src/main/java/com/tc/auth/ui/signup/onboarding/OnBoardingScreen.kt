@@ -23,7 +23,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.tc.auth.R
+import com.tc.auth.ui.signup.confirmcode.ConfirmCodeViewModel
 import kotlinx.coroutines.launch
 
 data class OnboardPage(
@@ -36,18 +38,24 @@ data class OnboardPage(
 )
 
 @Composable
-fun OnBoardingPageScreen(){
+fun OnBoardingPageScreen(
+    viewModel: OnBoardingViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
+    modifier: Modifier = Modifier
+){
     OnboardingPager(
+        viewModel = viewModel,
         pages = samplePages(),
         initialPage = 0,
         onSkip = {} ,
         onGetStarted = {},
-        onSignIn = {}
+        onSignIn = onSuccess
     )
 }
 
 @Composable
 fun OnboardingPager(
+    viewModel :  OnBoardingViewModel = hiltViewModel(),
     pages: List<OnboardPage>,
     modifier: Modifier = Modifier,
     initialPage: Int = 0,
@@ -200,10 +208,11 @@ fun OnboardingPager(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Text(
+
                             text = "Sign in",
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
-                                .clickable { onSignIn() }
+                                .clickable { viewModel.onSignInButtonPress(onSignIn, { }) }
                                 .padding(8.dp)
                         )
                     }
@@ -336,6 +345,15 @@ fun OnboardingPreviewLight() {
             onSignIn = {}
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnBoardingPageScreenPreview(){
+    Surface {
+        OnBoardingPageScreen(onSuccess = {})
+    }
+
 }
 
 //@Preview(showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES, name = "Onboarding Dark")

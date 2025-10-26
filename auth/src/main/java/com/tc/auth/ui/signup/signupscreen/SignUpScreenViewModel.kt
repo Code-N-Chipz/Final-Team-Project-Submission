@@ -3,9 +3,14 @@ package com.tc.auth.ui.signup.signupscreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigator
+import com.tc.auth.ui.navigation.AppNavigator
+import com.tc.auth.ui.navigation.Routes
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class SignUpData(
     val firstName: String = "",
@@ -16,7 +21,8 @@ data class SignUpData(
     val error:String? = null,
     val isLoading : Boolean = false
 )
-class SignUpScreenViewModel(
+class SignUpScreenViewModel @Inject constructor(
+    private val navigator: AppNavigator,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -76,6 +82,7 @@ class SignUpScreenViewModel(
                 // call repository to sign up...
                 // repository.signUp(state.email, state.password)
                 onSuccess()
+                navigator.navigateTo(Routes.VERIFY_PHONE)
             } catch (e: Exception) {
                 onError(e.message ?: "Unknown error")
             } finally {
@@ -83,6 +90,8 @@ class SignUpScreenViewModel(
             }
         }
     }
+
+    private fun CoroutineScope.onSuccess(function: () -> Unit) {}
 }
 
 

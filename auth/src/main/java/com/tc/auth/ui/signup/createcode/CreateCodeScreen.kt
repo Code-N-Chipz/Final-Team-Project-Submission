@@ -20,17 +20,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.tc.auth.R
 
 @Composable
-fun CreateCodeScreen(viewModel: CreateCodeViewModel, modifier: Modifier = Modifier) {
+fun CreateCodeScreen(
+    viewModel: CreateCodeViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val code by viewModel.createdCode.collectAsState()
 
     Column (modifier = modifier.padding(16.dp)) {
 
         // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
-            painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
+            painter = rememberAsyncImagePainter(R.drawable.generate_code),
             contentDescription = "Create your code Illustration",
             modifier = Modifier
                 .fillMaxWidth()
@@ -55,7 +61,7 @@ fun CreateCodeScreen(viewModel: CreateCodeViewModel, modifier: Modifier = Modifi
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button (onClick = { /* Save code */ }, modifier = Modifier.fillMaxWidth()) {
+        Button (onClick = { viewModel.onSubmit(onSuccess, {} ) }, modifier = Modifier.fillMaxWidth()) {
             Text("Confirm")
         }
     }
@@ -64,8 +70,10 @@ fun CreateCodeScreen(viewModel: CreateCodeViewModel, modifier: Modifier = Modifi
 @Preview(showBackground = true)
 @Composable
 fun PreviewCreateCodeScreen() {
-    val mockViewModel = CreateCodeViewModel().apply {
-        createdCode.value = listOf("", "", "", "", "", "")
-    }
-    CreateCodeScreen(viewModel = mockViewModel)
+//    val mockViewModel = CreateCodeViewModel().apply {
+//        createdCode.value = listOf("", "", "", "", "", "")
+//    }
+    CreateCodeScreen(
+        onSuccess = {}
+        )
 }

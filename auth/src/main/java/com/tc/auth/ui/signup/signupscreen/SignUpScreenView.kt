@@ -20,7 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.tc.auth.R
+
 
 
 @Composable
@@ -38,7 +39,7 @@ fun SignupFormScreen(
 
         // Top image: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
-            painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
+            painter = rememberAsyncImagePainter(R.drawable.signup_form),
             contentDescription = "Signup Illustration",
             modifier = Modifier
                 .fillMaxWidth()

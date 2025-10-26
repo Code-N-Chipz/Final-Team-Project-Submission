@@ -20,17 +20,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.tc.auth.R
 
 @Composable
-fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modifier) {
+fun VerifyPhoneScreen(
+    viewModel: VerifyPhoneViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val code by viewModel.verificationCode.collectAsState()
 
     Column (modifier = modifier.padding(16.dp)) {
 
         // Top image Todo: need to replace with the image and need to figure out where to keep it, core-Ui or someother
         Image(
-            painter = rememberAsyncImagePainter("https://via.placeholder.com/150"),
+            painter = rememberAsyncImagePainter(R.drawable.verify_number),
             contentDescription = "Verify phone Illustration",
             modifier = Modifier
                 .fillMaxWidth()
@@ -55,7 +61,7 @@ fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modi
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button (onClick = { /* Confirm code */ }, modifier = Modifier.fillMaxWidth()) {
+        Button (onClick = { viewModel.submit( onSuccess, {}) }, modifier = Modifier.fillMaxWidth()) {
             Text("Confirm")
         }
     }
@@ -64,8 +70,6 @@ fun VerifyPhoneScreen(viewModel: VerifyPhoneViewModel, modifier: Modifier = Modi
 @Preview(showBackground = true)
 @Composable
 fun PreviewVerifyPhoneScreen() {
-    val mockViewModel = VerifyPhoneViewModel().apply {
-        verificationCode.value = listOf("2", "3", "6", "1")
-    }
-    VerifyPhoneScreen(viewModel = mockViewModel)
+
+    VerifyPhoneScreen(onSuccess = {})
 }
