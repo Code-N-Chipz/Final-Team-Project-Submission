@@ -18,17 +18,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.tc.laundry.R
 import com.tc.laundry.ui.TopBar
-import theme.ICLICKIPAYTheme
 import theme.primaryColor
 
 @Composable
 fun LaundryStartPage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    onExitLaundry: () -> Unit = {}
 ){
 
     Column(
@@ -38,7 +39,8 @@ fun LaundryStartPage(
             .padding(20.dp)
     ){
         TopBar(
-            icon = com.tc.design.R.drawable.arrow_left_orange_icon
+            icon = com.tc.design.R.drawable.arrow_left_orange_icon,
+            onClick = onExitLaundry
         )
 
         Image(
@@ -75,7 +77,9 @@ fun LaundryStartPage(
         )
 
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate("home")
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = primaryColor
             ),
@@ -87,13 +91,5 @@ fun LaundryStartPage(
                 text = stringResource(R.string.laundry_button_start_page)
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun LaundryStartPagePreview(){
-    ICLICKIPAYTheme {
-        LaundryStartPage()
     }
 }

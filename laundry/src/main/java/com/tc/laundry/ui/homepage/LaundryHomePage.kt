@@ -20,7 +20,8 @@ import com.tc.laundry.ui.TopBar
 
 @Composable
 fun LaundryHomePage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onExitLaundry: () -> Unit = {}
 ) {
 
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
@@ -47,6 +48,7 @@ fun LaundryHomePage(
 
                 TopBar(
                     icon = com.tc.design.R.drawable.home_icon,
+                    onClick = onExitLaundry,
                     modifier = Modifier
                         .align(Alignment.TopStart)
                         .fillMaxWidth()
@@ -54,7 +56,7 @@ fun LaundryHomePage(
                 )
             }
 
-            // Bottom background
+            // Second background
             SecondBackground(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -66,8 +68,7 @@ fun LaundryHomePage(
         OverlayerBox(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .offset(y = (screenHeight / 2) - (overlayHeight / 2)) // middle between top & bottom backgrounds
-
+                .offset(y = (screenHeight / 2) - (overlayHeight / 2)), // middle between top & bottom backgrounds
         )
     }
 }

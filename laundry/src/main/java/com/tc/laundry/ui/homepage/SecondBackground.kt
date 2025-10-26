@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.laundry.R
@@ -38,7 +39,7 @@ fun SecondBackground(
         ){
             ButtonInOrangeBackground(
                 icon = com.tc.design.R.drawable.heart_icon,
-                text = R.string.laundry_favorites_home_page,
+                text = R.string.laundry_favorites_home_page_second_background,
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 40.dp)
@@ -46,7 +47,7 @@ fun SecondBackground(
 
             ButtonInOrangeBackground(
                 icon = com.tc.design.R.drawable.receipt_icons,
-                text = R.string.laundry_orders_home_page,
+                text = R.string.laundry_orders_home_page_second_background,
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 40.dp)

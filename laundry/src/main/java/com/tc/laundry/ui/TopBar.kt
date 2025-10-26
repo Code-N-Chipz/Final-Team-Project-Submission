@@ -3,10 +3,10 @@ package com.tc.laundry.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -14,23 +14,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import theme.primaryColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
+    modifier: Modifier = Modifier,
     title: String = "",
     icon: Int,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit = {}
 ){
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = {
-            Text( text = title )
+            Text(
+                text = title,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold
+            )
                 },
         navigationIcon = {
             IconButton(
-                onClick = {}
+                onClick = onClick
             ) {
                 Icon(
                     painter = painterResource(icon),
