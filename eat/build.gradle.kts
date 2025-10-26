@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling)
     implementation(project(":core:design"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

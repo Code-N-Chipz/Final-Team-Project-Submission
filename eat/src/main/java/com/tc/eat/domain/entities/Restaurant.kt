@@ -1,4 +1,4 @@
-package com.tc.eat.domain
+package com.tc.eat.domain.entities
 
 data class Restaurant(
     val name : String,
