@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,13 @@ plugins {
 
 kotlin {
     jvmToolchain(17)
+}
+
+val secretsPropertiesFile = rootProject.file("secrets.properties")
+val secrets = Properties().apply {
+    if (secretsPropertiesFile.exists()) {
+        load(secretsPropertiesFile.inputStream())
+    }
 }
 
 android {
@@ -20,6 +29,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        manifestPlaceholders["MAPS_API_KEY"] = secrets["MAPS_API_KEY"]!!
     }
 
     buildTypes {
