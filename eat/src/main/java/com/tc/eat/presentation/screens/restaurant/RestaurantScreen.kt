@@ -6,16 +6,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,26 +39,25 @@ fun RestaurantScreen(navToHome: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .semantics { isTraversalGroup = true },
+                .semantics { isTraversalGroup = true }
+                .verticalScroll(rememberScrollState()),
             contentAlignment = Alignment.TopCenter
         ) {
-            Scaffold(topBar = { RestaurantTopBar(navToHome) }) { innerPadding ->
-                Column(
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                RestaurantBanner()
+                FeaturedItems(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(innerPadding)
-                ) {
-                    RestaurantBanner()
-                    FeaturedItems(
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                    )
-                    HorizontalDivider(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = textTertiary,
-                    )
-                    RestaurantMenuListings()
-                }
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 88.dp)
+                )
+                HorizontalDivider(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = textTertiary,
+                )
+                RestaurantMenuListings()
             }
             RestaurantCard(
                 modifier = Modifier
@@ -67,24 +66,20 @@ fun RestaurantScreen(navToHome: () -> Unit) {
                     .height(120.dp)
             )
         }
-    }
-}
-
-@Composable
-private fun RestaurantTopBar(navToHome: () -> Unit) {
-    IconButton(
-        modifier = Modifier
-            .padding(start = 8.dp, top = 20.dp)
-            .size(52.dp)
-            .background(shape = CircleShape, color = primaryIconColor),
-        onClick = {navToHome()}
-    ) {
-        Icon(
-            modifier = Modifier.size(28.dp),
-            painter = painterResource(R.drawable.arrow_left_orange_icon),
-            contentDescription = "",
-            tint = Color.Unspecified
-        )
+        IconButton(
+            modifier = Modifier
+                .padding(start = 8.dp, top = 20.dp)
+                .size(52.dp)
+                .background(shape = CircleShape, color = primaryIconColor),
+            onClick = { navToHome() }
+        ) {
+            Icon(
+                modifier = Modifier.size(28.dp),
+                painter = painterResource(R.drawable.arrow_left_orange_icon),
+                contentDescription = "",
+                tint = Color.Unspecified
+            )
+        }
     }
 }
 
@@ -94,7 +89,6 @@ fun RestaurantBanner() {
         modifier = Modifier
             .fillMaxWidth()
             .height(256.dp)
-            .offset(y = (-88).dp)
             .background(
                 color = primaryColor,
                 shape = RoundedCornerShape(20.dp)

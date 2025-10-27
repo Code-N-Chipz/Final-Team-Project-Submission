@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.unit.dp
+import theme.primaryColor
 
 @Composable
 fun VectorPathContainer(){
@@ -70,7 +71,7 @@ fun VectorPathContainer(){
         }
         drawPath(
             path = path,
-            color = Color(0xFFFFA500), // Orange color
+            color = primaryColor
         )
 
         // Draw a black stroke to match the image's border

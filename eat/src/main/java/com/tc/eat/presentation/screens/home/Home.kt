@@ -36,7 +36,9 @@ fun HomeScreen(
                 .semantics { isTraversalGroup = true },
             contentAlignment = Alignment.TopCenter
         ) {
-            Scaffold(topBar = { HomeTopBar(navToSearch) }) { innerPadding ->
+            Scaffold(
+                topBar = { HomeTopBar(navToSearch) }
+            ) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()

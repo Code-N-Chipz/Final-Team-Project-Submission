@@ -62,9 +62,10 @@ fun FeaturedItems(modifier: Modifier = Modifier) {
         fontSize = 20.sp
     )
     LazyRow(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .height(192.dp)
+            .padding(horizontal = 16.dp)
     ) {
         items(featureMenu) { feature ->
             Column {

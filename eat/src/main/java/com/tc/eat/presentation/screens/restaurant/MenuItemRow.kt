@@ -12,6 +12,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,10 +27,12 @@ import androidx.compose.ui.unit.sp
 import com.tc.design.R
 import com.tc.eat.domain.entities.MenuItem
 import com.tc.eat.presentation.screens.composables.PriceTagText
+import com.tc.eat.presentation.screens.restaurant.bottom_sheets.AddToOrderBottomSheet
 import theme.textTertiary
 
 @Composable
 fun MenuItemRow(menuItem: MenuItem) {
+    var isSheetOpen by rememberSaveable { mutableStateOf(false) }
     var iconAvailability: Int
     var textColor: Color
     if (menuItem.isAvailable) {
@@ -51,7 +57,7 @@ fun MenuItemRow(menuItem: MenuItem) {
                 color = textTertiary
             )
             if (menuItem.isAvailable) {
-                IconButton(modifier = Modifier.size(32.dp), onClick = {}) {
+                IconButton(modifier = Modifier.size(32.dp), onClick = {isSheetOpen = true}) {
                     Icon(
                         modifier = Modifier.size(32.dp),
                         painter = painterResource(R.drawable.circle_plus_oranage_icon),
@@ -60,6 +66,9 @@ fun MenuItemRow(menuItem: MenuItem) {
                     )
                 }
             }
+        }
+        if(isSheetOpen){
+            AddToOrderBottomSheet(true){isSheetOpen = false}
         }
     }
 }

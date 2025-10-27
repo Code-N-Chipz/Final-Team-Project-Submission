@@ -25,7 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,7 +49,7 @@ import theme.textTertiary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddToOrderBottomSheet() {
+fun AddToOrderBottomSheet(isSheetOpen: Boolean, closeBottomSheet : () -> Unit) {
     val menuItem = MenuItem(
         name = "Spinach and ricotta raviolis",
         ingredients = listOf("Spinach", "Ricotta", "Pasta"),
@@ -63,14 +62,17 @@ fun AddToOrderBottomSheet() {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = false
     )
-    var isSheetOpen by rememberSaveable { mutableStateOf(false) }
+    var openSheet by remember { mutableStateOf(isSheetOpen) }
     var quantity by remember { mutableStateOf("1") }
-    var totalCost by remember{ mutableFloatStateOf(menuItem.price) }
-    if(isSheetOpen) {
+    var totalCost by remember { mutableFloatStateOf(menuItem.price) }
+    if (openSheet) {
         ModalBottomSheet(
             modifier = Modifier.fillMaxHeight(),
             sheetState = sheetState,
-            onDismissRequest = {}
+            onDismissRequest = {
+                openSheet = false
+                closeBottomSheet()
+            }
         ) {
             MenuItemHeader(
                 menuItem = menuItem,
