@@ -41,7 +41,7 @@ fun TinderNavHost() {
         navController = navController,
         startDestination = "start"
     ) {
-        // 1️⃣ Starting screen
+        //  Starting screen
         composable("start") {
             StartingScreen(
                 onLetsGoClick = {
@@ -52,7 +52,7 @@ fun TinderNavHost() {
             )
         }
 
-        // 2️⃣ Picture screen
+        //  Picture screen
         composable("picture") {
             PictureScreen(
                 onBackClick = { navController.popBackStack() },
@@ -61,7 +61,7 @@ fun TinderNavHost() {
             )
         }
 
-        // ⃣ Camera
+        //  Camera
         composable("camera") {
             CameraScreen(
                 onBackClick = { navController.popBackStack() },
