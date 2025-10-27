@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
-import com.tc.learn.data.model.Location
+//import com.tc.learn.data.model.Location
 import com.tc.learn.data.model.Teacher
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -36,7 +36,7 @@ data class Order(
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
     val teacher: Teacher? = null,
-    val location: Location? = null,
+//    val location: Location? = null,
 )
 
 @Composable
@@ -133,13 +133,13 @@ fun OrderScreen(
                     )
                 }
 
-                order.location.let { loc ->
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Location: (${loc?.latitude}, ${loc?.longitude})",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
+//                order.location.let { loc ->
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    Text(
+//                        text = "Location: (${loc?.latitude}, ${loc?.longitude})",
+//                        style = MaterialTheme.typography.bodyMedium
+//                    )
+//                }
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }

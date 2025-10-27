@@ -50,8 +50,11 @@ fun AppNavHost(
                 },
                 onMapClick = { teacher ->
                     navigator.navigateTo(NavRoute.Map.passId(teacher.id))
+                },
+                onCalendarClick = { teacher ->
+//                    navigator.navigateTo(NavRoute.Calander.passId(teacher.id))
+                    navigator.navigateTo(NavRoute.Calander.route)
                 }
-                //onCalanderClick = {}
             )
         }
 
@@ -74,6 +77,7 @@ fun AppNavHost(
             MapScreen(
                 navigator = navigator,
                 teacherId = teacherId,
+                viewModel = TODO(),
             )
         }
 

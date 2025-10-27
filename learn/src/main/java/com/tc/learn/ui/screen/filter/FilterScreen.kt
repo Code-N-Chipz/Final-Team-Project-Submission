@@ -60,6 +60,12 @@ fun FilterScreen(appNavigator: AppNavigator) {
         Button(onClick = {
             // Apply filters and navigate if needed
             // Example: appNavigator.navigateTo(NavRoute.Search.route)
+
+            //Call filter functions from repo by viewmodel
+
+            //need to make viewmodel available, and add new function to repository
+
+
         }) {
             Text("Apply Filters")
         }

@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.tc.design.theme.primaryColor
+//import com.tc.design.theme.primaryColor
 import com.tc.learn.R
 
 @Composable
@@ -61,9 +61,9 @@ fun OverlayerBox(
                 )
 
                 Icon(
-                    painter = painterResource(com.tc.design.R.drawable.location_crosshair_icon),
+                    painter = painterResource(R.drawable.location_crosshair_icon),
                     contentDescription = null,
-                    tint = primaryColor,
+//                    tint = primaryColor,
                     modifier = Modifier
                         .clickable(
                             onClick = {  }
@@ -82,12 +82,13 @@ fun OverlayerBox(
             Search(onClickSearchIcon = {  })
 
             Button(
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = primaryColor
-                ),
+//                colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                onClick = {
+                    /* TODO: handle click */
+
+                },
                 modifier = Modifier
                     .size(width = 257.dp, height = 33.dp),
-                onClick = {}
             ) {
                 Text(
                     text = stringResource(R.string.learn_search_button_home_page_overlayer_box),
@@ -193,7 +194,7 @@ private fun Search(
             )
 
             Icon(
-                painter = painterResource(com.tc.design.R.drawable.magnifying_glass_grey_icon),
+                painter = painterResource(R.drawable.magnifying_glass_grey_icon),
                 contentDescription = null,
                 tint = Color.Gray
             )

@@ -76,6 +76,6 @@ dependencies {
 
     //TcMap
     implementation("com.tc:tcmap:1.0.0")
-    implementation(project(":core:design"))
+//    implementation(project(":core:design"))
 
 }

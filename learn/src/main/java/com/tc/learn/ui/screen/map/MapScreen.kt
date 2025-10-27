@@ -1,5 +1,7 @@
 package com.tc.learn.ui.screen.map
 
+import android.R
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.maps.model.CameraPosition
@@ -25,12 +27,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 import com.tc.learn.data.model.Teacher
-import kotlinx.coroutines.flow.take
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
 
 //data class TeacherLocation(
 //    val name: String,
@@ -39,10 +43,11 @@ import kotlinx.coroutines.flow.take
 //    val latitude: Double,
 //    val longitude: Double
 //)
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun MapScreen (
     navigator: AppNavigator,
-    viewModel: TeacherViewModel,
+    viewModel: TeacherViewModel = hiltViewModel(),
     teacherId: String = ""){
 
     val context = LocalContext.current
@@ -92,7 +97,7 @@ fun MapScreen (
             placeholder = { Text("Search") },
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_search),
+                    painter = painterResource(id = R.drawable.ic_menu_search),
                     contentDescription = "Search"
                 )
             },
@@ -141,7 +146,7 @@ fun MapScreen (
                 .padding(16.dp)
         ) {
             Icon(
-                painter = painterResource(id = android.R.drawable.ic_menu_mylocation),
+                painter = painterResource(id = R.drawable.ic_menu_mylocation),
                 contentDescription = "My Location",
                 tint = Color(0xFFFF7A00)
             )
@@ -194,7 +199,7 @@ fun TeacherMapCard(teacher: Teacher, modifier: Modifier = Modifier) {
                 Text(teacher.name, fontWeight = FontWeight.Bold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        painter = painterResource(id = android.R.drawable.btn_star_big_on),
+                        painter = painterResource(id = R.drawable.btn_star_big_on),
                         contentDescription = "Rating",
                         tint = Color(0xFFFF7A00),
                         modifier = Modifier.size(16.dp)
@@ -211,8 +216,10 @@ fun TeacherMapCard(teacher: Teacher, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewMapScreen() {
-    MapScreen()
-}
+//@Preview(showSystemUi = true)
+//@Composable
+//fun PreviewMapScreen() {
+//    MapScreen(
+////        navigator =
+//    )
+//}

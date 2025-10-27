@@ -45,5 +45,5 @@ enum class Subject(val displayName: String) {
 
 }
 
-data class Location(val latitude: Double, val longitude: Double)
+//data class Location(val latitude: Double, val longitude: Double)
 

@@ -8,7 +8,7 @@ import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tc.learn.data.model.Location
+//import com.tc.learn.data.model.Location
 import com.tc.learn.data.model.Teacher
 import com.tc.tcmap.domain.MarkerInfo
 import com.tc.tcmap.domain.PersonInfo
@@ -17,15 +17,15 @@ import com.tc.tcmap.ui.TcMap
 @Composable
 fun TeacherMapCard(
     modifier: Modifier = Modifier,
-    teacherLocation: Location,
+//    teacherLocation: Location,
     teacher: Teacher,
     onMarkerClick: (MarkerInfo) -> Unit,
 ) {
     val marker = MarkerInfo(
         imageUrl = teacher.imageUrl,
         title = teacher.name,
-        latitude = teacherLocation.latitude,
-        longitude = teacherLocation.longitude
+        latitude = teacher.latitude,
+        longitude = teacher.longitude
     )
     TcMap(
         mapType = MapType.MarkedMapWithPeople(

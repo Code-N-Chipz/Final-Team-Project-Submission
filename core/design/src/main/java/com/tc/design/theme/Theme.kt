@@ -9,12 +9,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.tc.design.theme.backgroundColor
-import com.tc.design.theme.buttonTertiary
-import com.tc.design.theme.primaryColor
-import com.tc.design.theme.secondaryColor
-import com.tc.design.theme.textPrimary
-import com.tc.design.theme.textQuaternary
+import theme.typography
 
 private val darkColorScheme = darkColorScheme(
     primary = primaryColor,

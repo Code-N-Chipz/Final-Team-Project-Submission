@@ -16,7 +16,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Alice Smith",
                 levels = listOf(Level.ELEMENTARY),
                 subjects = listOf(Subject.ENGLISH, Subject.MATHS),
-                location = null,
+//                location = null,
                 price = 20.00,
                 _rating = 4.4,
                 latitude = -26.2030,
@@ -27,7 +27,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Boris Johnson",
                 levels = listOf(Level.ELEMENTARY),
                 subjects = listOf(Subject.FRENCH, Subject.SCIENCE),
-                location = null,
+//                location = null,
                 price = 22.00,
                 _rating = 4.5,
                 imageUrl = "https://s.gravatar.com/avatar/62a968f41c1feb83fd1cd142e7c043f3?s=200",
@@ -39,7 +39,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Catherine Lee",
                 levels = listOf(Level.MIDDLE_SCHOOL),
                 subjects = listOf(Subject.MATHS, Subject.SCIENCE),
-                location = null,
+//                location = null,
                 price = 25.00,
                 _rating = 4.7,
                 latitude = -26.2030,
@@ -50,7 +50,7 @@ class TeacherRepository @Inject constructor() {
                 name = "David Kim",
                 levels = listOf(Level.HIGH_SCHOOL),
                 subjects = listOf(Subject.ENGLISH, Subject.HISTORY),
-                location = null,
+//                location = null,
                 price = 30.00,
                 _rating = 4.6,
                 latitude = -26.2030,
@@ -61,7 +61,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Emily Zhang",
                 levels = listOf(Level.HIGH_SCHOOL),
                 subjects = listOf(Subject.SCIENCE, Subject.MATHS),
-                location = null,
+//                location = null,
                 price = 28.00,
                 _rating = 4.8,
                 latitude = -26.2030,
@@ -72,7 +72,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Frank Thompson",
                 levels = listOf(Level.MIDDLE_SCHOOL, Level.HIGH_SCHOOL),
                 subjects = listOf(Subject.ENGLISH, Subject.MATHS),
-                location = null,
+//                location = null,
                 price = 26.00,
                 _rating = 4.3,
                 latitude = -26.2030,
@@ -83,7 +83,7 @@ class TeacherRepository @Inject constructor() {
                 name = "Grace Liu",
                 levels = listOf(Level.ELEMENTARY, Level.MIDDLE_SCHOOL),
                 subjects = listOf(Subject.FRENCH, Subject.MATHS),
-                location = null,
+//                location = null,
                 price = 21.00,
                 _rating = 4.5,
                 latitude = -26.2030,
@@ -118,14 +118,13 @@ class TeacherRepository @Inject constructor() {
     // Search by location (case-insensitive)
     //Needs to be updated to maps inclusion
 
-    fun searchTeachersByLocation(latitude: Double, longitude: Double, radiusKm: Double): List<Teacher> {
-        return getTeachers().filter { teacher ->
-            teacher.location?.let { loc ->
-                val distance = haversine(loc.latitude, loc.longitude, latitude, longitude)
-                distance <= radiusKm
-            } ?: false
-        }
-    }
+//    fun searchTeachersByLocation(latitude: Double, longitude: Double, radiusKm: Double): List<Teacher> {
+//        return null
+////        getTeachers().filter { teacher ->
+////                val distance = haversine(teacher.latitude, teacher.longitude, latitude, longitude)
+////                distance <= radiusKm
+////            } ?: false
+//    }
 
     // Haversine formula to calculate distance in km
     fun haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
@@ -154,12 +153,12 @@ class TeacherRepository @Inject constructor() {
             val matchesLevel = levels.isEmpty() || teacher.levels.any { it in levels }
             val matchesSubject = subjects.isEmpty() || teacher.subjects.any { it in subjects }
             val matchesName = nameQuery.isBlank() || teacher.name.contains(nameQuery, ignoreCase = true)
-            val matchesLocation = if (latitude != null && longitude != null && radiusKm > 0) {
-                teacher.location?.let { loc ->
-                    haversine(loc.latitude, loc.longitude, latitude, longitude) <= radiusKm
-                } ?: false
-            } else true
-            matchesLevel && matchesSubject && matchesName && matchesLocation
+//            val matchesLocation = if (latitude != null && longitude != null && radiusKm > 0) {
+//                teacher.location?.let { loc ->
+//                    haversine(loc.latitude, loc.longitude, latitude, longitude) <= radiusKm
+//                } ?: false
+//            } else true
+            matchesLevel && matchesSubject && matchesName
         }
     }
 

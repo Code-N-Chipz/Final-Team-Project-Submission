@@ -32,8 +32,6 @@ import coil.Coil.imageLoader
 import com.tc.learn.data.model.Teacher
 import com.tc.learn.ui.component.TeacherCard
 import com.tc.learn.ui.navigation.AppNavigator
-
-import com.tc.design.theme.primaryColor
 import com.tc.learn.R
 
 @Composable
@@ -68,9 +66,8 @@ fun OverlayerBox(
                 )
 
                 Icon(
-                    painter = painterResource(com.tc.design.R.drawable.location_crosshair_icon),
+                    painter = painterResource(R.drawable.location_crosshair_icon),
                     contentDescription = null,
-                    tint = primaryColor,
                     modifier = Modifier
                         .clickable(
                             onClick = { }
@@ -94,9 +91,6 @@ fun OverlayerBox(
             Search(onClickSearchIcon = { })
 
             Button(
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = primaryColor
-                ),
                 modifier = Modifier
                     .size(width = 257.dp, height = 33.dp),
                 onClick = {}
@@ -206,7 +200,7 @@ private fun Search(
             )
 
             Icon(
-                painter = painterResource(com.tc.design.R.drawable.magnifying_glass_grey_icon),
+                painter = painterResource(R.drawable.magnifying_glass_grey_icon),
                 contentDescription = null,
                 tint = Color.Gray
             )

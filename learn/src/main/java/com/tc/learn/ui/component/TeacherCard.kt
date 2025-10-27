@@ -105,7 +105,7 @@ fun TeacherListPreview() {
             name = "Alice Johnson",
             levels = listOf(Level.ELEMENTARY, Level.MIDDLE_SCHOOL),
             subjects = listOf(Subject.MATHS, Subject.SCIENCE),
-            location = null,
+//            location = null,
             price = 25.0,
             _rating = 4.8
         ),
@@ -114,7 +114,7 @@ fun TeacherListPreview() {
             name = "Bob Smith",
             levels = listOf(Level.HIGH_SCHOOL),
             subjects = listOf(Subject.ENGLISH, Subject.HISTORY),
-            location = null,
+//            location = null,
             price = 30.0,
             _rating = 4.6
         ),
@@ -123,7 +123,7 @@ fun TeacherListPreview() {
             name = "Carol Lee",
             levels = listOf(Level.COLLEGE),
             subjects = listOf(Subject.ART, Subject.PHYSICAL_EDUCATION),
-            location = null,
+//            location = null,
             price = 35.0,
             _rating = 4.9
         )
