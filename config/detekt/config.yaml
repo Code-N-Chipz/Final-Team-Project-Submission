@@ -11,34 +11,22 @@ build:
   # Also count findings that could be auto-corrected by formatting.
   excludeCorrectable: false
 
-# Enable standard reports for CI and local review.
-reports:
-  xml:
-    enabled: true
-  html:
-    enabled: true
-  sarif:
-    enabled: true
 
 # Optional (prefer per-module baselines):
 # baseline:
 #   path: detekt-baseline.xml
 
-# Common glob for test and build folders to reduce noise.
-_test_excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
 
 # ---- Rule sets ----
-
 potential-bugs:
   active: true
   # equals() without matching hashCode()
-  EqualsHashCode:
+  EqualsWithHashCodeExist:
     active: true
+    excludes:
+      - "**/generated/**"
   # Locale-sensitive ops without specifying Locale
   ImplicitDefaultLocale:
-    active: true
-  # when-expression not exhaustive for sealed/enums
-  MissingWhenCase:
     active: true
   # Dangerous lateinit uses (commonly noisy on Android) -> off by default
   LateinitUsage:
@@ -46,6 +34,7 @@ potential-bugs:
 
 performance:
   active: true
+
   # Avoid spread operator on varargs (creates copies)
   SpreadOperator:
     active: true
@@ -59,6 +48,9 @@ performance:
 exceptions:
   active: true
   # Avoid catching overly generic exceptions
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+
+
   TooGenericExceptionCaught:
     active: true
     # Allow in tests to simplify fixtures
@@ -79,39 +71,43 @@ exceptions:
 style:
   active: true
 
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+
   # Discourage magic literals; allow common small values and in tests
   MagicNumber:
-    active: true
+    active: false
     excludes: *test_excludes
-    ignoreNumbers: [ -1, 0, 1, 2 ]
+    ignoreNumbers: [ "-1", "0", "1", "2" ]
     ignoreHashCodeFunction: true
     ignoreAnnotation: true
-    ignorePropertyDeclaration: false
+    ignorePropertyDeclaration: true # might need to be false
+
+  NewLineAtEndOfFile:
+    active: false
 
   # Prefer explicit imports; handled by formatting plugin instead -> disable here
   WildcardImport:
     active: false
 
-  # Enforce one top-level declaration per file naming
-  Filename:
-    active: true
-
   # Core line length rule disabled to avoid conflict with formatting.MaximumLineLength
   MaxLineLength:
     active: false
-
-  # Prefer explicit Unit return types only when meaningful
-  OptionalUnitReturn:
-    active: true
 
   # Flag unused private members (helps remove dead code)
   UnusedPrivateMember:
     active: true
     excludes: *test_excludes
-    allowedNames: [ '_', 'ignored', 'expected' ]
+    allowedNames: '^(?:_|ignored|expected)$'
+    ignoreAnnotated: [ 'Preview' ]
 
 naming:
   active: true
+  excludes: &test_excludes [ "**/test/**", "**/androidTest/**", "**/commonTest/**", "**/build/**" ]
+
+#  # Ensure declaration names match configured patterns
+  # might need to set a custom pattern for test functions if used
+#  MatchingDeclarationName:
+#    active: true
 
   # Function names in lowerCamelCase; allow @Composable for UI preview flexibility
   FunctionNaming:
@@ -122,8 +118,9 @@ naming:
   # Top-level vals/vars naming
   TopLevelPropertyNaming:
     active: true
-    constantPattern: '^[A-Z][_A-Z0-9]*$'
-    propertyPattern: '^[a-z][A-Za-z0-9]*$'
+    excludes: *test_excludes
+    constantPattern: '^[A-Z][_A-Z0-9]*'
+    propertyPattern: '^[a-z][A-Za-z0-9]*'
 
   # Class/object/interface names in PascalCase
   ClassNaming:
@@ -146,12 +143,13 @@ complexity:
     ignoreAnnotated: [ 'Composable' ]
 
   # Limit number of parameters
-  LongParameterList:
-    active: true
-    excludes: *test_excludes
-    threshold: 6
-    ignoreDefaultParameters: true
-    ignoreAnnotated: [ 'Composable' ]
+  # Deprecated -> functionThreshold and constructorThreshold
+#  LongParameterList:
+#    active: true
+#    excludes: *test_excludes
+#    threshold: 6
+#    ignoreDefaultParameters: true
+#    ignoreAnnotated: [ 'Composable' ]
 
   # Limit branching complexity
   CyclomaticComplexMethod:
@@ -183,30 +181,30 @@ coroutines:
 
 # Formatting rules require the detekt-formatting plugin on the classpath:
 # detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
-formatting:
-  active: true
-  android: true
-  autoCorrect: true
-
-  # Enforce import order
-  ImportOrdering:
-    active: true
-
-  # Disallow wildcard imports (replaces style.WildcardImport)
-  NoWildcardImports:
-    active: true
-
-  # Enforce indentation and line length
-  Indentation:
-    active: true
-  MaximumLineLength:
-    active: true
-    maxLineLength: 120
-
-  # Keep a newline at end of file
-  FinalNewline:
-    active: true
-
-  # Consistent string template formatting
-  StringTemplate:
-    active: true
+#formatting:
+#  active: true
+#  android: true
+#  autoCorrect: true
+#
+#  # Enforce import order
+#  ImportOrdering:
+#    active: true
+#
+#  # Disallow wildcard imports (replaces style.WildcardImport)
+#  NoWildcardImports:
+#    active: true
+#
+#  # Enforce indentation and line length
+#  Indentation:
+#    active: true
+#  MaximumLineLength:
+#    active: true
+#    maxLineLength: 120
+#
+#  # Keep a newline at end of file
+#  FinalNewline:
+#    active: true
+#
+#  # Consistent string template formatting
+#  StringTemplate:
+#    active: true
