@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.laundry.R
 import com.tc.laundry.ui.comon.HorizontalSpacerGrayLine
+import com.tc.laundry.ui.comon.PrimaryButtonColour
 import theme.primaryColor
 
 @Composable
@@ -174,6 +175,82 @@ fun PlaceOrderPage(
             )
 
             Spacer(modifier = Modifier.height(20.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = modifier
+                    .fillMaxWidth()
+            ){
+                Column{
+
+                    Text(
+                        text = "Subtotal",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Text(
+                        text = "Delivery fees",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier
+                            .padding(top = 17.dp)
+                    )
+                }
+
+                Column{
+                    Text(
+                        text = "$110",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = primaryColor
+                    )
+
+                    Text(
+                        text = "$0.00",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.LightGray,
+                        modifier = Modifier
+                            .padding(top = 17.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            HorizontalSpacerGrayLine()
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(top = 21.dp)
+                    .fillMaxWidth()
+            ){
+                Text(
+                    text = "Total amount",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.LightGray
+                )
+
+                Text(
+                    text = "$ 110.00",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = primaryColor,
+                    modifier = Modifier
+                        .padding(top = 7.dp)
+                )
+
+                Spacer(modifier = Modifier.height(25.dp))
+
+                PrimaryButtonColour(
+                    text = R.string.laundry_place_order_button_place_order_page,
+                )
+            }
         }
     }
 }
@@ -224,6 +301,8 @@ private fun Info(
     Spacer(modifier = Modifier.height(11.dp))
 
     HorizontalSpacerGrayLine()
+
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

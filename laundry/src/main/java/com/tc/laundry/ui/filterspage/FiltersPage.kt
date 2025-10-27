@@ -1,31 +1,10 @@
 package com.tc.laundry.ui.filterspage
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.RangeSlider
-import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,7 +24,17 @@ import theme.primaryColor
 fun FiltersPage(
     modifier: Modifier = Modifier,
     navController: NavController
-){
+) {
+    var selectedSort by remember { mutableStateOf("Recommend") }
+    var rating by remember { mutableStateOf(3) }
+    var range by remember { mutableStateOf(0f..60f) }
+
+    fun resetFilters() {
+        selectedSort = "Recommend"
+        rating = 3
+        range = 0f..60f
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -58,10 +47,16 @@ fun FiltersPage(
             endText = stringResource(R.string.laundry_header_action_clear_filters_page),
             onClick = {
                 navController.popBackStack()
+            },
+            onEndClick = {
+                resetFilters()
             }
         )
 
-        DropDownSection()
+        DropDownSection(
+            selected = selectedSort,
+            onSelect = { selectedSort = it }
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -69,7 +64,10 @@ fun FiltersPage(
             text = stringResource(R.string.laundry_price_kg_filters_page)
         )
 
-        RangeSliderCompose()
+        RangeSliderCompose(
+            range = range,
+            onRangeChange = { range = it }
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -77,11 +75,12 @@ fun FiltersPage(
             text = stringResource(R.string.laundry_Rate_filters_page)
         )
 
-        Rating()
-
-        Spacer(
-            modifier = Modifier.height(220.dp)
+        Rating(
+            initialRating = rating,
+            onRatingChanged = { rating = it }
         )
+
+        Spacer(modifier = Modifier.height(220.dp))
 
         PrimaryButtonColour(
             text = R.string.laundry_apply_button_filters_page
@@ -95,8 +94,8 @@ private fun Rating(
     initialRating: Int = 3,
     maxStars: Int = 5,
     onRatingChanged: (Int) -> Unit = {},
-){
-    var rating by remember {mutableStateOf(initialRating)}
+) {
+    var rating by remember { mutableStateOf(initialRating) }
 
     Row(
         modifier = modifier,
@@ -106,28 +105,27 @@ private fun Rating(
         for (i in 1..maxStars) {
             Icon(
                 painter = painterResource(
-                    if(i <= rating) R.drawable.filled_star else R.drawable.star
+                    if (i <= rating) R.drawable.filled_star else R.drawable.star
                 ),
                 contentDescription = null,
                 tint = if (i <= rating) primaryColor else Color.LightGray,
                 modifier = Modifier
                     .size(32.dp)
-                    .clickable{
+                    .clickable {
                         rating = i
                         onRatingChanged(i)
                     }
             )
         }
     }
-
 }
 
 @Composable
 private fun RangeSliderCompose(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    range: ClosedFloatingPointRange<Float>,
+    onRangeChange: (ClosedFloatingPointRange<Float>) -> Unit
 ) {
-    var range by remember { mutableStateOf(0f..60f) }
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -141,39 +139,22 @@ private fun RangeSliderCompose(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "0",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color.Black
-            )
-            Text(
-                text = "30",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-            Text(
-                text = "60",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color.LightGray
-            )
+            Text("0", fontSize = 14.sp, fontWeight = FontWeight.Medium)
+            Text("30", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+            Text("60", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = Color.LightGray)
         }
 
-        // Wrap slider + start dot
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(36.dp) // gives space for the slider and dot
+                .height(36.dp)
         ) {
-            // fixed orange start dot
-            androidx.compose.foundation.Canvas(
+            // orange start dot
+            Canvas(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(start = 8.dp)
-                    .width(12.dp)
-                    .height(12.dp)
+                    .size(12.dp)
             ) {
                 drawCircle(color = primaryColor)
             }
@@ -181,7 +162,7 @@ private fun RangeSliderCompose(
             // actual slider
             RangeSlider(
                 value = range,
-                onValueChange = { range = it },
+                onValueChange = { onRangeChange(it) },
                 valueRange = 0f..60f,
                 steps = 9,
                 colors = SliderDefaults.colors(
@@ -201,10 +182,11 @@ private fun RangeSliderCompose(
 
 @Composable
 private fun DropDownSection(
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+    selected: String,
+    onSelect: (String) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
-    var selected by remember { mutableStateOf("Recommend") }
 
     Box(
         modifier = modifier
@@ -221,9 +203,9 @@ private fun DropDownSection(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.LightGray
-                ) },
-            modifier = Modifier
-                .fillMaxWidth(),
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = primaryColor,
                 unfocusedBorderColor = Color.LightGray,
@@ -231,9 +213,7 @@ private fun DropDownSection(
                 unfocusedContainerColor = Color.Transparent
             ),
             trailingIcon = {
-                IconButton(
-                    onClick = { expanded = !expanded }
-                ) {
+                IconButton(onClick = { expanded = !expanded }) {
                     Icon(
                         painter = painterResource(com.tc.design.R.drawable.down_arrow_grey_icon),
                         contentDescription = null,
@@ -249,12 +229,14 @@ private fun DropDownSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             listOf(
-                stringResource(R.string.laundry_sort_by_drop_down_recommend_filters_page)
+                stringResource(R.string.laundry_sort_by_drop_down_recommend_filters_page),
+                "Newest",
+                "Top Rated"
             ).forEach {
                 DropdownMenuItem(
                     text = { Text(it) },
                     onClick = {
-                        selected = it
+                        onSelect(it)
                         expanded = false
                     }
                 )

@@ -41,7 +41,7 @@ fun LaundryStartPage(
         )
 
         Image(
-            painter = painterResource(R.drawable.laundry),
+            painter = painterResource(R.drawable.laundry_start_page),
             contentDescription = null,
             modifier = Modifier
                 .padding(top = 112.dp)

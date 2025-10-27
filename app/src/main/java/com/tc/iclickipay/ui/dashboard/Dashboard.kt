@@ -76,7 +76,7 @@ val iconItems = listOf(
     IconItem("screen_pc_repair", R.drawable.pc_repair),
     IconItem("screen_learn", R.drawable.learn),
     IconItem("screen_handy_man", R.drawable.handyman),
-    IconItem("screen_laundry", R.drawable.laundry),
+    IconItem("screen_laundry", R.drawable.laundry_start_page),
     IconItem("screen_delivery", R.drawable.delivery),
     IconItem("screen_babysitter", R.drawable.babysitter),
     IconItem("screen_house_clean", R.drawable.house_clean)

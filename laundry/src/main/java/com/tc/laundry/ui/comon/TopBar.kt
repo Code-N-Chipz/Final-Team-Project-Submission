@@ -1,6 +1,7 @@
 package com.tc.laundry.ui.comon
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -25,7 +26,8 @@ fun TopBar(
     title: String = "",
     icon: Int,
     onClick: () -> Unit = {},
-    endText: String = ""
+    endText: String = "",
+    onEndClick: () -> Unit = {}
 ){
     CenterAlignedTopAppBar(
         title = {
@@ -58,7 +60,11 @@ fun TopBar(
                     text = endText,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = primaryColor
+                    color = primaryColor,
+                    modifier = Modifier
+                        .clickable{
+                            onEndClick()
+                        }
                 )
             }
         },

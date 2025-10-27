@@ -34,5 +34,8 @@
     <string name="laundry_price_kg_filters_page">Price/Kg</string>
     <string name="laundry_Rate_filters_page">Rate</string>
     <string name="laundry_apply_button_filters_page">Apply</string>
+    
+    <!-- PlACE ORDER PAGE-->
+    <string name="laundry_place_order_button_place_order_page">Place order</string>
 
 </resources>

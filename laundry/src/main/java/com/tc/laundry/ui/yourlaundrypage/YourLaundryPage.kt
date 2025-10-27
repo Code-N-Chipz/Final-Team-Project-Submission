@@ -1,5 +1,7 @@
 package com.tc.laundry.ui.yourlaundrypage
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DropdownMenu
@@ -42,6 +45,9 @@ import com.tc.laundry.ui.comon.TopBar
 import com.tc.laundry.ui.comon.LineInfo
 import com.tc.laundry.ui.comon.PrimaryButtonColour
 import theme.primaryColor
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun YourLaundryPage(
@@ -99,38 +105,51 @@ fun YourLaundryPage(
 }
 
 @Composable
-private fun Availability(
-    modifier: Modifier = Modifier
-){
-    var hour by remember { mutableStateOf(14f) }
+fun Availability(
+    modifier: Modifier = Modifier,
+    onHourSelected: (Int) -> Unit = {}
+) {
+    val hours = listOf(8, 11, 14, 17, 20)
+    var selectedHour by remember { mutableStateOf(14) } // default at 14h
 
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Hour labels above the slider
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            listOf("8h", "11h", "14h", "17h", "20h").forEach {
-                val isSelected = it == "${hour.toInt()}h"
+            hours.forEach {
+                val isSelected = it == selectedHour
                 Text(
-                    text = it,
-                    color = if (isSelected) Color.Black else Color.LightGray,
-                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                    text = "${it}h",
+                    color = if (isSelected) Color.Black else Color.Gray,
+                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                    fontSize = if (isSelected) 16.sp else 14.sp
                 )
             }
         }
 
+        // Slider that snaps to these five hours
         Slider(
-            value = hour,
-            onValueChange = { hour = it },
-            valueRange = 8f..20f,
-            steps = 3,
+            value = hours.indexOf(selectedHour).toFloat(),
+            onValueChange = { value ->
+                val index = value.toInt().coerceIn(0, hours.lastIndex)
+                selectedHour = hours[index]
+                onHourSelected(hours[index])
+            },
+            valueRange = 0f..(hours.size - 1).toFloat(),
+            steps = hours.size - 2, // 5 points = 3 steps between
             colors = SliderDefaults.colors(
                 thumbColor = primaryColor,
-                activeTrackColor = Color.LightGray
-            )
+                activeTrackColor = Color.LightGray,
+                inactiveTrackColor = Color.LightGray
+            ),
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
