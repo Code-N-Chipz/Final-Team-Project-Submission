@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
-    
+
 }
 
 android {
@@ -58,6 +58,9 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(project(":eat"))
+    implementation(project(":laundry"))
+    implementation(project(":tinder"))
+    implementation(project(":uber"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

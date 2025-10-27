@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
-
 android {
     namespace = "com.tc.doctor"
     compileSdk {
@@ -31,7 +30,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
+kotlin {
+    jvmToolchain(17)
+}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
