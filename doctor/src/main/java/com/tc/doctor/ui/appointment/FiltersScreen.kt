@@ -13,14 +13,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DividerDefaults
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
@@ -28,37 +33,75 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tc.ui.CommonButton
 import theme.primaryColor
+import theme.textPenternary
 import theme.textTertiary
+import kotlin.math.roundToInt
 import com.tc.design.R as CoreDraw
 
 @Composable
 fun FiltersScreen() {
+
+    var city by rememberSaveable { mutableStateOf("") }
+    var distance by rememberSaveable { mutableStateOf(50f) }
+    var specialistSet by rememberSaveable { mutableStateOf(setOf<Int>()) }
+    var language by rememberSaveable { mutableStateOf("English") }
+
     Column(
-        verticalArrangement = Arrangement.spacedBy(15.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .padding(15.dp)
             .fillMaxSize()
     ) {
         TopBar()
-        CitySelect()
-        DistanceSet()
-        SpecialtiesSet()
-        LanguageSelect()
+        CitySelect(
+            city = city,
+            onCityChange = { city = it }
+        )
+        DistanceSet(
+            distance = distance,
+            onDistanceChange = { distance = it }
+        )
+        SpecialtiesSet(
+            selected = specialistSet,
+            onSelectedChange = { specialistSet = it },
+            options = setOf(
+                "All", "Allergist", "Anesthesiologist",
+                "Cardiologist",
+                "Dermatologist",
+                "Endocrinologist", "ENT (Otolaryngologist)",
+                "Family Physician",
+                "Gastroenterologist", "Geriatrician", "Gynecologist",
+                "Hematologist",
+                "Infectious Disease Specialist", "Internist",
+                "Nephrologist", "Neurologist", "Neurosurgeon",
+                "Obstetrician", "Oncologist"
+            )
+        )
+        LanguageDropDown(
+            language = language,
+            onLanguageChange = { language = it },
+            options = setOf("English", "Spanish", "French", "German")
+        )
+        Spacer(modifier = Modifier.height(10.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Button(onClick = {}) { Text("Save") }
+            CommonButton("Save")
         }
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -73,7 +116,8 @@ private fun TopBar() {
         IconButton(onClick = {}) {
             Icon(
                 painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
-                contentDescription = "Back Button"
+                contentDescription = "Back Button",
+                tint = Color.Unspecified
             )
         }
         Text(
@@ -86,24 +130,21 @@ private fun TopBar() {
 
 @Composable
 private fun CitySelect(
-    initial: String = "",
-    onCityChange: (String) -> Unit = {}
+    city: String,
+    onCityChange: (String) -> Unit = {},
+    findCurrentLocation: () -> Unit = {}
 ) {
-    var city by remember { mutableStateOf(initial) }
-
     OutlinedTextField(
         value = city,
-        onValueChange = {
-            city = it
-            onCityChange(it)
-        },
+        onValueChange = { onCityChange(it) },
         label = { Text("City") },
         singleLine = true,
         trailingIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { findCurrentLocation }) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.location_crosshair_icon_gray),
-                    contentDescription = "My Location"
+                    contentDescription = "My Location",
+                    tint = Color.Unspecified
                 )
             }
         },
@@ -114,9 +155,7 @@ private fun CitySelect(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DistanceSet() {
-    var distance by remember { mutableStateOf(50f) }
-
+private fun DistanceSet(distance: Float = 50f, onDistanceChange: (Float) -> Unit) {
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -124,27 +163,27 @@ private fun DistanceSet() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text("Distance", style = theme.typography.bodyMedium.copy(color = textTertiary))
-            HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
+            Text("Distance", style = theme.typography.bodyMedium.copy(color = textPenternary))
+            HorizontalDivider(Modifier, DividerDefaults.Thickness, textPenternary)
         }
-        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text("1 km", style = theme.typography.bodyMedium.copy(color = textTertiary))
+            Text("1 km", style = theme.typography.bodyMedium.copy(color = textPenternary))
             Text("$distance km", style = theme.typography.bodyMedium)
-            Text("+100 km", style = theme.typography.bodyMedium.copy(color = textTertiary))
+            Text("+100 km", style = theme.typography.bodyMedium.copy(color = textPenternary))
         }
 
 
         Slider(
             value = distance,
-            onValueChange = { distance = it },
+            onValueChange = { onDistanceChange(it.roundToInt().toFloat()) },
             valueRange = 1f..100f,
-            steps = 0,
+            steps = 98, // step by 1
             modifier = Modifier
                 .fillMaxWidth(),
             thumb = { sliderState ->
@@ -159,8 +198,8 @@ private fun DistanceSet() {
                 SliderDefaults.Track(
                     sliderState = sliderState,
                     colors = SliderDefaults.colors(
-                        activeTrackColor = theme.textTertiary,
-                        inactiveTrackColor = theme.textTertiary
+                        activeTickColor = theme.textTertiary,
+                        inactiveTickColor = theme.textTertiary
                     ),
                     modifier = Modifier
                         .height(2.dp)
@@ -171,18 +210,8 @@ private fun DistanceSet() {
 }
 
 @Composable
-private fun SpecialtiesSet() {
-    val specialties: List<String> = listOf(
-        "All", "Allergist", "Anesthesiologist",
-        "Cardiologist",
-        "Dermatologist",
-        "Endocrinologist", "ENT (Otolaryngologist)",
-        "Family Physician",
-        "Gastroenterologist", "Geriatrician", "Gynecologist",
-        "Hematologist",
-        "Infectious Disease Specialist", "Internist",
-        "Nephrologist", "Neurologist", "Neurosurgeon",
-        "Obstetrician", "Oncologist")
+private fun SpecialtiesSet(selected: Set<Int>, onSelectedChange: (Set<Int>) -> Unit, options: Set<String>) {
+
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -190,46 +219,97 @@ private fun SpecialtiesSet() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text("Specialties", style = theme.typography.bodyMedium.copy(color = textTertiary))
-            HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
+            Text("Specialties", style = theme.typography.bodyMedium.copy(color = textPenternary))
+            HorizontalDivider(Modifier, DividerDefaults.Thickness, textPenternary)
         }
-        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-            items(specialties.size) { index ->
-                Button(onClick = {}) {
-                    Text(specialties[index])
+            itemsIndexed(options.toList()) { index, specialty ->
+                val isSelected = index in selected
+                if (isSelected) {
+                    Button(
+                        onClick = {
+                            val newSet = if (isSelected) selected - index else selected + index
+                            onSelectedChange(newSet)
+                        },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(theme.buttonPrimary)
+                    ) {
+                        Text(specialty)
+                    }
+                } else {
+                    Box() {
+
+                    }
+                    Button(
+                        onClick = {
+                            val newSet = if (isSelected) selected - index else selected + index
+                            onSelectedChange(newSet)
+                        },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(theme.backgroundColor),
+                        modifier = Modifier
+                            .shadow(4.dp, RoundedCornerShape(8.dp
+                            ))
+
+                    ) {
+                        Text(specialty, color = theme.textQuaternary)
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LanguageSelect(
-    initial: String = "",
-    onLanguageChange: (String) -> Unit = {}
+private fun LanguageDropDown(
+    onLanguageChange: (String) -> Unit = {},
+    options: Set<String> = emptySet(),
+    language: String = "English"
 ) {
-    var language by remember { mutableStateOf(initial) }
+    var expanded by rememberSaveable { mutableStateOf(false) }
 
-    OutlinedTextField(
-        value = language,
-        onValueChange = {
-            language = it
-            onLanguageChange(it)
-        },
-        label = { Text("Language") },
-        singleLine = true,
-        trailingIcon = {
-            IconButton(onClick = {}) {
-                Icon(
-                    painter = painterResource(CoreDraw.drawable.down_arrow_grey_icon),
-                    contentDescription = "My Location"
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        OutlinedTextField(
+            value = language,
+            onValueChange = {}, /* keep readOnly behavior; selection via menu */
+            readOnly = true,
+            enabled = true,
+            label = { Text("Language") },
+            singleLine = true,
+            trailingIcon = {
+                if (expanded) CoreDraw.drawable.down_arrow_grey_icon
+                else CoreDraw.drawable.arrow_right_icon
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .menuAnchor(
+                    type = MenuAnchorType.PrimaryNotEditable,
+                    enabled = true
+                ),
+
+            shape = RoundedCornerShape(8.dp),
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option) },
+                    onClick = {
+                        onLanguageChange(option)
+                        expanded = false
+                    }
                 )
             }
-        },
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp)
-    )
+        }
+    }
 }
 
 

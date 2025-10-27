@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
+import com.tc.ui.CommonButton
 
 @Composable
 fun ConfirmationScreen(){
@@ -46,13 +48,9 @@ fun ConfirmationScreen(){
             style = theme.typography.bodyLarge,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.padding(vertical = 30.dp))
-        Button(onClick = {}) {
-            Icon(
-                painter = painterResource(CoreDraw.drawable.home_icon),
-                contentDescription = "Go Home Button"
-            )
-        }
+        Spacer(modifier = Modifier.height(30.dp))
+        CommonButton("Go Home")
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -73,7 +71,7 @@ private fun TopBar() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ConfirmationScreenPreview(){
     ConfirmationScreen()

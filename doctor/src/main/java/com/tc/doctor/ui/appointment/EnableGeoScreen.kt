@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
+import com.tc.ui.CommonButton
 
 @Composable
 fun EnableGeoScreen() {
@@ -41,16 +43,15 @@ fun EnableGeoScreen() {
             modifier = Modifier.size(300.dp)
         )
         Text(text = "Enable geolocation",
-            style = theme.typography.titleLarge.copy(fontSize = 40.sp))
+            style = theme.typography.titleLarge.copy(fontSize = 30.sp))
         Text(text = "To propose doctor near you,\n" +
                 "you must activate the localization",
             style = theme.typography.bodyLarge,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.padding(vertical = 30.dp))
-        Button(onClick = {}) {
-            Text("Activate")
-        }
+        Spacer(modifier = Modifier.height(40.dp))
+        CommonButton("Activate")
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -71,7 +72,7 @@ private fun TopBar() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun EnableGeoScreenPreview() {
     EnableGeoScreen()

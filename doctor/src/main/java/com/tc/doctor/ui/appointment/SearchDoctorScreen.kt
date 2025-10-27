@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import java.time.LocalTime
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
+import theme.textPenternary
 import theme.textTertiary
 
 
@@ -119,14 +120,17 @@ private val specialistList: List<Specialist> = listOf(
 
 
 @Composable
-fun SearchDoctorScreen() {
+fun SearchDoctorScreen(
+    onHomeClick: () -> Unit = {},
+    onDoctorClick: () -> Unit = {} // TODO: need to pass information -> figure it out
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(15.dp)
             .fillMaxSize()
     ) {
-        TopBar()
+        TopBar(onHomeClick)
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         SearchBar()
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
@@ -135,13 +139,13 @@ fun SearchDoctorScreen() {
 }
 
 @Composable
-private fun TopBar() {
+private fun TopBar(onHomeClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row {
-            IconButton(onClick = {}) {
+            IconButton(onClick = onHomeClick) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.home_icon),
                     contentDescription = "Home Icon"
@@ -244,7 +248,7 @@ private fun SpecialistList(specialists: List<Specialist>) {
                     Text(text = specialists[index].name,
                         style = theme.typography.bodyLarge)
                     Text(text = specialists[index].address,
-                        style = theme.typography.bodyMedium.copy(color = textTertiary))
+                        style = theme.typography.bodyMedium.copy(color = textPenternary))
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
                 Column(
@@ -252,7 +256,7 @@ private fun SpecialistList(specialists: List<Specialist>) {
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = if (specialists[index].isAvailable) "Available" else "Unavailable",
-                        style = theme.typography.bodyMedium.copy(color = textTertiary))
+                        style = theme.typography.bodyMedium.copy(color = textPenternary))
                     Text(text = specialists[index].workHours.toString())
                     Row {
                         val stars = specialists[index].stars

@@ -7,15 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -24,12 +27,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
+import com.tc.ui.CommonButton
 
 @Composable
 fun OptionScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        verticalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(15.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.Start,
@@ -38,7 +45,8 @@ fun OptionScreen() {
             IconButton(onClick = {  } ) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
-                    contentDescription = "Back Button"
+                    contentDescription = "Back Button",
+                    tint = Color.Unspecified
                 )
             }
         }
@@ -47,27 +55,27 @@ fun OptionScreen() {
             contentDescription = "Filler Image",
             modifier = Modifier.size(300.dp)
         )
-        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        Spacer(modifier = Modifier
+            .height(10.dp))
         Text(
             text = "Choose your option",
-            style = theme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+            style = theme.typography.titleLarge.copy(fontWeight = FontWeight.Bold, fontSize = 30.sp)
         )
-        Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        Spacer(modifier = Modifier
+            .height(10.dp))
         Text(
             text = "We're here to help",
-            style = theme.typography.bodyMedium,
-            // TODO: need to fix color to be Pent
-            color = theme.textQuaternary,
+            style = theme.typography.bodyLarge.copy(color = theme.textPenternary),
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.padding(vertical = 30.dp))
+        Spacer(modifier = Modifier
+            .height(30.dp))
 
-        Button(onClick = {}) {
-            Text("Make the Diagnosis")
-        }
-        Button(onClick = {}) {
-            Text("Make an Appointment")
-        }
+        val greenButton = ButtonDefaults.buttonColors(containerColor = theme.secondaryColor)
+        CommonButton("Make the Diagnosis", color = greenButton)
+
+        CommonButton("Make an Appointment")
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 

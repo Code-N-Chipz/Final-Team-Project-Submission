@@ -1,6 +1,10 @@
 package com.tc.doctor.ui.appointment
 
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.tc.ui.WeekCalendar
+import com.tc.doctor.R
 
 sealed class MapStates(){
     object MapState: MapStates()
@@ -22,6 +26,12 @@ fun DoctorMapScreen(mapState: MapStates = MapStates.MapState){
     }
 }
 
+data class Business(
+    val name: String,
+    @DrawableRes val img: Int
+)
+val myBusiness = Business("Jenny Jones", R.drawable.img_jenny_jones)
+
 @Composable
 private fun MapStateContent() {
 
@@ -34,7 +44,7 @@ private fun TakeAppStateContent() {
 
 @Composable
 private fun CalendarStateContent() {
-
+    WeekCalendar(modifier = Modifier, onSelectionChange = {}, business = myBusiness) { }
 }
 
 @Composable

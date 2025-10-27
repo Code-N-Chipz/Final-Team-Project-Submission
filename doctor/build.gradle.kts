@@ -31,6 +31,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+kotlin {
+    jvmToolchain(17)
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -46,6 +49,9 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:ui"))
     implementation(project(":core:di"))
+    implementation(libs.androidx.compose.ui.unit)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
