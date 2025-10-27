@@ -63,6 +63,7 @@ private enum class Decision { Neutral, Like, Nope, SuperLike }
 
 private enum class VisualDecision { Neutral, Like, Nope, SuperLike }
 
+@Suppress("CyclomaticComplexMethod")
 @Composable
 fun SwipeDeck(
     currentUser: User,

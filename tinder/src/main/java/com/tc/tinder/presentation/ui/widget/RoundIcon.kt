@@ -41,13 +41,4 @@ fun RoundIcon(
     }
 }
 
-@Composable
-private fun BottomScrim(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.background(
-            brush = Brush.verticalGradient(
-                colors = listOf(Color.Transparent, Color(0xAA000000))
-            )
-        )
-    )
-}
+
