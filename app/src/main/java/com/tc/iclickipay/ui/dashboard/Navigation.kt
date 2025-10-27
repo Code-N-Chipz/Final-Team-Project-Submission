@@ -12,10 +12,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.tc.laundry.ui.navigation.LaundryApp
-import com.tc.laundry.ui.startpage.LaundryStartPage
-import com.tc.tinder.presentation.navigation.TinderNavHost
 import com.tc.eat.presentation.navigation.EatNavigation
+import com.tc.laundry.ui.navigation.LaundryApp
+import com.tc.tinder.presentation.navigation.TinderNavHost
 
 
 @Preview
