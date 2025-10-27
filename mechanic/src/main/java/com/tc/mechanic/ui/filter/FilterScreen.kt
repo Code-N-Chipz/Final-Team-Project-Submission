@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Star
@@ -148,6 +149,7 @@ fun FiltersScreen(
         Button (
             onClick = { viewModel.apply(onApplied = { onApply(it) }) },
             modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
         ) {
             Text(text = "Apply", color = Color.White)

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
@@ -69,6 +70,7 @@ fun MechanicStarterScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
+                shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
             ) {
                 Text(text = "Let’s go", color = Color.White)

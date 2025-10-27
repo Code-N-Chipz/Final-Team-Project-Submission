@@ -244,6 +244,7 @@ fun MechanicFormScreenWithDropdowns(
         Button (
             onClick = { viewModel.submit(onSuccess = { onNext(it) }) },
             modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
         ) {
             Text(text = "Next", color = Color.White)

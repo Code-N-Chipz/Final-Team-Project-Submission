@@ -42,10 +42,10 @@ android {
 }
 
 //required for preview
-//composeCompiler {
-//    reportsDestination = layout.buildDirectory.dir("compose_compiler")
-//    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
-//}
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -76,6 +76,16 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.play.services)
     debugImplementation(libs.androidx.ui.tooling)
+
+    implementation(libs.androidx.compose.material.icons.extended)
+
+
+//    Importing Map
+//    implementation(libs.tcmap)
+//    implementation(project(":core:di"))
+    implementation("com.google.maps.android:maps-compose:2.10.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
 
     testImplementation(libs.junit)
