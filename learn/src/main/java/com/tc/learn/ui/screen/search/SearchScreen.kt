@@ -8,9 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,28 +36,40 @@ import com.tc.learn.data.model.Subject
 import com.tc.learn.data.model.Teacher
 import com.tc.learn.ui.component.TeacherCard
 import com.tc.learn.ui.viewmodel.TeacherViewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
     viewModel: TeacherViewModel = hiltViewModel(),
     onTeacherClick: (Teacher) -> Unit,
     onMapClick: (Teacher) -> Unit,
 ) {
-    // Collect StateFlow as Compose State
     val teachers by viewModel.teachers.collectAsState()
-
-    // Local search/filter states
     var nameQuery by remember { mutableStateOf("") }
     var selectedLevels by remember { mutableStateOf<List<Level>>(emptyList()) }
     var selectedSubjects by remember { mutableStateOf<List<Subject>>(emptyList()) }
     var locationQuery by remember { mutableStateOf("") }
     val imageLoader: ImageLoader = viewModel.imageLoader as ImageLoader
 
+    // Dropdown states
+    var expandedLesson by remember { mutableStateOf(false) }
+    var expandedLevel by remember { mutableStateOf(false) }
+    var selectedLesson by remember { mutableStateOf<String?>(null) }
+    var selectedLevel by remember { mutableStateOf<String?>(null) }
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+
+    // Sample data (replace with data from repo, via viewmodel)
+    val lessons = listOf("Math", "English", "Physics")
+    val levels = listOf("Beginner", "Intermediate", "Advanced")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        //Background Image
         AsyncImage(
             //Draw image of search_screen_bg.png
             model = R.drawable.search_screen_bg, // make sure this drawable exists
@@ -67,32 +84,75 @@ fun SearchScreen(
             modifier = Modifier
                 .height(4.dp)
         )
-//       3 Rows
+
+//       Filters Row
         Row(
             modifier = Modifier,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             //Choose date
-            Column {
-                Text(text = "Choose Date")
-                //Date picker goes here
+            Column(
+                modifier = Modifier
+            ) {
+//                Text(text = "Choose Date")
+//                //Date picker goes here (or go to calendar?)
+//                Button(onClick = {
+//                    // Show date picker dialog
+//                    // This is a placeholder; actual date picker requires Compose Dialog or third-party library
+//
+//                    //Arth has a calander implementaion
+//
+//
+//                    selectedDate = LocalDate.now()
+//                }) {
+//                    Text(selectedDate?.format(DateTimeFormatter.ISO_DATE) ?: "Pick a date")
+//                }
+
+
+                // --- Lesson Dropdown ---
+                Column (
+                    modifier = Modifier
+                        .width(80.dp)
+                ) {
+                    Text("Lesson")
+                    ExposedDropdownMenuBox(
+                        expanded = expandedLesson,
+                        onExpandedChange = { expandedLesson = !expandedLesson }
+                    ) {
+                        OutlinedTextField(
+                            value = selectedLesson ?: "",
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text("Lesson") },
+                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedLesson) },
+                            modifier = Modifier.menuAnchor()
+                        )
+                        ExposedDropdownMenu(
+                            expanded = expandedLesson,
+                            onDismissRequest = { expandedLesson = false }
+                        ) {
+                            lessons.forEach { lesson ->
+                                DropdownMenuItem(
+                                    text = { Text(lesson) },
+                                    onClick = {
+                                        selectedLesson = lesson
+                                        expandedLesson = false
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
 
 
 
             }
+        }
 
-            //Choose lesson
-            Column {
-                Text(text = "Lesson")
-                //Lesson drop down goes here
-
-            }
-
-            //Choose level
-            Column {
-                Text(text = "Level")
-                //Level drop down goes here
-
-            }
+        //Choose level
+        Column {
+            Text(text = "Level")
+            //Level drop down goes here
 
         }
 
@@ -102,7 +162,7 @@ fun SearchScreen(
             value = nameQuery,
             onValueChange = { nameQuery = it },
             label = { Text("Search by name") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.width(60.dp)
         )
 
         // --- Location search ---
@@ -160,9 +220,7 @@ fun SearchScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         //Filter button needs to go here
-
-
-        // --- LazyColumn list of SearchCards ---
+        // --- LazyColumn list of TeacherCards ---
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.fillMaxSize()
@@ -177,5 +235,7 @@ fun SearchScreen(
                 )
             }
         }
+
     }
+
 }
