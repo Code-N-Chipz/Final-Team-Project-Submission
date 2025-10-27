@@ -34,7 +34,7 @@ import theme.primaryIconColor
 import theme.textTertiary
 
 @Composable
-fun RestaurantScreen() {
+fun RestaurantScreen(navToHome: () -> Unit) {
     ICLICKIPAYTheme {
         Box(
             modifier = Modifier
@@ -42,7 +42,7 @@ fun RestaurantScreen() {
                 .semantics { isTraversalGroup = true },
             contentAlignment = Alignment.TopCenter
         ) {
-            Scaffold(topBar = { RestaurantTopBar() }) { innerPadding ->
+            Scaffold(topBar = { RestaurantTopBar(navToHome) }) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -71,13 +71,13 @@ fun RestaurantScreen() {
 }
 
 @Composable
-private fun RestaurantTopBar() {
+private fun RestaurantTopBar(navToHome: () -> Unit) {
     IconButton(
         modifier = Modifier
             .padding(start = 8.dp, top = 20.dp)
             .size(52.dp)
             .background(shape = CircleShape, color = primaryIconColor),
-        onClick = {}
+        onClick = {navToHome()}
     ) {
         Icon(
             modifier = Modifier.size(28.dp),

@@ -15,5 +15,8 @@ enum class Categories(@StringRes val categoryString : Int){
     BREAKFAST(categoryString = R.string.Breakfast),
     SPICY(categoryString = R.string.Spicy),
     BURGER(categoryString = R.string.Burger),
-    FRIES(categoryString = R.string.Fries)
+    FRIES(categoryString = R.string.Fries),
+    PIZZA(categoryString = R.string.Pizza),
+    CUPCAKE(R.string.Cupcake),
+    ASIAN(R.string.Asian)
 }

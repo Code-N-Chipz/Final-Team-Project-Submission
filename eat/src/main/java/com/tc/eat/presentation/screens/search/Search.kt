@@ -43,14 +43,14 @@ import theme.textTertiary
 
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(navToFilters: () -> Unit, navToHome: () -> Unit) {
     ICLICKIPAYTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .semantics { isTraversalGroup = true }
         ) {
-            Scaffold(topBar = { SearchTopBar() }) { innerPadding ->
+            Scaffold(topBar = { SearchTopBar(navToHome, navToFilters) }) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -66,7 +66,7 @@ fun SearchScreen() {
 }
 
 @Composable
-private fun SearchTopBar() {
+private fun SearchTopBar(navToHome: () -> Unit, navToFilters: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -76,7 +76,8 @@ private fun SearchTopBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = {}) {
+            onClick = {navToHome()}
+        ) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 painter = painterResource(R.drawable.arrow_left_white_icon),
@@ -90,7 +91,7 @@ private fun SearchTopBar() {
             fontSize = 26.sp,
             color = textPrimary
         )
-        IconButton(onClick = {}) {
+        IconButton(onClick = {navToFilters()}) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 painter = painterResource(R.drawable.options_sliders_orange_icon),

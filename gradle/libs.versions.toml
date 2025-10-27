@@ -12,7 +12,7 @@ composeBom = "2024.09.00"
 appcompat = "1.7.1"
 material = "1.13.0"
 jetbrainsKotlinJvm = "2.2.20"
-navigationCompose = "2.5.3"
+navigationCompose = "2.9.5"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
@@ -38,7 +38,6 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-
 
 #androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 #junit = { group = "junit", name = "junit", version.ref = "junit" }

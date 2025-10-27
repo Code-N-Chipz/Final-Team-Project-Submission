@@ -3,6 +3,7 @@
     <string name="welcome_message">Restaurant</string>
     <string name="search">Search</string>
     <string name="restaurants">Restaurants</string>
+    <string name="all_res">All restaurants</string>
     <string name="filters">Filters</string>
     <string name="clear">Clear</string>
     <string name="feature">Featured Items</string>
@@ -20,6 +21,11 @@
     <string name="Burger">Burger</string>
     <string name="Fries">Fries</string>
     <string name="Breakfast">Breakfast</string>
+    <string name="Pizza">Breakfast</string>
+    <string name="Asian">Asian</string>
+    <string name="Cupcake">Cupcake</string>
+
+
 
     <string name="entrees">Entrees</string>
     <string name="dishes">Dishes</string>
@@ -39,4 +45,18 @@
     <string name="rating">Ratings</string>
     <string name="proximity">Proximity</string>
     <string name="alphabetical">Alphabetical</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add to order</string>
+    <string name="view">View order</string>
+    <string name="place">Place order</string>
+    <string name="total">Total amount</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery_fees">Delivery fees</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="delivery_location">Delivery location</string>
+    <string name="order">Order</string>
+    <string name="cancel">Cancel</string>
+    <string name = "address">28 Broad Street Johannesburg</string>
 </resources>

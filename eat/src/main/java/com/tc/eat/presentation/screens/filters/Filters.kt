@@ -27,9 +27,9 @@ import theme.primaryColor
 import theme.textQuaternary
 
 @Composable
-fun FiltersScreen() {
+fun FiltersScreen(navBack: () -> Unit) {
     ICLICKIPAYTheme {
-        Scaffold(topBar = { FilterTopBar() }) { innerPadding ->
+        Scaffold(topBar = { FilterTopBar(navBack) }) { innerPadding ->
             Column(modifier = Modifier.padding(innerPadding)) {
                 SortByDropDownMenu()
                 PriceRangeSlider()
@@ -40,7 +40,7 @@ fun FiltersScreen() {
 }
 
 @Composable
-private fun FilterTopBar() {
+private fun FilterTopBar(navBack: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,7 +50,7 @@ private fun FilterTopBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = {}) {
+            onClick = {navBack()}) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 painter = painterResource(R.drawable.arrow_left_orange_icon),
