@@ -67,6 +67,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.activity:activity-compose")
     implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 
     // tests
     testImplementation(libs.junit)
@@ -75,5 +76,20 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+
+
+   // Camera
+    val camerax_version = "1.2.2"
+    implementation ("androidx.camera:camera-core:${camerax_version}")
+    implementation ("androidx.camera:camera-camera2:${camerax_version}")
+    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation ("androidx.camera:camera-video:${camerax_version}")
+
+    implementation ("androidx.camera:camera-view:${camerax_version}")
+    implementation ("androidx.camera:camera-extensions:${camerax_version}")
+
+
+    //Compose
+    implementation("androidx.navigation:navigation-compose:2.8.3")
 }
 
