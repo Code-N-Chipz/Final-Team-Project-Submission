@@ -2,6 +2,7 @@ package com.tc.eat.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.Navigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,16 +20,19 @@ object Res
 object Search
 @Serializable
 object Filter
+@Serializable
+object EatNavigation
 
 @Preview
 @Composable
-fun EatNavigation(){
+fun EatNavigation(navToApp :() -> Unit){
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Home
     ){
         composable<Home>{ HomeScreen(
+            navToApp = {navToApp()},
             navToSearch = {navController.navigate(route = Search)},
             navToFilters = {navController.navigate(route = Filter)},
             navToRes = {navController.navigate(route = Res)}

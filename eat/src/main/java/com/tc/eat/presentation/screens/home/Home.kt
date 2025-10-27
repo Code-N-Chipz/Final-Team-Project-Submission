@@ -25,6 +25,7 @@ import theme.primaryIconColor
 
 @Composable
 fun HomeScreen(
+    navToApp : () -> Unit,
     navToSearch: () -> Unit,
     navToFilters: () -> Unit,
     navToRes: () -> Unit
@@ -37,7 +38,7 @@ fun HomeScreen(
             contentAlignment = Alignment.TopCenter
         ) {
             Scaffold(
-                topBar = { HomeTopBar(navToSearch) }
+                topBar = { HomeTopBar(navToApp, navToSearch) }
             ) { innerPadding ->
                 Column(
                     modifier = Modifier
@@ -61,7 +62,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeTopBar(navToSearch: () -> Unit = {}) {
+private fun HomeTopBar(navToApp : () -> Unit, navToSearch: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -71,7 +72,7 @@ private fun HomeTopBar(navToSearch: () -> Unit = {}) {
         IconButton(
             modifier = Modifier
                 .padding(start = 8.dp, top = 20.dp),
-            onClick = {}
+            onClick = {navToApp()}
         ) {
             Icon(
                 modifier = Modifier.size(28.dp),
