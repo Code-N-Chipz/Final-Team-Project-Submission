@@ -45,6 +45,7 @@ fun SearchScreen(
     viewModel: TeacherViewModel = hiltViewModel(),
     onTeacherClick: (Teacher) -> Unit,
     onMapClick: (Teacher) -> Unit,
+    onCalendarClick: (List<Teacher>) -> Unit,
 ) {
     val teachers by viewModel.teachers.collectAsState()
     var nameQuery by remember { mutableStateOf("") }
@@ -63,6 +64,13 @@ fun SearchScreen(
     // Sample data (replace with data from repo, via viewmodel)
     val lessons = listOf("Math", "English", "Physics")
     val levels = listOf("Beginner", "Intermediate", "Advanced")
+
+//    OverlayerBox(
+//        modifier = Modifier,
+//        navigator = navigator,
+//        onTeacherClick = TODO(),
+//        onMapClick = TODO()
+//    )
 
     Column(
         modifier = Modifier
@@ -94,19 +102,14 @@ fun SearchScreen(
             Column(
                 modifier = Modifier
             ) {
-//                Text(text = "Choose Date")
-//                //Date picker goes here (or go to calendar?)
-//                Button(onClick = {
-//                    // Show date picker dialog
-//                    // This is a placeholder; actual date picker requires Compose Dialog or third-party library
-//
-//                    //Arth has a calander implementaion
-//
-//
-//                    selectedDate = LocalDate.now()
-//                }) {
-//                    Text(selectedDate?.format(DateTimeFormatter.ISO_DATE) ?: "Pick a date")
-//                }
+                Text(text = "Choose Date")
+
+                //Go to Calendar Screen
+                Button(onClick = { onCalendarClick(teachers) }
+
+                ) {
+                    Text(selectedDate?.format(DateTimeFormatter.ISO_DATE) ?: "Pick a date")
+                }
 
 
                 // --- Lesson Dropdown ---
@@ -208,13 +211,13 @@ fun SearchScreen(
                 Text("Search")
             }
 
-            // Small filter button
-            Button(
-                onClick = { /* Open filter dialog/sheet */ },
-                modifier = Modifier.height(48.dp) // keeps height consistent with search
-            ) {
-                Text("Filter")
-            }
+//            // Small filter button
+//            Button(
+//                onClick = { /* Open filter dialog/sheet */ },
+//                modifier = Modifier.height(48.dp) // keeps height consistent with search
+//            ) {
+//                Text("Filter")
+//            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))

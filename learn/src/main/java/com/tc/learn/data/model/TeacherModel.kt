@@ -5,17 +5,19 @@ data class Teacher(
     val name: String = "",
     val levels: List<Level> = emptyList(),
     val subjects: List<Subject> = emptyList(),
-    val location: Location?,           //To become maps data
+//    val location: Location? = null,           //To become maps data
     val address: String = "",
     val price: Double = 0.00,              //An hour
 
     private val _rating: Double = 0.0,
     val imageUrl: String = "https://picsum.photos/100",
+    val latitude: Double = -26.2030,
+    val longitude: Double = 28.0465
 ) {
     val rating: Double get() = _rating.coerceIn(0.0, 5.0)
     val validatedPrice: Double get() = price.coerceAtLeast(0.0)
 
-    val hasLocation: Boolean get() = location != null
+//    val hasLocation: Boolean get() = location != null
     val levelNames: String get() = if (levels.isEmpty()) "N/A" else levels.joinToString { it.displayName }
     val subjectNames: String get() = if (subjects.isEmpty()) "N/A" else subjects.joinToString { it.displayName }
 }

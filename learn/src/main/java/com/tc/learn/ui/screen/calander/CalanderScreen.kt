@@ -22,6 +22,9 @@ fun CalendarScreen(appNavigator: AppNavigator) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Calendar Screen (Placeholder)")
+        
+
+
         Button(
             onClick = { appNavigator.goBack() },
             modifier = Modifier.padding(top = 16.dp)

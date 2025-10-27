@@ -47,27 +47,32 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.volley)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    implementation("com.google.dagger:hilt-android:2.57.1")
+    implementation(libs.hilt.android)
     debugImplementation(libs.androidx.ui.tooling)
-    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
-    implementation("androidx.compose.ui:ui:1.5.3")
-    implementation("androidx.compose.material3:material3:1.2.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.3")
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.compose.material3.v120)
+    implementation(libs.androidx.compose.ui.tooling.preview.v153)
+    debugImplementation(libs.androidx.compose.ui.tooling.v153)
 
     implementation(libs.coil.compose) // Use latest version from https://coil-kt.github.io/coil/compose/
 
-//    // Coil SVG
-    implementation("io.coil-kt:coil-svg:2.7.0")
+//   Coil SVG
+    implementation(libs.coil.svg)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 
     //TcMap
     implementation("com.tc:tcmap:1.0.0")

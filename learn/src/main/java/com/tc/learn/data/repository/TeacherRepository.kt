@@ -18,7 +18,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.ENGLISH, Subject.MATHS),
                 location = null,
                 price = 20.00,
-                _rating = 4.4
+                _rating = 4.4,
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "2",
@@ -28,7 +30,9 @@ class TeacherRepository @Inject constructor() {
                 location = null,
                 price = 22.00,
                 _rating = 4.5,
-                imageUrl = "https://s.gravatar.com/avatar/62a968f41c1feb83fd1cd142e7c043f3?s=200"
+                imageUrl = "https://s.gravatar.com/avatar/62a968f41c1feb83fd1cd142e7c043f3?s=200",
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "3",
@@ -37,7 +41,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.MATHS, Subject.SCIENCE),
                 location = null,
                 price = 25.00,
-                _rating = 4.7
+                _rating = 4.7,
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "4",
@@ -46,7 +52,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.ENGLISH, Subject.HISTORY),
                 location = null,
                 price = 30.00,
-                _rating = 4.6
+                _rating = 4.6,
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "5",
@@ -55,7 +63,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.SCIENCE, Subject.MATHS),
                 location = null,
                 price = 28.00,
-                _rating = 4.8
+                _rating = 4.8,
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "6",
@@ -64,7 +74,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.ENGLISH, Subject.MATHS),
                 location = null,
                 price = 26.00,
-                _rating = 4.3
+                _rating = 4.3,
+                latitude = -26.2030,
+                longitude = 28.0465
             ),
             Teacher(
                 id = "7",
@@ -73,7 +85,9 @@ class TeacherRepository @Inject constructor() {
                 subjects = listOf(Subject.FRENCH, Subject.MATHS),
                 location = null,
                 price = 21.00,
-                _rating = 4.5
+                _rating = 4.5,
+                latitude = -26.2030,
+                longitude = 28.0465
             )
         )
     }

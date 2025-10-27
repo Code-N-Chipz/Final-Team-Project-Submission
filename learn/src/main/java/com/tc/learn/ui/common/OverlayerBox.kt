@@ -1,4 +1,4 @@
-package com.tc.laundry.ui.homepage
+package com.tc.learn.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,10 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.tc.laundry.R
-import com.tc.laundry.ui.comon.HorizontalSpacerGrayLine
-
-import theme.primaryColor
+import com.tc.design.theme.primaryColor
+import com.tc.learn.R
 
 @Composable
 fun OverlayerBox(
@@ -75,7 +73,7 @@ fun OverlayerBox(
 
             HorizontalSpacerGrayLine()
 
-            LaundryInfo(
+            learnInfo(
                 navController = navController
             )
 
@@ -92,7 +90,7 @@ fun OverlayerBox(
                 onClick = {}
             ) {
                 Text(
-                    text = stringResource(R.string.laundry_search_button_home_page_overlayer_box),
+                    text = stringResource(R.string.learn_search_button_home_page_overlayer_box),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -103,7 +101,7 @@ fun OverlayerBox(
 }
 
 @Composable
-private fun LaundryInfo(
+private fun learnInfo(
     modifier: Modifier = Modifier,
     navController: NavController
 ){
@@ -115,30 +113,30 @@ private fun LaundryInfo(
             .height(63.dp)
             .clickable(
                 onClick = {
-                    navController.navigate("your_laundry")
+                    navController.navigate("your_learn")
                 }
             )
     ) {
         Info(
-            text = stringResource(R.string.laundry_choose_dates_home_page_overlayer_box)
+            text = stringResource(R.string.learn_choose_dates_home_page_overlayer_box)
         )
 
         VerticalSpacerGrayLine()
 
         Info(
-            text = stringResource(R.string.laundry_KG_home_page_overlayer_box)
+            text = stringResource(R.string.learn_KG_home_page_overlayer_box)
         )
 
         VerticalSpacerGrayLine()
 
         Info(
-            text = stringResource(R.string.laundry_dry_home_page_overlayer_box)
+            text = stringResource(R.string.learn_dry_home_page_overlayer_box)
         )
 
         VerticalSpacerGrayLine()
 
         Info(
-            text = stringResource(R.string.laundry_ironing_home_page_overlayer_box)
+            text = stringResource(R.string.learn_ironing_home_page_overlayer_box)
         )
     }
 }
@@ -188,7 +186,7 @@ private fun Search(
                 .align(Alignment.Center)
         ) {
             Text(
-                text = stringResource(R.string.laundry_search_home_page_overlayer_box),
+                text = stringResource(R.string.learn_search_home_page_overlayer_box),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Gray
@@ -211,6 +209,17 @@ private fun VerticalSpacerGrayLine(
         modifier = modifier
             .fillMaxHeight()
             .width(1.dp)
+            .background(Color.Gray)
+    )
+}
+@Composable
+fun HorizontalSpacerGrayLine(
+    modifier: Modifier = Modifier
+){
+    Spacer(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(1.dp)
             .background(Color.Gray)
     )
 }
