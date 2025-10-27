@@ -56,7 +56,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(project(":laundry"))
-    implementation(project(":delivery"))
+    implementation(project(":tinder"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
