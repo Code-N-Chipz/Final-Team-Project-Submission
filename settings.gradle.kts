@@ -7,6 +7,7 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -16,6 +17,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
     }
 }
 

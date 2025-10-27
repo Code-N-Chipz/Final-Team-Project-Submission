@@ -5,28 +5,75 @@ import com.tc.learn.data.model.Subject
 import com.tc.learn.data.model.Teacher
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.pow
 
 @Singleton
 class TeacherRepository @Inject constructor() {
     fun getTeachers(): List<Teacher> {
         return listOf(
             Teacher(
-                id = 1,
+                id = "1",
                 name = "Alice Smith",
-                listOf<Level>(Level.ELEMENTARY),
-                subjects = listOf<Subject>(Subject.ENGLISH, Subject.MATHS),
-                location = "Test location",
+                levels = listOf(Level.ELEMENTARY),
+                subjects = listOf(Subject.ENGLISH, Subject.MATHS),
+                location = null,
                 price = 20.00,
-                rating = 4.4
+                _rating = 4.4
             ),
             Teacher(
-                id = 2,
+                id = "2",
                 name = "Boris Johnson",
-                listOf<Level>(Level.ELEMENTARY),
-                subjects = listOf<Subject>(Subject.FRENCH, Subject.SCIENCE),
-                location = "Test location",
+                levels = listOf(Level.ELEMENTARY),
+                subjects = listOf(Subject.FRENCH, Subject.SCIENCE),
+                location = null,
                 price = 22.00,
-                rating = 4.5
+                _rating = 4.5,
+                imageUrl = "https://s.gravatar.com/avatar/62a968f41c1feb83fd1cd142e7c043f3?s=200"
+            ),
+            Teacher(
+                id = "3",
+                name = "Catherine Lee",
+                levels = listOf(Level.MIDDLE_SCHOOL),
+                subjects = listOf(Subject.MATHS, Subject.SCIENCE),
+                location = null,
+                price = 25.00,
+                _rating = 4.7
+            ),
+            Teacher(
+                id = "4",
+                name = "David Kim",
+                levels = listOf(Level.HIGH_SCHOOL),
+                subjects = listOf(Subject.ENGLISH, Subject.HISTORY),
+                location = null,
+                price = 30.00,
+                _rating = 4.6
+            ),
+            Teacher(
+                id = "5",
+                name = "Emily Zhang",
+                levels = listOf(Level.HIGH_SCHOOL),
+                subjects = listOf(Subject.SCIENCE, Subject.MATHS),
+                location = null,
+                price = 28.00,
+                _rating = 4.8
+            ),
+            Teacher(
+                id = "6",
+                name = "Frank Thompson",
+                levels = listOf(Level.MIDDLE_SCHOOL, Level.HIGH_SCHOOL),
+                subjects = listOf(Subject.ENGLISH, Subject.MATHS),
+                location = null,
+                price = 26.00,
+                _rating = 4.3
+            ),
+            Teacher(
+                id = "7",
+                name = "Grace Liu",
+                levels = listOf(Level.ELEMENTARY, Level.MIDDLE_SCHOOL),
+                subjects = listOf(Subject.FRENCH, Subject.MATHS),
+                location = null,
+                price = 21.00,
+                _rating = 4.5
             )
         )
     }
@@ -57,26 +104,53 @@ class TeacherRepository @Inject constructor() {
     // Search by location (case-insensitive)
     //Needs to be updated to maps inclusion
 
-    fun searchTeachersByLocation(query: String): List<Teacher> {
-        if (query.isBlank()) return getTeachers()
+    fun searchTeachersByLocation(latitude: Double, longitude: Double, radiusKm: Double): List<Teacher> {
         return getTeachers().filter { teacher ->
-            teacher.location.contains(query, ignoreCase = true)
+            teacher.location?.let { loc ->
+                val distance = haversine(loc.latitude, loc.longitude, latitude, longitude)
+                distance <= radiusKm
+            } ?: false
         }
     }
+
+    // Haversine formula to calculate distance in km
+    fun haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val R = 6371.0 // Earth radius in km
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = Math.sin(dLat / 2).pow(2.0) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.sin(dLon / 2).pow(2.0)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        return R * c
+    }
+
 
     // Combined advanced filter
     fun filterTeachers(
         levels: List<Level> = emptyList(),
         subjects: List<Subject> = emptyList(),
         nameQuery: String = "",
-        locationQuery: String = ""
+        latitude: Double? = null,
+        longitude: Double? = null,
+        radiusKm: Double = 0.0,
+        locationQuery: String
     ): List<Teacher> {
         return getTeachers().filter { teacher ->
             val matchesLevel = levels.isEmpty() || teacher.levels.any { it in levels }
             val matchesSubject = subjects.isEmpty() || teacher.subjects.any { it in subjects }
             val matchesName = nameQuery.isBlank() || teacher.name.contains(nameQuery, ignoreCase = true)
-            val matchesLocation = locationQuery.isBlank() || teacher.location.contains(locationQuery, ignoreCase = true)
+            val matchesLocation = if (latitude != null && longitude != null && radiusKm > 0) {
+                teacher.location?.let { loc ->
+                    haversine(loc.latitude, loc.longitude, latitude, longitude) <= radiusKm
+                } ?: false
+            } else true
             matchesLevel && matchesSubject && matchesName && matchesLocation
         }
     }
+
+    fun getTeacherById(id: String?): Teacher? {
+        return getTeachers().firstOrNull { it.id == id }
+    }
+
 }

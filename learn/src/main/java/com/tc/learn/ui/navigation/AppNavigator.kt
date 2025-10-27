@@ -1,4 +1,4 @@
-package com.tc.auth.ui.navigation
+package com.tc.learn.ui.navigation
 
 import androidx.navigation.NavController
 
