@@ -72,7 +72,7 @@ fun PrimaryButtonColour(
         colors = ButtonDefaults.buttonColors(
             containerColor = primaryColor
         ),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(8.dp),
         modifier = modifier
             .size(width = 258.dp, height = 56.dp)
     ) {

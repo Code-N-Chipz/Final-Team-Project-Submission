@@ -27,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(project(":core:design"))
+    implementation(project(":core:ui"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
