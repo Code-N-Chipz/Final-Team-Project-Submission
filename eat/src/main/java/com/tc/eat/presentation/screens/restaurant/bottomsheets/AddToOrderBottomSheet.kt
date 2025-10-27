@@ -1,4 +1,4 @@
-package com.tc.eat.presentation.screens.restaurant.bottom_sheets
+package com.tc.eat.presentation.screens.restaurant.bottomsheets
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.tc.design.R
 import com.tc.eat.domain.entities.MenuItem
 import com.tc.eat.presentation.screens.composables.PriceTagText
-import com.tc.eat.presentation.screens.restaurant.bottom_sheets.AddToOrderBottomSheet
+import com.tc.eat.presentation.screens.restaurant.bottomsheets.AddToOrderBottomSheet
 import theme.textTertiary
 
 @Composable
