@@ -58,12 +58,13 @@ fun LaundryApp(
 
         composable("calendar"){
             WeekCalendar(
-                business = "Jenny Jones",
+                name = "Jenny Jones",
                 onBackClick = {
                     navController.popBackStack()
                     Unit
                 },
-                onSelectionChange = {}
+                onSelectionChange = {},
+                imageUrl = ""
             )
         }
     }
