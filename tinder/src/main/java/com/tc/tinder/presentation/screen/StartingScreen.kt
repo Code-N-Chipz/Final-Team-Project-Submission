@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tc.tinder.R
 import com.tc.tinder.presentation.ui.button.ButtonWithTextOnly
 import com.tc.tinder.presentation.ui.topbar.BackOnlyTopAppBar
+import theme.ICLICKIPAYTheme
 
 @Composable
 fun StartingScreen(
@@ -75,7 +77,11 @@ fun StartingScreen(
         }
     }}
 
-
-
-
+@Preview
+@Composable
+fun prev(){
+    ICLICKIPAYTheme {
+        StartingScreen({},{})
+    }
+}
 

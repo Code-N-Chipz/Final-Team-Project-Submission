@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,7 +28,10 @@ import com.tc.tinder.presentation.viewmodel.MatchViewModel
 import com.tc.tinder.presentation.viewmodel.MatchViewModelFactory
 
 @Composable
-fun TinderNavHost() {
+fun TinderNavHost( parentNavController: NavController) {
+
+
+
     val navController = rememberNavController()
 
     // ✅ Setup ViewModel dependencies
@@ -41,9 +45,9 @@ fun TinderNavHost() {
         navController = navController,
         startDestination = "start"
     ) {
-        // 1️⃣ Starting screen
+        //  Starting screen
         composable("start") {
-            StartingScreen(
+            StartingScreen(onBackClick = {parentNavController.popBackStack()},
                 onLetsGoClick = {
                     navController.navigate("picture") {
                         popUpTo("start") { inclusive = true }
@@ -52,7 +56,7 @@ fun TinderNavHost() {
             )
         }
 
-        // 2️⃣ Picture screen
+        //  Picture screen
         composable("picture") {
             PictureScreen(
                 onBackClick = { navController.popBackStack() },
@@ -61,7 +65,7 @@ fun TinderNavHost() {
             )
         }
 
-        // ⃣ Camera
+        //  Camera
         composable("camera") {
             CameraScreen(
                 onBackClick = { navController.popBackStack() },
@@ -113,7 +117,7 @@ fun TinderNavHost() {
         composable("match") {
             MatchScreen(
                 viewModel = matchViewModel,
-                onHomeClick = {},
+                onHomeClick = {parentNavController.popBackStack()},
                 onMessageClick = {},
                 onUserProfileClick = {},
                 onOpenBoostPaywall = { navController.navigate("boost_payment") },
@@ -140,9 +144,10 @@ fun TinderNavHost() {
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun TinderFeatureEntry() {
-    TinderNavHost()
+fun TinderFeatureEntryPreview() {
+    val fakeParentNavController = rememberNavController()
+    TinderNavHost(parentNavController = fakeParentNavController)
 }
 
