@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.laundry.ui.filterspage.FiltersPage
 import com.tc.laundry.ui.homepage.LaundryHomePage
+import com.tc.laundry.ui.map.MapScreen
 import com.tc.laundry.ui.startpage.LaundryStartPage
 import com.tc.laundry.ui.yourlaundrypage.YourLaundryPage
 
@@ -46,6 +47,10 @@ fun LaundryApp(
             FiltersPage(
                 navController = navController
             )
+        }
+
+        composable("map"){
+            MapScreen()
         }
     }
 }

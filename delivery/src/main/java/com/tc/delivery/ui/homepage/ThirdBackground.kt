@@ -1,4 +1,4 @@
-package com.tc.laundry.ui.homepage
+package com.tc.delivery.ui.homepage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -25,8 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.tc.laundry.R
-import com.tc.laundry.ui.comon.HorizontalSpacerGrayLine
+import com.tc.delivery.R
+import com.tc.delivery.ui.comon.HorizontalSpacerGrayLine
 import theme.primaryColor
 
 @Composable
@@ -48,7 +48,7 @@ fun ThirdBackground(
         ) {
             Row {
                 Text(
-                    text = "House cleaner",
+                    text = "Delivery men",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -69,7 +69,7 @@ fun ThirdBackground(
                 tint = primaryColor,
                 modifier = Modifier
                     .clickable{
-                        navController
+
                     }
             )
         }
@@ -91,7 +91,7 @@ private fun CardView(
         modifier = modifier
             .fillMaxWidth()
             .clickable{
-                navController.navigate("map")
+
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
@@ -103,7 +103,7 @@ private fun CardView(
             horizontalAlignment = Alignment.Start,
             ) {
             Image(
-                painter = painterResource(R.drawable.background),
+                painter = painterResource(R.drawable.delivery_man),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
