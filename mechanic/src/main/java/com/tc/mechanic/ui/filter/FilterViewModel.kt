@@ -2,12 +2,17 @@ package com.tc.mechanic.ui.filter
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.tc.auth.ui.navigation.AppNavigator
+import com.tc.auth.ui.navigation.Routes
 import com.tc.mechanic.data.FiltersUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class FilterViewModel(private val savedStateHandle: SavedStateHandle? = null) : ViewModel() {
+class FilterViewModel @Inject constructor(
+    private val navigator: AppNavigator? = null ,
+    private val savedStateHandle: SavedStateHandle? = null) : ViewModel() {
     private val _uiState = MutableStateFlow(FiltersUiState())
     val uiState: StateFlow<FiltersUiState> = _uiState.asStateFlow()
 
@@ -33,5 +38,6 @@ class FilterViewModel(private val savedStateHandle: SavedStateHandle? = null) : 
 
     fun apply(onApplied: (FiltersUiState) -> Unit) {
         onApplied(_uiState.value)
+        navigator?.navigateTo(Routes.MAP)
     }
 }

@@ -2,6 +2,7 @@ package com.tc.mechanic.ui.map
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -46,11 +49,17 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.tc.mechanic.R
+import com.tc.mechanic.data.FiltersUiState
 import com.tc.mechanic.data.MechanicLocationData
+import com.tc.mechanic.ui.filter.FilterViewModel
 
 
 @Composable
-fun MapScreen() {
+fun MapScreen(
+    viewModel: MapViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier,
+    onSuccess: () -> Unit = {}
+) {
     val context = LocalContext.current
     val userLocation = LatLng(-26.2041, 28.0473) // Johannesburg
 
@@ -183,6 +192,8 @@ fun MapScreen() {
         ) {
             mechanics.take(2).forEachIndexed { index, mechanic ->
                 MechanicCardView(
+                    viewModel =viewModel,
+                    onSuccess = onSuccess,
                     mechanic = mechanic,
                     modifier = Modifier
                         .padding(horizontal = 6.dp)
@@ -194,13 +205,14 @@ fun MapScreen() {
 }
 
 @Composable
-fun MechanicCardView(mechanic: MechanicLocationData, modifier: Modifier = Modifier) {
+fun MechanicCardView(viewModel: MapViewModel, onSuccess: () -> Unit, mechanic: MechanicLocationData, modifier: Modifier = Modifier) {
     Card (
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = modifier
             .height(90.dp)
+            .clickable{ viewModel.submit(onSuccess = { onSuccess }, onError = {}) }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

@@ -29,8 +29,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,13 +53,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.tc.mechanic.data.FiltersUiState
 import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
 fun FiltersScreen(
-    viewModel: FilterViewModel,
+    viewModel: FilterViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
     onApply: (FiltersUiState) -> Unit = {}
 ) {
@@ -325,8 +324,8 @@ fun DiscretePricePerHourSlider(
 @Preview(showBackground = true, name = "Filters Screen Preview")
 @Composable
 fun FiltersScreenPreview() {
-    val vm = remember { FilterViewModel(null) }
+//    val vm = remember { FilterViewModel(null) }
     Surface {
-        FiltersScreen(viewModel = vm, onApply = {})
+        FiltersScreen( onApply = {})
     }
 }

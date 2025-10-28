@@ -23,13 +23,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.tc.mechanic.R
+import com.tc.mechanic.ui.search.MechanicSearchViewModel
 
 
 @Composable
 fun MechanicStarterScreen(
-    onLetsGo: () -> Unit,
+    viewModel: MechanicStarterViewModel = hiltViewModel(),
+    onSuccess: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 //    val isPreview = LocalInspectionMode.current
@@ -66,7 +69,7 @@ fun MechanicStarterScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             Button (
-                onClick = onLetsGo,
+                onClick = {viewModel.submit( onSuccess, {}) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
@@ -84,5 +87,5 @@ fun MechanicStarterScreen(
 @Preview(showBackground = true, name = "Mechanic Intro Preview")
 @Composable
 fun MechanicIntroPreview() {
-    MechanicStarterScreen(onLetsGo = {})
+    MechanicStarterScreen(onSuccess = {})
 }

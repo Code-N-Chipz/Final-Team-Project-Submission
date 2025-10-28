@@ -35,15 +35,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
 fun CalenderView(
-    viewModel: CalenderViewModel,
+    viewModel: CalenderViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
-    onConfirmed: (LocalDate, String) -> Unit = { _, _ -> }
+//    onConfirmed: (LocalDate, String) -> Unit = { _, _ -> }
+    onConfirmed: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
     val isPreview = LocalInspectionMode.current
@@ -134,9 +136,9 @@ fun CalenderView(
 @Preview(showBackground = true, name = "Schedule Screen Preview")
 @Composable
 fun CalenderPreview() {
-    val vm = remember { CalenderViewModel(null) }
+    val vm = remember { CalenderViewModel() }
     Surface {
-        CalenderView(viewModel = vm, onConfirmed = { d, t -> /* preview */ })
+        CalenderView(onConfirmed = {})
     }
 }
 

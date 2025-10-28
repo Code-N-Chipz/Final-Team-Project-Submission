@@ -4,6 +4,7 @@ firebaseAuth = "24.0.1"
 firebaseBom = "34.4.0"
 foundation = "1.9.4"
 hiltAndroid = "2.57.2"
+hilt = "2.48"
 hiltAndroidCompiler = "2.57.2"
 hiltNavigationCompose = "1.3.0"
 coilCompose = "2.7.0"
@@ -86,4 +87,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+hilt = { id = "dagger.hilt.android.plugin", version.ref = "hiltAndroid" }
 

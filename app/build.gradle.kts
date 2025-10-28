@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -57,6 +58,10 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":laundry"))
+    implementation(project(":tinder"))
+    implementation(project(":uber"))
+    implementation(project(":mechanic"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

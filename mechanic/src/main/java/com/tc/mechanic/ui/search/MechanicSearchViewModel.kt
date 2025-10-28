@@ -1,12 +1,16 @@
 package com.tc.mechanic.ui.search
 
 import androidx.lifecycle.ViewModel
+import com.tc.auth.ui.navigation.AppNavigator
 import com.tc.mechanic.data.MechanicSearchData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class MechanicSearchViewModel : ViewModel() {
+class MechanicSearchViewModel @Inject constructor(
+    private val navigator: AppNavigator
+) : ViewModel() {
     private val _uiState = MutableStateFlow(MechanicSearchData())
     val uiState: StateFlow<MechanicSearchData> = _uiState.asStateFlow()
 
@@ -15,4 +19,9 @@ class MechanicSearchViewModel : ViewModel() {
     fun updateType(type: String) { _uiState.value = _uiState.value.copy(type = type) }
     fun updateModel(model: String) { _uiState.value = _uiState.value.copy(model = model) }
     fun updateSearch(query: String) { _uiState.value = _uiState.value.copy(searchQuery = query) }
+
+    fun calenderSelect(onSuccess : () -> Unit, onError: () -> Unit){
+
+
+    }
 }

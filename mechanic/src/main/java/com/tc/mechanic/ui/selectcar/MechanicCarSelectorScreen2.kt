@@ -58,7 +58,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.tc.mechanic.data.MechanicFormState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -107,12 +109,12 @@ private fun DropdownField(
 
 @Composable
 fun MechanicFormScreenWithDropdowns(
-    viewModel: MechanicCarSelectorViewModel,
-    typeOptions: List<String>,
-    modelOptions: List<String>,
-    yearOptions: List<String>,
-    motorOptions: List<String>,
-    onNext: (MechanicFormState) -> Unit,
+    viewModel: MechanicCarSelectorViewModel = hiltViewModel(),
+    typeOptions: List<String> = listOf("Car", "Motorbike", "Van", "Truck"),
+    modelOptions: List<String> = listOf("Lexus", "Toyota", "Honda", "Ford", "BMW"),
+    yearOptions: List<String> = (2000..2025).map { it.toString() }.reversed().take(10),
+    motorOptions: List<String> = listOf("Gasoil", "Petrol", "Electric", "Hybrid"),
+    onSuccess: (MechanicFormState) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -242,7 +244,7 @@ fun MechanicFormScreenWithDropdowns(
         state.error?.let { Text(text = it, color = Color.Red) }
 
         Button (
-            onClick = { viewModel.submit(onSuccess = { onNext(it) }) },
+            onClick = { viewModel.submit(onSuccess = { onSuccess(it) }) },
             modifier = Modifier.fillMaxWidth().height(52.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
@@ -441,7 +443,7 @@ fun MechanicFormDropdownsPreview() {
             modelOptions = modelOptions,
             yearOptions = yearOptions,
             motorOptions = motorOptions,
-            onNext = {}
+            onSuccess = {}
         )
     }
 }
