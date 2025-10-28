@@ -53,14 +53,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tc.mechanic.data.FiltersUiState
 import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
 fun FiltersScreen(
-    viewModel: FilterViewModel = hiltViewModel(),
+    viewModel: FilterViewModel = viewModel (),
     modifier: Modifier = Modifier,
     onApply: (FiltersUiState) -> Unit = {}
 ) {

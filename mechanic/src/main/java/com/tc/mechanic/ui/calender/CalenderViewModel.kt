@@ -3,8 +3,6 @@ package com.tc.mechanic.ui.calender
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tc.auth.ui.navigation.AppNavigator
-import com.tc.auth.ui.navigation.Routes
 import com.tc.mechanic.data.CalenderData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,10 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.Locale
-import javax.inject.Inject
 
-class CalenderViewModel @Inject constructor(
-    private val navigator: AppNavigator? = null,
+class CalenderViewModel(
     private val savedStateHandle: SavedStateHandle? = null
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CalenderData())
@@ -71,7 +67,6 @@ class CalenderViewModel @Inject constructor(
             try {
                 // simulate network / repo; immediately return success here
 //                onSuccess(s.dates[s.selectedDateIndex], s.timesForSelectedDate[timeIndex])
-                navigator?.navigateTo(Routes.SUMMERY)
             } catch (e: Exception) {
                 _uiState.value = s.copy(error = e.message ?: "Unknown error")
                 onError(e.message ?: "Unknown error")

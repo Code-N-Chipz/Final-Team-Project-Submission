@@ -4,7 +4,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,9 +57,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tc.mechanic.data.MechanicFormState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -109,7 +107,7 @@ private fun DropdownField(
 
 @Composable
 fun MechanicFormScreenWithDropdowns(
-    viewModel: MechanicCarSelectorViewModel = hiltViewModel(),
+    viewModel: MechanicCarSelectorViewModel = viewModel (),
     typeOptions: List<String> = listOf("Car", "Motorbike", "Van", "Truck"),
     modelOptions: List<String> = listOf("Lexus", "Toyota", "Honda", "Ford", "BMW"),
     yearOptions: List<String> = (2000..2025).map { it.toString() }.reversed().take(10),

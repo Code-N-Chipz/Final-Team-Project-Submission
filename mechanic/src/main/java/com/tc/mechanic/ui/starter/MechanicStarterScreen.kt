@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.tc.mechanic.R
 import com.tc.mechanic.ui.search.MechanicSearchViewModel
@@ -31,7 +31,7 @@ import com.tc.mechanic.ui.search.MechanicSearchViewModel
 
 @Composable
 fun MechanicStarterScreen(
-    viewModel: MechanicStarterViewModel = hiltViewModel(),
+    viewModel: MechanicStarterViewModel = viewModel (),
     onSuccess: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -69,7 +69,7 @@ fun MechanicStarterScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             Button (
-                onClick = {viewModel.submit( onSuccess, {}) },
+                onClick =  onSuccess,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),

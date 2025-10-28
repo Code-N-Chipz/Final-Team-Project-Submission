@@ -3,17 +3,13 @@ package com.tc.mechanic.ui.selectcar
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tc.auth.ui.navigation.AppNavigator
-import com.tc.auth.ui.navigation.Routes
 import com.tc.mechanic.data.MechanicFormState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MechanicCarSelectorViewModel @Inject constructor(
-    private val navigator: AppNavigator? = null,
+class MechanicCarSelectorViewModel (
     private val savedStateHandle: SavedStateHandle? = null //  inject via Hilt in real app
 ): ViewModel() {
     private val _uiState = MutableStateFlow(MechanicFormState())
@@ -69,7 +65,7 @@ class MechanicCarSelectorViewModel @Inject constructor(
             try {
                 // TODO: repository/network call
                 onSuccess(_uiState.value)
-                navigator?.navigateTo(Routes.FILTER)
+//                navigator?.navigateTo(Routes.FILTER)
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(error = e.message ?: "Unknown error")
                 onError(e.message ?: "Unknown error")

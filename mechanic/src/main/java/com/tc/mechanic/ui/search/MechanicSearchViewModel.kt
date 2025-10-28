@@ -1,16 +1,13 @@
 package com.tc.mechanic.ui.search
 
 import androidx.lifecycle.ViewModel
-import com.tc.auth.ui.navigation.AppNavigator
 import com.tc.mechanic.data.MechanicSearchData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
-class MechanicSearchViewModel @Inject constructor(
-    private val navigator: AppNavigator
-) : ViewModel() {
+
+class MechanicSearchViewModel () : ViewModel() {
     private val _uiState = MutableStateFlow(MechanicSearchData())
     val uiState: StateFlow<MechanicSearchData> = _uiState.asStateFlow()
 

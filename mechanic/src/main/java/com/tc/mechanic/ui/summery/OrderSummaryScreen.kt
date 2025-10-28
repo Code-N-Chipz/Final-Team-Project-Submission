@@ -39,7 +39,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tc.mechanic.R
 
@@ -128,7 +127,7 @@ import com.tc.mechanic.R
 
 @Composable
 fun OrderSummaryScreen(
-    viewModel: OrderSummaryViewModel = hiltViewModel(),
+    viewModel: OrderSummaryViewModel = viewModel (),
     profileImageRes: Int = R.drawable.jenny_johns_round, // Replace with your drawable
     onPlaceOrder: () -> Unit = {}
 ) {

@@ -38,7 +38,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
@@ -56,7 +55,7 @@ import com.tc.mechanic.ui.filter.FilterViewModel
 
 @Composable
 fun MapScreen(
-    viewModel: MapViewModel = hiltViewModel(),
+    viewModel: MapViewModel = viewModel (),
     modifier: Modifier = Modifier,
     onSuccess: () -> Unit = {}
 ) {

@@ -1,15 +1,12 @@
 package com.tc.mechanic.ui.summery
 
 import androidx.lifecycle.ViewModel
-import com.tc.auth.ui.navigation.AppNavigator
 import com.tc.mechanic.data.OrderSummaryData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
-class OrderSummaryViewModel @Inject constructor(
-    private val navigator: AppNavigator
+class OrderSummaryViewModel (
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(OrderSummaryData())
     val uiState: StateFlow<OrderSummaryData> = _uiState.asStateFlow()

@@ -7,14 +7,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-//import com.tc.laundry.ui.navigation.LaundryApp
-import com.tc.mechanic.MainScreen
+import com.tc.mechanic.ui.MechanicEntryPoint
+import com.tc.mechanic.ui.MechanicNavGraph
+
+
 //import com.tc.tinder.presentation.navigation.TinderNavHost
 
+@Preview
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
@@ -31,7 +35,7 @@ fun AppNavHost() {
         composable("screen_hotel") { SimpleScreen("Hotel Screen") }
         composable("screen_doctor") { SimpleScreen("Doctor Screen") }
         composable("screen_pet") { SimpleScreen("Pet Screen") }
-        composable("screen_mechanic") { MainScreen() }
+        composable("screen_mechanic") { MechanicEntryPoint() }
         composable("screen_pc_repair") {SimpleScreen("PcRepair Screen")}
         composable("screen_learn") { SimpleScreen("Learn Screen") }
         composable("screen_handy_man") { SimpleScreen("Handy Man Screen")}
