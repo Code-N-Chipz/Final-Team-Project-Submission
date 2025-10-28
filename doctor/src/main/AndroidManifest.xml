@@ -4,7 +4,8 @@
     <application>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="Xyzhfsghjklifhpoityulk" />
+            android:value="Xyzhfsghjklifhpoityulk" 
+            tools:replace="android:value"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
