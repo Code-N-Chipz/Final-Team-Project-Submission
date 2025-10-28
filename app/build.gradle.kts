@@ -58,8 +58,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
-    implementation(project(":laundry"))
-    implementation(project(":tinder"))
+//    implementation(project(":laundry"))
+//    implementation(project(":tinder"))
     implementation(project(":uber"))
     implementation(project(":mechanic"))
 
