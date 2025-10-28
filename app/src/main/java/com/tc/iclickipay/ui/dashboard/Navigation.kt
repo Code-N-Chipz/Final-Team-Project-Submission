@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.laundry.ui.navigation.LaundryApp
 import com.tc.tinder.presentation.navigation.TinderNavHost
+import com.tc.uber.ui.nav.UberNavigationC
 
 @Composable
 fun AppNavHost() {
@@ -21,7 +22,7 @@ fun AppNavHost() {
         composable("dashboard") { Dashboard(navController = navController) }
 
         // Define composable destinations for each screen id
-        composable("screen_uber") { SimpleScreen("Uber Screen") }
+        composable("screen_uber") { UberNavigationC(navController) }
         composable("screen_bank") { SimpleScreen("Bank Screen") }
         composable("screen_tinder") { TinderNavHost(parentNavController = navController) }
         composable("screen_chat") { SimpleScreen("Chat Screen") }
