@@ -54,6 +54,9 @@ android {
 dependencies {
     implementation("com.tc:tcmap:1.0.0")
     implementation(project(":core:design"))
+
+    implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
