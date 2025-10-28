@@ -1,17 +1,15 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace = "com.tc.design"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 27
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -19,8 +17,9 @@ android {
     buildFeatures {
         compose = true
     }
+
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     buildTypes {
@@ -32,14 +31,15 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
-
 }
 
 dependencies {
@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.ui:ui:1.6.0")
     implementation("androidx.compose.material3:material3:1.2.0")
 
     testImplementation(libs.junit)

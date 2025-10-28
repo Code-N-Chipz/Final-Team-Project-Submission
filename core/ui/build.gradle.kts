@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.kotlin.plugin.compose")
     kotlin("kapt")
 }
 
@@ -22,7 +23,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     buildTypes {
