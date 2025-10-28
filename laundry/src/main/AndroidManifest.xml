@@ -2,17 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Location permissions (used by Google Maps or your composables) -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <application>
-        <!-- Only needed if this module directly uses Google Maps composables -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDVv1WEvpi6QiVX8lSiBflFhsHHRB3JgEY"
-            tools:replace="android:value"
-            tools:node="merge"/>
-    </application>
+   
 
 </manifest>
