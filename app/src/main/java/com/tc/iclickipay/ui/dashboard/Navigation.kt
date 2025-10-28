@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.laundry.ui.navigation.LaundryApp
-import com.tc.laundry.ui.startpage.LaundryStartPage
 import com.tc.tinder.presentation.navigation.TinderNavHost
 
 @Composable
