@@ -14,6 +14,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
         google()
         mavenCentral()
         maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }

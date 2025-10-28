@@ -12,6 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.doctor.ui.DoctorNavHost
+import com.tc.laundry.ui.navigation.LaundryApp
+import com.tc.laundry.ui.startpage.LaundryStartPage
+import com.tc.tinder.presentation.navigation.TinderNavHost
 
 @Composable
 fun AppNavHost() {
@@ -22,7 +25,7 @@ fun AppNavHost() {
         // Define composable destinations for each screen id
         composable("screen_uber") { SimpleScreen("Uber Screen") }
         composable("screen_bank") { SimpleScreen("Bank Screen") }
-        composable("screen_tinder") { SimpleScreen("Tinder Screen") }
+        composable("screen_tinder") { TinderNavHost(parentNavController = navController) }
         composable("screen_chat") { SimpleScreen("Chat Screen") }
         composable("screen_eat") { SimpleScreen("Restaurant Screen") }
         composable("screen_hotel") { SimpleScreen("Hotel Screen") }
@@ -32,7 +35,7 @@ fun AppNavHost() {
         composable("screen_pc_repair") {SimpleScreen("PcRepair Screen")}
         composable("screen_learn") { SimpleScreen("Learn Screen") }
         composable("screen_handy_man") { SimpleScreen("Handy Man Screen")}
-        composable("screen_laundry") { SimpleScreen("Laundry Screen") }
+        composable("screen_laundry") { LaundryApp(parentNavController = navController) }
         composable("screen_delivery") { SimpleScreen("Delivery Screen") }
         composable("screen_babysitter") {SimpleScreen("Babysitter Screen")}
         composable("screen_house_clean") { SimpleScreen("House Clean Screen") }

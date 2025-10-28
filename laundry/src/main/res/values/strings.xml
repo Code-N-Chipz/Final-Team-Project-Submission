@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- START PAGE -->
+    <string name="laundry_start_page">Laundry</string>
+    <string name="laundry_info_start_page">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis sit amet odio in egestas. Pellen tesque ultricies justo.</string>
+    <string name="laundry_button_start_page">Let\'s go</string>
+
+    <!-- HOME PAGE -->
+    <string name="laundry_favorites_home_page_second_background">Favorites</string>
+    <string name="laundry_orders_home_page_second_background">Orders</string>
+    <string name="laundry_search_home_page_overlayer_box">Search location name</string>
+    <string name="laundry_choose_dates_home_page_overlayer_box">CHOOSE DATES</string>
+    <string name="laundry_KG_home_page_overlayer_box">KG</string>
+    <string name="laundry_dry_home_page_overlayer_box">dry</string>
+    <string name="laundry_ironing_home_page_overlayer_box">IRONING</string>
+    <string name="laundry_search_button_home_page_overlayer_box">Search</string>
+    
+    <!-- YOUR LAUNDRY PAGE -->
+    <string name="laundry_header_your_laundry_page">Your laundry</string>
+    <string name="laundry_laundry_kg_your_laundry_page">laundry/kg</string>
+    <string name="laundry_dry_cleaning_your_laundry_page">Dry cleaning</string>
+    <string name="laundry_ironing_your_laundry_page">Ironing</string>
+    <string name="laundry_ironing_yes_your_laundry_page">Yes</string>
+    <string name="laundry_ironing_no_your_laundry_page">No</string>
+    <string name="laundry_availability_your_laundry_page">Availability</string>
+    <string name="laundry_next_button_your_laundry_page">Next</string>
+
+    <!-- FILTERS PAGE -->
+    <string name="laundry_header_filters_page">Filters</string>
+    <string name="laundry_header_action_clear_filters_page">Clear</string>
+    <string name="laundry_sort_by_filters_page">Sort by</string>
+    <string name="laundry_sort_by_drop_down_recommend_filters_page">Recommend</string>
+    <string name="laundry_price_kg_filters_page">Price/Kg</string>
+    <string name="laundry_Rate_filters_page">Rate</string>
+    <string name="laundry_apply_button_filters_page">Apply</string>
+    
+    <!-- PlACE ORDER PAGE-->
+    <string name="laundry_place_order_button_place_order_page">Place order</string>
+
+</resources>

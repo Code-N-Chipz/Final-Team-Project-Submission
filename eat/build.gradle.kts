@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 }
-
 android {
     namespace = "com.tc.eat"
     compileSdk {
@@ -30,7 +29,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
+kotlin {
+    jvmToolchain(17)
+}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

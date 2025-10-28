@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(project(":doctor"))
 
+    implementation(project(":laundry"))
+    implementation(project(":tinder"))
+    implementation(project(":uber"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
