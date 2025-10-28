@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_message">Restaurant</string>
+    <string name="search">Search</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="all_res">All restaurants</string>
+    <string name="filters">Filters</string>
+    <string name="clear">Clear</string>
+    <string name="feature">Featured Items</string>
+
+
+    <string name="categories">Categories</string>
+    <string name="African">African</string>
+    <string name="American">American</string>
+    <string name="French">French</string>
+    <string name="Indian">Indian</string>
+    <string name="Mexican">Mexican</string>
+    <string name="Traditional">Traditional</string>
+    <string name="Italian">Italian</string>
+    <string name="Spicy">Spicy</string>
+    <string name="Burger">Burger</string>
+    <string name="Fries">Fries</string>
+    <string name="Breakfast">Breakfast</string>
+    <string name="Pizza">Breakfast</string>
+    <string name="Asian">Asian</string>
+    <string name="Cupcake">Cupcake</string>
+
+
+
+    <string name="entrees">Entrees</string>
+    <string name="dishes">Dishes</string>
+    <string name="desserts">Desserts</string>
+    <string name="drinks">Drinks</string>
+    <string name="popular">Most Popular</string>
+
+
+    <string name="apply">Apply</string>
+    <string name="minute">min</string>
+    <string name="sort_by">Sort by</string>
+    <string name="recommended">Recommended</string>
+    <string name="price">Price</string>
+    <string name="low_price">$</string>
+    <string name="mid_price">$$</string>
+    <string name="hi_price">$$$</string>
+    <string name="rating">Ratings</string>
+    <string name="proximity">Proximity</string>
+    <string name="alphabetical">Alphabetical</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add to order</string>
+    <string name="view">View order</string>
+    <string name="place">Place order</string>
+    <string name="total">Total amount</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery_fees">Delivery fees</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="delivery_location">Delivery location</string>
+    <string name="order">Order</string>
+    <string name="cancel">Cancel</string>
+    <string name = "address">28 Broad Street Johannesburg</string>
+</resources>
