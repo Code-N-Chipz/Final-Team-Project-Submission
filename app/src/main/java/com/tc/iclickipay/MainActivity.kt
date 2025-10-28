@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tc.iclickipay.ui.dashboard.AppNavHost
+import com.tc.iclickipay.ui.dashboard.Dashboard
 import com.tc.iclickipay.ui.theme.ICLICKIPAYTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ICLICKIPAYTheme {
-
+                AppNavHost()
             }
         }
     }
