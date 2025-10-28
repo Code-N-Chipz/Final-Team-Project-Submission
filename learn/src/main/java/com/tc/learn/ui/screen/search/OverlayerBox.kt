@@ -107,46 +107,46 @@ fun OverlayerBox(
     }
 }
 
-@Composable
-private fun TeacherInfo(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(63.dp)
-            .clickable(
-                onClick = {
-                    navController.navigate("your_learn")
-                }
-            )
-    ) {
-        Info(
-            text = stringResource(R.string.learn_choose_dates_home_page_overlayer_box)
-        )
-
-        VerticalSpacerGrayLine()
-
-        Info(
-            text = stringResource(R.string.learn_KG_home_page_overlayer_box)
-        )
-
-        VerticalSpacerGrayLine()
-
-        Info(
-            text = stringResource(R.string.learn_dry_home_page_overlayer_box)
-        )
-
-        VerticalSpacerGrayLine()
-
-        Info(
-            text = stringResource(R.string.learn_ironing_home_page_overlayer_box)
-        )
-    }
-}
+//@Composable
+//private fun TeacherInfo(
+//    modifier: Modifier = Modifier,
+//    navController: NavController,
+//) {
+//    Row(
+//        verticalAlignment = Alignment.CenterVertically,
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .height(63.dp)
+//            .clickable(
+//                onClick = {
+//                    navController.navigate("your_learn")
+//                }
+//            )
+//    ) {
+//        Info(
+//            text = stringResource(R.string.learn_choose_dates_home_page_overlayer_box)
+//        )
+//
+//        VerticalSpacerGrayLine()
+//
+//        Info(
+//            text = stringResource(R.string.learn_KG_home_page_overlayer_box)
+//        )
+//
+//        VerticalSpacerGrayLine()
+//
+//        Info(
+//            text = stringResource(R.string.learn_dry_home_page_overlayer_box)
+//        )
+//
+//        VerticalSpacerGrayLine()
+//
+//        Info(
+//            text = stringResource(R.string.learn_ironing_home_page_overlayer_box)
+//        )
+//    }
+//}
 
 @Composable
 private fun Info(
