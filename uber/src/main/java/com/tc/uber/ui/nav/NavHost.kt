@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.tc.uber.R
@@ -18,7 +19,7 @@ import com.tc.uber.ui.UberMapPage
 import com.tc.uber.ui.WelcomePage
 
 @Composable
-fun UberNavigationC(){
+fun UberNavigationC(navController : NavHostController){
     val description = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis sit amet odio in egestas. Pellen tesque ultricies justo.
     """.trimIndent()
@@ -26,7 +27,12 @@ fun UberNavigationC(){
     val backStack = remember { mutableStateListOf<Screen>(Screen.WelcomeScreen) }
 
     NavDisplay(backStack = backStack, modifier = Modifier.fillMaxSize(),
-        onBack = { backStack.removeLastOrNull() },
+        onBack = {
+            try { backStack.removeLastOrNull() }
+            catch (e : IllegalArgumentException){
+                navController.popBackStack()
+            }
+                 },
         transitionSpec = {
             fadeIn(tween(300)) togetherWith fadeOut(tween(300))
         },
@@ -35,7 +41,10 @@ fun UberNavigationC(){
                 WelcomePage(R.drawable.welcome_uber,"Transportation",
                     description, "Let's go",
                     onBack = {
-                        backStack.removeLastOrNull()
+                        try { backStack.removeLastOrNull() }
+            catch (e : IllegalArgumentException){
+                navController.popBackStack()
+            }
                     }) {
                     backStack.add(Screen.EnableLocationScreen)
                 }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android") version "2.57.2"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
 
 }
 
@@ -58,6 +59,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":doctor"))
+
+    implementation(project(":eat"))
     implementation(project(":laundry"))
     implementation(project(":tinder"))
     implementation(project(":uber"))
@@ -73,5 +77,6 @@ dependencies {
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
 }

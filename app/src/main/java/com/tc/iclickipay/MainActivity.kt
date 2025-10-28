@@ -28,11 +28,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ICLICKIPAYTheme {
-                val navController = rememberNavController()
-                Dashboard(
-                    modifier = Modifier,
-                    navController = navController,
-                )
+                AppNavHost()
             }
         }
     }

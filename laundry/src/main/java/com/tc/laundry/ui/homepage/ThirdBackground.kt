@@ -69,7 +69,7 @@ fun ThirdBackground(
                 tint = primaryColor,
                 modifier = Modifier
                     .clickable{
-
+                        navController
                     }
             )
         }
@@ -91,7 +91,7 @@ private fun CardView(
         modifier = modifier
             .fillMaxWidth()
             .clickable{
-
+                navController.navigate("map")
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
