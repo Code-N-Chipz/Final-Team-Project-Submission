@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<<<<<<< HEAD
     <!-- Location permissions (used by Google Maps or your composables) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,6 +15,3 @@
     </application>
 
 </manifest>
-=======
-</manifest>
->>>>>>> b8d26d53865a7c3bd26dcce2c65c7ebfaae7a374
