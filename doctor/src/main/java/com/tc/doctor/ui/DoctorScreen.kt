@@ -24,12 +24,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
 import com.tc.ui.CommonButton
 
 @Composable
-fun DoctorScreen() {
+fun DoctorScreen(
+    navController: NavController? = null,
+    parentNavController: NavController? = null
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
@@ -42,7 +47,7 @@ fun DoctorScreen() {
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier.fillMaxWidth()
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { parentNavController?.popBackStack() }) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
                     contentDescription = "Back Button",
@@ -69,7 +74,7 @@ fun DoctorScreen() {
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(40.dp))
-        CommonButton("Let's go")
+        CommonButton("Let's go", onClick = { navController?.navigate(DoctorDest.Option.route) })
         Spacer(modifier = Modifier.height(10.dp))
     }
 

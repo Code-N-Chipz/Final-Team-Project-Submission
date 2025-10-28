@@ -25,12 +25,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
 import com.tc.ui.CommonButton
 
 @Composable
-fun OptionScreen() {
+fun OptionScreen(navController: NavController? = null) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
@@ -42,7 +43,9 @@ fun OptionScreen() {
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier.fillMaxWidth()
             ) {
-            IconButton(onClick = {  } ) {
+            IconButton(onClick = {
+                navController?.popBackStack()
+            } ) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
                     contentDescription = "Back Button",
@@ -72,9 +75,9 @@ fun OptionScreen() {
             .height(30.dp))
 
         val greenButton = ButtonDefaults.buttonColors(containerColor = theme.secondaryColor)
-        CommonButton("Make the Diagnosis", color = greenButton)
+        CommonButton("Make the Diagnosis", color = greenButton, onClick = {})
 
-        CommonButton("Make an Appointment")
+        CommonButton("Make an Appointment", onClick = {navController?.navigate(DoctorDest.Filters.route)})
         Spacer(modifier = Modifier.height(10.dp))
     }
 }

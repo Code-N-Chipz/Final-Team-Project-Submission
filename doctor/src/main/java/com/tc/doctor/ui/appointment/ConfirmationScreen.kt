@@ -23,12 +23,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.tc.design.R as CoreDraw
 import com.tc.doctor.R
+import com.tc.doctor.ui.DoctorDest
 import com.tc.ui.CommonButton
 
 @Composable
-fun ConfirmationScreen(){
+fun ConfirmationScreen(navController: NavController? = null){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
@@ -36,7 +38,9 @@ fun ConfirmationScreen(){
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        TopBar()
+        TopBar(onBackClick = {
+            navController?.popBackStack()
+        })
         Image(
             painter = painterResource(R.drawable.img_confirmation),
             contentDescription = "Confirmation Image",
@@ -49,19 +53,19 @@ fun ConfirmationScreen(){
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(30.dp))
-        CommonButton("Go Home")
+        CommonButton("Go Home", onClick = { navController?.navigate(DoctorDest.Doctor.route) })
         Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
 @Composable
-private fun TopBar() {
+private fun TopBar(onBackClick: () -> Unit = {}) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
         modifier = Modifier.fillMaxWidth()
     ) {
-        IconButton(onClick = {}) {
+        IconButton(onClick = onBackClick) {
             Icon(
                 painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
                 contentDescription = "Back Button",

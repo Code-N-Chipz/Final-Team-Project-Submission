@@ -42,15 +42,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.tc.doctor.ui.DoctorDest
 import com.tc.ui.CommonButton
 import theme.primaryColor
 import theme.textPenternary
-import theme.textTertiary
 import kotlin.math.roundToInt
 import com.tc.design.R as CoreDraw
 
 @Composable
-fun FiltersScreen() {
+fun FiltersScreen(
+    navController: NavController? = null,
+    viewModelAppointment: ViewModelAppointment? = null
+) {
 
     var city by rememberSaveable { mutableStateOf("") }
     var distance by rememberSaveable { mutableStateOf(50f) }
@@ -63,7 +67,9 @@ fun FiltersScreen() {
             .padding(15.dp)
             .fillMaxSize()
     ) {
-        TopBar()
+        TopBar(onBackClick = {
+            navController?.popBackStack()
+        })
         CitySelect(
             city = city,
             onCityChange = { city = it }
@@ -99,7 +105,8 @@ fun FiltersScreen() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            CommonButton("Save")
+            // TODO: need to pass information. view model is big here
+            CommonButton("Save", onClick = { navController?.navigate(DoctorDest.Search.route) })
         }
         Spacer(modifier = Modifier.height(10.dp))
     }
@@ -107,13 +114,13 @@ fun FiltersScreen() {
 
 
 @Composable
-private fun TopBar() {
+private fun TopBar(onBackClick: () -> Unit = {}) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
-        IconButton(onClick = {}) {
+        IconButton(onClick = onBackClick) {
             Icon(
                 painter = painterResource(CoreDraw.drawable.arrow_left_orange_icon),
                 contentDescription = "Back Button",

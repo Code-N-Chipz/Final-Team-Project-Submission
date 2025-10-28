@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.tc.doctor.ui.DoctorNavHost
 
 @Composable
 fun AppNavHost() {
@@ -25,7 +26,7 @@ fun AppNavHost() {
         composable("screen_chat") { SimpleScreen("Chat Screen") }
         composable("screen_eat") { SimpleScreen("Restaurant Screen") }
         composable("screen_hotel") { SimpleScreen("Hotel Screen") }
-        composable("screen_doctor") { SimpleScreen("Doctor Screen") }
+        composable("screen_doctor") { DoctorNavHost(parentNavController = navController) }
         composable("screen_pet") { SimpleScreen("Pet Screen") }
         composable("screen_mechanic") { SimpleScreen("Mechanic Screen") }
         composable("screen_pc_repair") {SimpleScreen("PcRepair Screen")}
