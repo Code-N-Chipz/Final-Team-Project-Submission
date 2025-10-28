@@ -68,7 +68,9 @@ fun OverlayerBox(
                     tint = primaryColor,
                     modifier = Modifier
                         .clickable(
-                            onClick = {  }
+                            onClick = {
+                                navController.navigate("map")
+                            }
                         )
                 )
             }
@@ -115,7 +117,7 @@ private fun LaundryInfo(
             .height(63.dp)
             .clickable(
                 onClick = {
-                    navController.navigate("your_laundry")
+                    navController.navigate("calendar")
                 }
             )
     ) {
