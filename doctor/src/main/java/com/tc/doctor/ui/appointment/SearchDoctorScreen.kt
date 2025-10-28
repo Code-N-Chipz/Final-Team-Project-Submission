@@ -1,6 +1,5 @@
 package com.tc.doctor.ui.appointment
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,8 +15,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,6 +22,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -33,115 +31,65 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import java.time.LocalTime
+import androidx.navigation.NavController
+import com.tc.doctor.domain.model.Specialist
 import com.tc.design.R as CoreDraw
-import com.tc.doctor.R
-import theme.textTertiary
-
-
-// TODO: replace textTertiary with Pent
-
-data class Specialist(
-    val name: String,
-    val address: String,
-    val isAvailable: Boolean,
-    val workHours: ClosedRange<LocalTime> = LocalTime.of(8, 0)..LocalTime.of(20, 0),
-    val stars: Float,
-    @DrawableRes val imageRes: Int
-)
-
-private val specialistList: List<Specialist> = listOf(
-    Specialist(
-        name = "Dr. Alice Smith",
-        address = "123 Main St",
-        isAvailable = true,
-        workHours = LocalTime.of(9, 0)..LocalTime.of(17, 0),
-        stars = 4.6f,
-        imageRes = R.drawable.img_jenny_jones
-    ),
-    Specialist(
-        name = "Dr. Bob Jones",
-        address = "456 Elm St",
-        isAvailable = false,
-        workHours = LocalTime.of(10, 0)..LocalTime.of(18, 0),
-        stars = 4.2f,
-        imageRes = R.drawable.img_dispensary
-    ),
-    Specialist(
-        name = "Dr. Carol Lee",
-        address = "789 Oak Ave",
-        isAvailable = true,
-        workHours = LocalTime.of(8, 30)..LocalTime.of(15, 30),
-        stars = 5.0f,
-        imageRes = R.drawable.img_jenny_jones
-    ),
-    Specialist(
-        name = "Dr. James Hoflof",
-        address = "999 Ukon Ave",
-        isAvailable = true,
-        workHours = LocalTime.of(8, 30)..LocalTime.of(15, 30),
-        stars = 3.0f,
-        imageRes = R.drawable.img_jenny_jones
-    ),
-    Specialist(
-        name = "Dr. Alice Smith",
-        address = "123 Main St",
-        isAvailable = true,
-        workHours = LocalTime.of(9, 0)..LocalTime.of(17, 0),
-        stars = 4.6f,
-        imageRes = R.drawable.img_jenny_jones
-    ),
-    Specialist(
-        name = "Dr. Bob Jones",
-        address = "456 Elm St",
-        isAvailable = false,
-        workHours = LocalTime.of(10, 0)..LocalTime.of(18, 0),
-        stars = 4.2f,
-        imageRes = R.drawable.img_dispensary
-    ),
-    Specialist(
-        name = "Dr. Carol Lee",
-        address = "789 Oak Ave",
-        isAvailable = true,
-        workHours = LocalTime.of(8, 30)..LocalTime.of(15, 30),
-        stars = 5.0f,
-        imageRes = R.drawable.img_jenny_jones
-    ),
-    Specialist(
-        name = "Dr. James Hoflof",
-        address = "999 Ukon Ave",
-        isAvailable = true,
-        workHours = LocalTime.of(8, 30)..LocalTime.of(15, 30),
-        stars = 3.0f,
-        imageRes = R.drawable.img_jenny_jones
-    )
-)
+import com.tc.doctor.ui.DoctorDest
+import theme.textPenternary
 
 
 @Composable
-fun SearchDoctorScreen() {
+fun SearchDoctorScreen(
+    navController: NavController? = null,
+    viewModelAppointment: ViewModelAppointment? = null,
+    ) {
+
+    // collect StateFlow with fallback empty list
+    val specialistList: List<Specialist> =
+        viewModelAppointment?.specialists?.collectAsState(initial = emptyList())?.value ?: emptyList()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(15.dp)
             .fillMaxSize()
     ) {
-        TopBar()
+        TopBar(
+            onHomeClick = {
+                navController?.navigate(DoctorDest.Doctor.route)
+            },
+            onFilterClick = {
+                navController?.navigate(DoctorDest.Filters.route)
+            },
+            onMapClick = {
+                navController?.navigate(DoctorDest.Map.route)
+            }
+        )
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         SearchBar()
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
-        SpecialistList(specialistList)
+        SpecialistList(
+            specialistList,
+            onSpecialistClick = {
+                // TODO: need to pass data and something to change Map State
+                navController?.navigate(DoctorDest.Map.route)
+            }
+        )
     }
 }
 
 @Composable
-private fun TopBar() {
+private fun TopBar(
+    onHomeClick: () -> Unit = {},
+    onFilterClick: () -> Unit = {},
+    onMapClick: () -> Unit = {},
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row {
-            IconButton(onClick = {}) {
+            IconButton(onClick = onHomeClick) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.home_icon),
                     contentDescription = "Home Icon"
@@ -149,13 +97,13 @@ private fun TopBar() {
             }
         }
         Row {
-            IconButton(onClick = {}) {
+            IconButton(onClick = onFilterClick) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.options_gray_icon),
                     contentDescription = "Home Icon"
                 )
             }
-            IconButton(onClick = {}) {
+            IconButton(onClick = onMapClick) {
                 Icon(
                     painter = painterResource(CoreDraw.drawable.pin_gray_icon),
                     contentDescription = "Home Icon"
@@ -194,7 +142,9 @@ private fun SearchBar(
                 Row {
                     if (searchQuery.isNotEmpty()) {
                         IconButton(onClick = { onSearchQueryChange("") }) {
-                            Icon(Icons.Default.Close, contentDescription = "Clear")
+                            Icon(
+                                painter = painterResource(CoreDraw.drawable.cancel_grey_icon),
+                                contentDescription = "Clear")
                         }
                     }
                     Icon(
@@ -216,7 +166,7 @@ private fun SearchBar(
 }
 
 @Composable
-private fun SpecialistList(specialists: List<Specialist>) {
+private fun SpecialistList(specialists: List<Specialist>, onSpecialistClick: () -> Unit = {}) {
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -224,6 +174,7 @@ private fun SpecialistList(specialists: List<Specialist>) {
         modifier = Modifier.fillMaxWidth()
     ) {
         items(specialists.size) { index ->
+            // TODO: need to make this wrapped in a click
             HorizontalDivider(modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 5.dp)
@@ -244,7 +195,7 @@ private fun SpecialistList(specialists: List<Specialist>) {
                     Text(text = specialists[index].name,
                         style = theme.typography.bodyLarge)
                     Text(text = specialists[index].address,
-                        style = theme.typography.bodyMedium.copy(color = textTertiary))
+                        style = theme.typography.bodyMedium.copy(color = textPenternary))
                 }
                 Spacer(modifier = Modifier.padding(10.dp))
                 Column(
@@ -252,7 +203,7 @@ private fun SpecialistList(specialists: List<Specialist>) {
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = if (specialists[index].isAvailable) "Available" else "Unavailable",
-                        style = theme.typography.bodyMedium.copy(color = textTertiary))
+                        style = theme.typography.bodyMedium.copy(color = textPenternary))
                     Text(text = specialists[index].workHours.toString())
                     Row {
                         val stars = specialists[index].stars
