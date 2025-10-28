@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":doctor"))
+
     implementation(project(":eat"))
     implementation(project(":laundry"))
     implementation(project(":tinder"))

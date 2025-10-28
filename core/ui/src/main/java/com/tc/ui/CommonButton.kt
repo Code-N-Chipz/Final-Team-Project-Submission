@@ -3,6 +3,7 @@ package com.tc.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -41,26 +42,30 @@ fun CommonButton(
     text: String = "Hello",
     onClick: () -> Unit = {},
     color: ButtonColors = ButtonDefaults.buttonColors(containerColor = theme.primaryColor),
+    enabled: Boolean = true,
+    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     width: Dp = 300.dp,
     height: Dp = 60.dp,
 ) {
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .width(width)
             .height(height)
     ) {
-        // Drop layer behind the button (only this is offset)
         Box(
             modifier = Modifier
                 .matchParentSize()
                 .offset(x = 4.dp, y = 4.dp)
                 .shadow(elevation = 10.dp, shape = RoundedCornerShape(8.dp), clip = false)
-                .background(Color(0xFFfae1cf), RoundedCornerShape(8.dp))
+                .background(theme.textTertiary, RoundedCornerShape(8.dp))
         )
         Button(
             shape = RoundedCornerShape(8.dp),
+            enabled = enabled,
             colors = color,
+            contentPadding = contentPadding,
             onClick = onClick,
             modifier = Modifier.matchParentSize()
         ) {

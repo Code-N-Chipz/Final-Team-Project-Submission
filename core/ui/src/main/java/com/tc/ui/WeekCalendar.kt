@@ -73,8 +73,9 @@ fun WeekCalendar(
 //    loadUnavailableTimesOfMonth: suspend (ClosedRange<LocalDate>) -> Map<LocalDate, Set<LocalTime>>,
     onSelectionChange: (CalendarSelection) -> Unit,
     // TODO: this is for the top image and name
-    business: Any,
-    onBackClick: () -> Unit?
+    imageUrl: String,
+    name: String,
+    onBackClick: () -> Unit = {}
 ) {
 
     fun timeSlots(range: ClosedRange<LocalTime>, step: Long): List<LocalTime> {
@@ -97,7 +98,7 @@ fun WeekCalendar(
     var isToday = (initialDate.dayOfMonth == selectedDate.dayOfMonth)
 
     Column {
-        TopBar(onBackClick, business.toString())
+        TopBar(onBackClick, name, imageUrl)
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         MonthYearUi(
             initialDate,
@@ -416,7 +417,8 @@ private fun WeekCalendarPreview(){
         initialDate = LocalDate.now(),
         initialTime = LocalTime.now(),
         onSelectionChange = {},
-        business = "Preview Business",
-        onBackClick = {}
+        onBackClick = {},
+        name = "Jenny",
+        imageUrl = ""
     )
 }
