@@ -11,7 +11,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDVv1WEvpi6QiVX8lSiBflFhsHHRB3JgEY"
-            tools:replace="android:value" />
+            tools:replace="android:value"
+            tools:node="merge"/>
     </application>
 
 </manifest>
