@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,7 +10,9 @@ android {
     compileSdk {
         version = release(36)
     }
-
+    lint{
+        lintConfig = rootProject.file("config/lint/lint.xml")
+    }
     defaultConfig {
         applicationId = "com.tc.iclickipay"
         minSdk = 27
@@ -33,15 +36,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+}
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -53,6 +56,12 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(project(":laundry"))
+    implementation(project(":tinder"))
+    implementation(project(":uber"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

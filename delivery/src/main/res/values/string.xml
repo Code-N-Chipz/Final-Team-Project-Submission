@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="delivery_lets_go_button_start_page">Lets go</string>
+
+    <string name="delivery_favorites_home_page_second_background">Favorites</string>
+    <string name="delivery_orders_home_page_second_background">Orders</string>
+
+</resources>
