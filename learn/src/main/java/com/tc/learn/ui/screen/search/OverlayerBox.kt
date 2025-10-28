@@ -148,6 +148,7 @@ fun OverlayerBox(
 //    }
 //}
 
+@Suppress("UnusedPrivateMember")
 @Composable
 private fun Info(
     modifier: Modifier = Modifier,
@@ -208,6 +209,7 @@ private fun Search(
     }
 }
 
+@Suppress("UnusedPrivateMember")
 @Composable
 private fun VerticalSpacerGrayLine(
     modifier: Modifier = Modifier,
