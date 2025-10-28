@@ -40,6 +40,7 @@ import com.tc.learn.ui.viewmodel.TeacherViewModel
 import com.tc.learn.ui.navigation.AppNavigator
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import com.tc.learn.ui.component.ButtonWithTextOnly
 
 @Composable
 fun StartScreen(
@@ -81,14 +82,19 @@ fun StartScreen(
         }
         Spacer(modifier = Modifier.weight(1f))
 
-        Button(
-            onClick = onButtonClick,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth()
-        ) {
-            Text("Get Started")
-        }
+//        Button(
+//            onClick = onButtonClick,
+//            modifier = Modifier
+//                .align(Alignment.CenterHorizontally)
+//                .fillMaxWidth()
+//        ) {
+//            Text("Get Started")
+//        }
+
+        ButtonWithTextOnly(
+            text = "GetStarted",
+            onClick = onButtonClick
+        )
 
         Spacer(modifier = Modifier.height(26.dp))
 

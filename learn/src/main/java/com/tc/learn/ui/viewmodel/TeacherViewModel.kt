@@ -1,5 +1,8 @@
 package com.tc.learn.ui.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.ImageLoader
@@ -25,6 +28,11 @@ class TeacherViewModel @Inject constructor(
     private val _selectedTeacher = MutableStateFlow<Teacher?>(null)
     val selectedTeacher: StateFlow<Teacher?> = _selectedTeacher
 
+    // --- Filters ---
+    var sortOption by mutableStateOf("Recommended")
+    var maxPrice by mutableStateOf(500f)
+    var minStar by mutableStateOf(0f)
+
     init {
         loadTeachers()
     }
@@ -33,7 +41,28 @@ class TeacherViewModel @Inject constructor(
         return repository.getTeacherById(id)
     }
 
+    fun applyFilterPageFilters(
+        sort: String,
+        price: Float,
+        star: Float
+    ) {
+        sortOption = sort
+        maxPrice = price
+        minStar = star
 
+        viewModelScope.launch {
+            val filtered = repository.getTeachers()
+                .filter { it.price <= price && it.rating >= star }
+                .let { list ->
+                    when (sort) {
+                        "Price: Low to High" -> list.sortedBy { it.price }
+                        "Price: High to Low" -> list.sortedByDescending { it.price }
+                        else -> list
+                    }
+                }
+            _teachers.value = filtered
+        }
+    }
     fun getTeacherImageUrlById(id: String?): String? = repository.getTeacherById(id)?.imageUrl
 
     fun loadTeachers() {

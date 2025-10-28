@@ -41,7 +41,7 @@ fun TeacherScreen(
     teacherId: String = "", // Pass the selected teacher here
     viewModel: TeacherDetailViewModel = hiltViewModel(),
     onButtonClick: () -> Unit,
-    ) {
+) {
     var selectedSubject by remember { mutableStateOf<Subject?>(null) }
     var selectedLevel by remember { mutableStateOf<Level?>(null) }
 
@@ -121,7 +121,7 @@ fun TeacherScreen(
                     if (selectedSubject != null && selectedLevel != null) {
                         navigator.navigateTo(
                             NavRoute.Booking.passParams(
-                                teacherId = it.id
+                                id = it.id
                             )
                         )
                     }
@@ -133,7 +133,5 @@ fun TeacherScreen(
             }
         }
     }
-
-
-
 }
+

@@ -12,24 +12,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun CalendarScreen(appNavigator: AppNavigator) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Calendar Screen (Placeholder)")
-        
+fun CalendarScreen(navigator: AppNavigator) {
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(16.dp),
+//        verticalArrangement = Arrangement.Center,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Text("Calendar Screen (Placeholder)")
+
+        ChooseDateEnhancedScreen(
+            navigator = navigator
+        )
 
 
-        Button(
-            onClick = { appNavigator.goBack() },
-            modifier = Modifier.padding(top = 16.dp)
-        ) {
-            Text("Go Back")
-        }
-    }
+
+//        Button(
+//            onClick = { navigator.goBack() },
+//            modifier = Modifier.padding(top = 16.dp)
+//        ) {
+//            Text("Go Back")
+//        }
+//    }
 }

@@ -8,14 +8,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tc.learn.ui.navigation.AppNavigator
 import androidx.compose.material3.Slider
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.tc.learn.ui.viewmodel.TeacherViewModel
 
 @Composable
-fun FilterScreen(appNavigator: AppNavigator) {
+fun FilterScreen(
+    navigator: AppNavigator,
+    viewModel: TeacherViewModel = hiltViewModel()
+) {
     var sortOption by remember { mutableStateOf("Recommended") }
     val sortOptions = listOf("Recommended", "Price: Low to High", "Price: High to Low")
 
     var priceRange by remember { mutableStateOf(50f) } // max price
     var starRange by remember { mutableStateOf(5f) } // max star rating
+
+
 
     Column(
         modifier = Modifier
@@ -25,7 +32,6 @@ fun FilterScreen(appNavigator: AppNavigator) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Filter Options", style = MaterialTheme.typography.headlineSmall)
-
         Spacer(modifier = Modifier.height(24.dp))
 
         // --- Sort Dropdown ---
@@ -64,7 +70,9 @@ fun FilterScreen(appNavigator: AppNavigator) {
             //Call filter functions from repo by viewmodel
 
             //need to make viewmodel available, and add new function to repository
+            viewModel.applyFilterPageFilters(sortOption, priceRange, starRange)
 
+            navigator.navigateTo("search") // close filter screen
 
         }) {
             Text("Apply Filters")

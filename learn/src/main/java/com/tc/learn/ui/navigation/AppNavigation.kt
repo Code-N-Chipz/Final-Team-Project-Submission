@@ -4,20 +4,31 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import javax.inject.Inject
 
-class ComposeAppNavigator @Inject constructor() : AppNavigator {
+class ComposeAppNavigator : AppNavigator {
+    private var internalController: NavController? = null
+    private var parentController: NavController? = null
 
-    private var navController: NavHostController? = null
-
-    // Single method to set controller
-    override fun setController(controller: NavController) {
-        navController = controller as? NavHostController
+    fun setControllers(internal: NavController, parent: NavController? = null) {
+        internalController = internal
+        parentController = parent
     }
 
     override fun navigateTo(route: String) {
-        navController?.navigate(route)
+        internalController?.let {
+            // Only use internal for navigation within the module
+            it.navigate(route)
+        } ?: parentController?.navigate(route)
     }
 
     override fun goBack() {
-        navController?.popBackStack()
+        internalController?.let {
+            if (!it.popBackStack()) {
+                parentController?.popBackStack()
+            }
+        } ?: parentController?.popBackStack()
+    }
+
+    override fun setController(controller: NavController) {
+        internalController = controller
     }
 }

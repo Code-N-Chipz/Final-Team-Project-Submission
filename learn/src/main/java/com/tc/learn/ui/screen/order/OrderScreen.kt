@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,6 +30,9 @@ import com.tc.learn.data.model.Teacher
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.tc.learn.ui.navigation.AppNavigator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 
 // Example data class for an order (adjust if you have a real one)
 data class Order(
@@ -55,12 +60,16 @@ fun OrderScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Row(
-                modifier = Modifier
-                    .width(32.dp)
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(onClick = { navigator.goBack() }) {
-                    Text(text = "<")
+                IconButton(onClick = { navigator.goBack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
                 }
             }
             Text(

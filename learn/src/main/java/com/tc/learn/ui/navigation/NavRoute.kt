@@ -5,16 +5,17 @@ sealed class NavRoute(val route: String) {
     object Start : NavRoute("start")
 
     object Search : NavRoute("search")
-    object Calander: NavRoute("calander") 
+    object Calendar: NavRoute("calendar")
 
-//    object Calander: NavRoute("calander") {
+//    object Calendar: NavRoute("calendar") {
 //        fun passId(id: String) = "calendar/$id"
 //    }
-    object Map : NavRoute("map/{teacherId}"){
+    object Map : NavRoute("map/{id}"){
         fun passId(id: String) = "map/$id"
     }
 
-    object TeacherDetail : NavRoute("teacher_detail/{teacherId}") {
+
+    object TeacherDetail : NavRoute("teacher_detail/{id}") {
         fun passId(id: String) = "teacher_detail/$id"
     }
 
@@ -22,8 +23,8 @@ sealed class NavRoute(val route: String) {
 //        fun passParams(teacherId: Int, subject: String, level: String) =
 //            "booking/$teacherId/$subject/$level"
 //    }
-    object Booking : NavRoute("booking/{teacherId}") {
-        fun passParams(teacherId: String) = "booking/$teacherId"
+    object Booking : NavRoute("booking/{id}") {
+        fun passParams(id: String) = "booking/$id"
     }
 
 

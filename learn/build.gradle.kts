@@ -1,8 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+//    id("com.google.devtools.ksp")
     id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+//    id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.android") version "2.57.2"
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -36,43 +38,53 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
+kotlin {
+    jvmToolchain(17)
+}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.volley)
-    implementation(libs.play.services.maps)
+
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(project(":core:design"))
+    implementation(project(":core:ui"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-
+    // Hilt - Dependency Injection
     implementation(libs.hilt.android)
-    debugImplementation(libs.androidx.ui.tooling)
     ksp(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.navigation:navigation-compose:2.9.3")
 
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.compose.material3.v120)
-    implementation(libs.androidx.compose.ui.tooling.preview.v153)
-    debugImplementation(libs.androidx.compose.ui.tooling.v153)
+    implementation("androidx.compose.material:material-icons-extended:1.5.0")
+    implementation("androidx.compose.material3:material3:1.2.0") // adjust if you use a different M3 version
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
 
-    implementation(libs.coil.compose) // Use latest version from https://coil-kt.github.io/coil/compose/
-
-//   Coil SVG
-    implementation(libs.coil.svg)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.maps.compose)
-    implementation(libs.play.services.maps)
-    implementation(libs.play.services.location)
+    implementation("com.google.maps.android:maps-compose:2.13.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
     //TcMap
-    implementation("com.tc:tcmap:1.0.0")
+    implementation(libs.tcmap)
 //    implementation(project(":core:design"))
+    implementation(libs.coil.compose)
+//    implementation(libs.coil.network)
+    implementation(libs.coil)
+
+
+    implementation(libs.coil.kt.coil.svg) // <-- SVG decoder
 
 }
