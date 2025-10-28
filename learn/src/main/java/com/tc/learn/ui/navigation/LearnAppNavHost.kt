@@ -19,15 +19,16 @@ fun AppNavHost(
 ) {
     // Set the NavController in our navigator
     navigator.setController(navController)
-    val viewModel: TeacherViewModel = hiltViewModel()
 
     NavHost(
         navController = navController,
         startDestination = NavRoute.Start.route,
     ) {
 
+
         // --- Start Screen ---
         composable(NavRoute.Start.route) {
+//            val viewModel: TeacherViewModel = hiltViewModel()
             StartScreen(
                 name = "John Doe",
                 navigator = navigator,
@@ -42,6 +43,7 @@ fun AppNavHost(
 
         // --- Search Screen ---
         composable(NavRoute.Search.route) {
+            val viewModel: TeacherViewModel = hiltViewModel()
             SearchScreen(
                 viewModel = viewModel,
                 onTeacherClick = { teacher ->
@@ -52,16 +54,16 @@ fun AppNavHost(
                     navigator.navigateTo(NavRoute.Map.passId(teacher.id))
                 },
                 onCalendarClick = { teacher ->
-//                    navigator.navigateTo(NavRoute.Calander.passId(teacher.id))
-                    navigator.navigateTo(NavRoute.Calander.route)
-                }
+                    navigator.navigateTo(NavRoute.Calendar.route)
+                },
+                navigator = navigator
             )
         }
 
         // --- Teacher Detail Screen ---
         composable(NavRoute.TeacherDetail.route) { backStackEntry ->
             val teacherId: String =
-                backStackEntry.arguments?.getString("teacherId") ?: return@composable
+                backStackEntry.arguments?.getString("id") ?: return@composable
             TeacherScreen(
                 navigator = navigator,
                 teacherId = teacherId,
@@ -77,7 +79,6 @@ fun AppNavHost(
             MapScreen(
                 navigator = navigator,
                 teacherId = teacherId,
-                viewModel = TODO(),
             )
         }
 
