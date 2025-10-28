@@ -10,6 +10,7 @@ import com.tc.laundry.ui.homepage.LaundryHomePage
 import com.tc.laundry.ui.map.MapScreen
 import com.tc.laundry.ui.startpage.LaundryStartPage
 import com.tc.laundry.ui.yourlaundrypage.YourLaundryPage
+import com.tc.ui.WeekCalendar
 
 @Composable
 fun LaundryApp(
@@ -50,7 +51,20 @@ fun LaundryApp(
         }
 
         composable("map"){
-            MapScreen()
+            MapScreen(
+                navController = navController
+            )
+        }
+
+        composable("calendar"){
+            WeekCalendar(
+                business = "Jenny Jones",
+                onBackClick = {
+                    navController.popBackStack()
+                    Unit
+                },
+                onSelectionChange = {}
+            )
         }
     }
 }

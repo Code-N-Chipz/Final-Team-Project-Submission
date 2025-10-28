@@ -83,7 +83,8 @@ fun FiltersPage(
         Spacer(modifier = Modifier.height(220.dp))
 
         PrimaryButtonColour(
-            text = R.string.laundry_apply_button_filters_page
+            text = R.string.laundry_apply_button_filters_page,
+            onClick = { navController.navigate("home") }
         )
     }
 }

@@ -2,6 +2,8 @@ package com.tc.laundry.ui.map
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -20,12 +22,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 
-data class BabysitterLocation(
+data class LaundryLocation(
     val name: String,
     val imageUrl: String,
     val rating: Float,
@@ -34,26 +38,28 @@ data class BabysitterLocation(
 )
 
 @Composable
-fun MapScreen() {
+fun MapScreen(
+    navController: NavController
+) {
     val context = LocalContext.current
     val userLocation = LatLng(-26.2041, 28.0473) // Johannesburg
 
-    val babysitters = listOf(
-        BabysitterLocation(
+    val laundry = listOf(
+        LaundryLocation(
             name = "Jenny Jones",
             imageUrl = "https://randomuser.me/api/portraits/women/65.jpg",
             rating = 4.8f,
             latitude = -26.2030,
             longitude = 28.0465
         ),
-        BabysitterLocation(
+        LaundryLocation(
             name = "Sacha Down",
             imageUrl = "https://randomuser.me/api/portraits/women/22.jpg",
             rating = 4.8f,
             latitude = -26.2060,
             longitude = 28.0500
         ),
-        BabysitterLocation(
+        LaundryLocation(
             name = "Ella Brown",
             imageUrl = "https://randomuser.me/api/portraits/women/10.jpg",
             rating = 4.7f,
@@ -66,18 +72,22 @@ fun MapScreen() {
         position = CameraPosition.fromLatLngZoom(userLocation, 15f)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+        .fillMaxSize()
+            .padding()
+    ) {
         // Google Map
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
             uiSettings = MapUiSettings(zoomControlsEnabled = false)
         ) {
-            babysitters.forEach { sitter ->
-                val location = LatLng(sitter.latitude, sitter.longitude)
+            laundry.forEach { person ->
+                val location = LatLng(person.latitude, person.longitude)
                 Marker(
                     state = MarkerState(position = location),
-                    title = sitter.name
+                    title = person.name
                 )
             }
 
@@ -101,7 +111,7 @@ fun MapScreen() {
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(20.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(Color.White)
         )
@@ -114,14 +124,18 @@ fun MapScreen() {
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             FloatingActionButton(
-                onClick = { /* TODO: Home */ },
+                onClick = {
+                    navController.navigate("home")
+                },
                 containerColor = Color.White
             ) {
                 Icon(Icons.Filled.Home, contentDescription = "Home", tint = Color(0xFFFF7A00))
             }
 
             FloatingActionButton(
-                onClick = { /* TODO: Filter */ },
+                onClick = {
+                    navController.navigate("filters")
+                },
                 containerColor = Color.White
             ) {
                 Icon(Icons.Filled.Tune, contentDescription = "Filter", tint = Color(0xFFFF7A00))
@@ -141,29 +155,25 @@ fun MapScreen() {
             containerColor = Color.White,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp)
+                .padding(bottom = 150.dp, end = 10.dp)
         ) {
             Icon(
                 painter = painterResource(id = android.R.drawable.ic_menu_mylocation),
                 contentDescription = "My Location",
-                tint = Color(0xFFFF7A00)
+                tint = Color.Blue
             )
         }
 
         // Bottom Cards
-        Row(
+        LazyRow(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+                .fillMaxWidth()
+                .padding(bottom = 40.dp, start = 27.dp)
+                .align(Alignment.BottomEnd)
         ) {
-            babysitters.take(2).forEachIndexed { index, sitter ->
-                BabysitterCard(
-                    sitter = sitter,
-                    modifier = Modifier
-                        .padding(horizontal = 6.dp)
-                        .weight(1f)
+            items(laundry){ person ->
+                LaundryCard(
+                    sitter = person
                 )
             }
         }
@@ -171,13 +181,14 @@ fun MapScreen() {
 }
 
 @Composable
-fun BabysitterCard(sitter: BabysitterLocation, modifier: Modifier = Modifier) {
+fun LaundryCard(sitter: LaundryLocation, modifier: Modifier = Modifier) {
     Card(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = modifier
             .height(90.dp)
+            .padding(end = 12.dp  )
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -215,5 +226,5 @@ fun BabysitterCard(sitter: BabysitterLocation, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewMapScreen() {
-    MapScreen()
+    MapScreen(rememberNavController())
 }
