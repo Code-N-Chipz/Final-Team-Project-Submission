@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
-
 android {
     namespace = "com.tc.doctor"
     compileSdk {
@@ -31,6 +30,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+kotlin {
+    jvmToolchain(17)
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -46,6 +48,18 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:ui"))
     implementation(project(":core:di"))
+
+
+    // Pradyumn Maps
+    implementation("com.tc:tcmap:1.0.0")
+
+    // coil for images
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    implementation(libs.androidx.compose.ui.unit)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

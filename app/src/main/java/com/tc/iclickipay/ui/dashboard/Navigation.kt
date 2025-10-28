@@ -7,13 +7,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.tc.doctor.ui.DoctorNavHost
+import com.tc.eat.presentation.navigation.EatNavigation
 import com.tc.laundry.ui.navigation.LaundryApp
 import com.tc.tinder.presentation.navigation.TinderNavHost
 
+
+@Preview
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
@@ -25,9 +30,11 @@ fun AppNavHost() {
         composable("screen_bank") { SimpleScreen("Bank Screen") }
         composable("screen_tinder") { TinderNavHost(parentNavController = navController) }
         composable("screen_chat") { SimpleScreen("Chat Screen") }
-        composable("screen_eat") { SimpleScreen("Restaurant Screen") }
+        composable<EatNavigation> { EatNavigation(
+            navToApp = {navController.navigate("dashboard")}
+        ) }
         composable("screen_hotel") { SimpleScreen("Hotel Screen") }
-        composable("screen_doctor") { SimpleScreen("Doctor Screen") }
+        composable("screen_doctor") { DoctorNavHost(parentNavController = navController) }
         composable("screen_pet") { SimpleScreen("Pet Screen") }
         composable("screen_mechanic") { SimpleScreen("Mechanic Screen") }
         composable("screen_pc_repair") {SimpleScreen("PcRepair Screen")}
