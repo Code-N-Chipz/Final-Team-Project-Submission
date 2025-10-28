@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Location permissions (used by Google Maps or your composables) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,7 +10,8 @@
         <!-- Only needed if this module directly uses Google Maps composables -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDVv1WEvpi6QiVX8lSiBflFhsHHRB3JgEY" />
+            android:value="AIzaSyDVv1WEvpi6QiVX8lSiBflFhsHHRB3JgEY"
+            tools:node="merge" />
     </application>
 
 </manifest>
