@@ -112,7 +112,8 @@ fun MechanicFormScreenWithDropdowns(
     modelOptions: List<String> = listOf("Lexus", "Toyota", "Honda", "Ford", "BMW"),
     yearOptions: List<String> = (2000..2025).map { it.toString() }.reversed().take(10),
     motorOptions: List<String> = listOf("Gasoil", "Petrol", "Electric", "Hybrid"),
-    onSuccess: (MechanicFormState) -> Unit,
+//    onSuccess: (MechanicFormState) -> Unit,
+    onSuccess: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -242,7 +243,7 @@ fun MechanicFormScreenWithDropdowns(
         state.error?.let { Text(text = it, color = Color.Red) }
 
         Button (
-            onClick = { viewModel.submit(onSuccess = { onSuccess(it) }) },
+            onClick = onSuccess,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))

@@ -7,12 +7,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.mechanic.navigation.navigation.MechanicRoute
+import com.tc.mechanic.ui.calender.CalenderView
+import com.tc.mechanic.ui.calender.CalenderViewModel
 import com.tc.mechanic.ui.filter.FilterViewModel
 import com.tc.mechanic.ui.filter.FiltersScreen
+import com.tc.mechanic.ui.map.MapScreen
+import com.tc.mechanic.ui.map.MapViewModel
+import com.tc.mechanic.ui.search.MechanicSearchScreen
+import com.tc.mechanic.ui.search.MechanicSearchViewModel
 import com.tc.mechanic.ui.selectcar.MechanicCarSelectorViewModel
 import com.tc.mechanic.ui.selectcar.MechanicFormScreenWithDropdowns
 import com.tc.mechanic.ui.starter.MechanicStarterScreen
 import com.tc.mechanic.ui.starter.MechanicStarterViewModel
+import com.tc.mechanic.ui.summery.OrderSummaryScreen
+import com.tc.mechanic.ui.summery.OrderSummaryViewModel
 
 @Composable
 fun MechanicNavGraph(
@@ -38,7 +46,40 @@ fun MechanicNavGraph(
             val viewModel = remember { FilterViewModel() }
             FiltersScreen (
                 viewModel = viewModel,
-                onApply = {}
+                onApply = { navController.navigate(MechanicRoute.Map.route) }
+            )
+        }
+
+        composable (MechanicRoute.Map.route) {
+            val viewModel = remember { MapViewModel() }
+            MapScreen (
+                viewModel = viewModel,
+                onSuccess = { navController.navigate(MechanicRoute.Search.route) }
+            )
+        }
+
+        composable (MechanicRoute.Search.route) {
+            val viewModel = remember { MechanicSearchViewModel() }
+            MechanicSearchScreen (
+                viewModel = viewModel,
+                onSuccess = {},
+                onCalenderClick = {navController.navigate(MechanicRoute.Calender.route) }
+            )
+        }
+
+        composable (MechanicRoute.Calender.route) {
+            val viewModel = remember { CalenderViewModel() }
+            CalenderView (
+                viewModel = viewModel,
+                onConfirmed = { navController.navigate(MechanicRoute.Summery.route) }
+            )
+        }
+
+        composable (MechanicRoute.Summery.route) {
+            val viewModel = remember { OrderSummaryViewModel() }
+            OrderSummaryScreen (
+                viewModel = viewModel,
+                onPlaceOrder = {  }
             )
         }
     }

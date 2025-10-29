@@ -122,7 +122,7 @@ fun CalenderView(
         state.error?.let { Text(text = it, color = Color.Red, modifier = Modifier.padding(vertical = 8.dp)) }
 
         Button (
-            onClick = { viewModel.confirmSelection(onSuccess = onConfirmed, onError = {}) },
+            onClick = onConfirmed,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))

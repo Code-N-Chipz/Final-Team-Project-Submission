@@ -62,7 +62,7 @@ import kotlin.math.roundToInt
 fun FiltersScreen(
     viewModel: FilterViewModel = viewModel (),
     modifier: Modifier = Modifier,
-    onApply: (FiltersUiState) -> Unit = {}
+    onApply: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
     Column (modifier = modifier.fillMaxSize().padding(16.dp)) {
@@ -146,7 +146,7 @@ fun FiltersScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         Button (
-            onClick = { viewModel.apply(onApplied = { onApply(it) }) },
+            onClick =  onApply,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))

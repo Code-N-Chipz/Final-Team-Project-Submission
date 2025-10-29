@@ -111,7 +111,7 @@ fun MechanicSearchScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Column(
                         modifier = Modifier.weight(1f)
-                            .clickable{ viewModel.calenderSelect(onSuccess = {onCalenderClick}, onError = {} ) }
+                            .clickable( onClick = onCalenderClick )
                         ) {
                         Text("CHOOSE DATE", fontSize = 10.sp, color = Color.Gray)
                         Text(state.date, fontWeight = FontWeight.Bold)

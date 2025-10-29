@@ -128,7 +128,7 @@ import com.tc.mechanic.R
 @Composable
 fun OrderSummaryScreen(
     viewModel: OrderSummaryViewModel = viewModel (),
-    profileImageRes: Int = R.drawable.jenny_johns_round, // Replace with your drawable
+    profileImageRes: Int = R.drawable.jenny_johns_round,
     onPlaceOrder: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsState()

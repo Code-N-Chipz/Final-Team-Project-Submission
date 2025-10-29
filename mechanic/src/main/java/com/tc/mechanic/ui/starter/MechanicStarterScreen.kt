@@ -17,16 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.rememberAsyncImagePainter
 import com.tc.mechanic.R
-import com.tc.mechanic.ui.search.MechanicSearchViewModel
 
 
 @Composable
@@ -48,7 +45,7 @@ fun MechanicStarterScreen(
 
             // Illustration placeholder
             Image(
-                painter = painterResource(R.drawable.mechanic),
+                painter = painterResource(R.drawable.ic_mechanic_app),
                 contentDescription = "Mechanic Illustration",
                 modifier = Modifier
                     .fillMaxWidth()
