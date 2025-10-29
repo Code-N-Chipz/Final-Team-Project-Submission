@@ -28,12 +28,113 @@ import com.tc.learn.data.model.Level
 import com.tc.learn.data.model.Subject
 import com.tc.learn.data.model.Teacher
 import com.tc.learn.ui.navigation.AppNavigator
+import com.tc.learn.ui.screen.filter.DropdownMenuDemo
 import com.tc.learn.utils.navigation.NavRoute
 
 //This is the page where you have clicked on a teacher in the list, and now you have to
 // choose between the options
 //(Level & Subject)
 // And then when you click then you will be taken to the place order page
+
+//@Composable
+//fun TeacherScreen(
+//    navigator: AppNavigator,
+//    teacherId: String = "", // Pass the selected teacher here
+//    viewModel: TeacherDetailViewModel = hiltViewModel(),
+//    onButtonClick: () -> Unit,
+//) {
+//    var selectedSubject by remember { mutableStateOf<Subject?>(null) }
+//    var selectedLevel by remember { mutableStateOf<Level?>(null) }
+//
+//    // Collect the teacher from the ViewModel
+//    val selectedTeacher by viewModel.teacher.collectAsState()
+//
+//    // Load teacher once when composable enters composition
+//    LaunchedEffect(teacherId) {
+//        viewModel.loadTeacher(teacherId)
+//    }
+//
+//    selectedTeacher?.let {
+//        Column(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(16.dp),
+//            verticalArrangement = Arrangement.spacedBy(24.dp)
+//        ) {
+//            Text(
+//                text = "Select Lesson & Level for ${it.name}",
+//                style = MaterialTheme.typography.headlineSmall
+//            )
+//
+//            // --- Subject Selection ---
+//            Column {
+//                Text("Select Subject:", style = MaterialTheme.typography.titleMedium)
+//                it.subjects.forEach { subject ->
+//                    Row(
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .selectable(
+//                                selected = selectedSubject == subject,
+//                                onClick = { selectedSubject = subject }
+//                            )
+//                            .padding(8.dp)
+//                    ) {
+//                        RadioButton(
+//                            selected = selectedSubject == subject,
+//                            onClick = { selectedSubject = subject }
+//                        )
+//                        Spacer(Modifier.width(8.dp))
+//                        Text(subject.name)
+//                    }
+//                }
+//            }
+//
+//            // --- Level Selection ---
+//            Column {
+//                Text("Select Level:", style = MaterialTheme.typography.titleMedium)
+//                it.levels.forEach { level ->
+//                    Row(
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .selectable(
+//                                selected = selectedLevel == level,
+//                                onClick = { selectedLevel = level }
+//                            )
+//                            .padding(8.dp)
+//                    ) {
+//                        RadioButton(
+//                            selected = selectedLevel == level,
+//                            onClick = { selectedLevel = level }
+//                        )
+//                        Spacer(Modifier.width(8.dp))
+//                        Text(level.name.replace("_", " "))
+//                    }
+//                }
+//            }
+//
+//            Spacer(modifier = Modifier.weight(1f))
+//
+//            // --- Next Button ---
+//            Button(
+//                onClick = {
+//                    if (selectedSubject != null && selectedLevel != null) {
+//                        navigator.navigateTo(
+//                            NavRoute.Booking.passParams(
+//                                id = it.id
+//                            )
+//                        )
+//                    }
+//                },
+//                enabled = selectedSubject != null && selectedLevel != null,
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Text("Next")
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun TeacherScreen(
@@ -42,8 +143,8 @@ fun TeacherScreen(
     viewModel: TeacherDetailViewModel = hiltViewModel(),
     onButtonClick: () -> Unit,
 ) {
-    var selectedSubject by remember { mutableStateOf<Subject?>(null) }
-    var selectedLevel by remember { mutableStateOf<Level?>(null) }
+    var selectedSubject by remember { mutableStateOf<String?>(null) }
+    var selectedLevel by remember { mutableStateOf<String?>(null) }
 
     // Collect the teacher from the ViewModel
     val selectedTeacher by viewModel.teacher.collectAsState()
@@ -53,7 +154,7 @@ fun TeacherScreen(
         viewModel.loadTeacher(teacherId)
     }
 
-    selectedTeacher?.let {
+    selectedTeacher?.let { teacher ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -61,56 +162,32 @@ fun TeacherScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Text(
-                text = "Select Lesson & Level for ${it.name}",
+                text = "Select Lesson & Level for ${teacher.name}",
                 style = MaterialTheme.typography.headlineSmall
             )
 
-            // --- Subject Selection ---
+            // --- Subject Dropdown ---
             Column {
                 Text("Select Subject:", style = MaterialTheme.typography.titleMedium)
-                it.subjects.forEach { subject ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .selectable(
-                                selected = selectedSubject == subject,
-                                onClick = { selectedSubject = subject }
-                            )
-                            .padding(8.dp)
-                    ) {
-                        RadioButton(
-                            selected = selectedSubject == subject,
-                            onClick = { selectedSubject = subject }
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(subject.name)
-                    }
-                }
+                val subjectOptions = teacher.subjects.map { it.name }
+                DropdownMenuDemo(
+                    modifier = Modifier,
+                    options = subjectOptions,
+                    selectedOption = selectedSubject ?: "Select Subject",
+                    onSelect = { selectedSubject = it }
+                )
             }
 
-            // --- Level Selection ---
+            // --- Level Dropdown ---
             Column {
                 Text("Select Level:", style = MaterialTheme.typography.titleMedium)
-                it.levels.forEach { level ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .selectable(
-                                selected = selectedLevel == level,
-                                onClick = { selectedLevel = level }
-                            )
-                            .padding(8.dp)
-                    ) {
-                        RadioButton(
-                            selected = selectedLevel == level,
-                            onClick = { selectedLevel = level }
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(level.name.replace("_", " "))
-                    }
-                }
+                val levelOptions = teacher.levels.map { it.name.replace("_", " ") }
+                DropdownMenuDemo(
+                    modifier = Modifier,
+                    options = levelOptions,
+                    selectedOption = selectedLevel ?: "Select Level",
+                    onSelect = { selectedLevel = it }
+                )
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -120,9 +197,7 @@ fun TeacherScreen(
                 onClick = {
                     if (selectedSubject != null && selectedLevel != null) {
                         navigator.navigateTo(
-                            NavRoute.Booking.passParams(
-                                id = it.id
-                            )
+                            NavRoute.Booking.passParams(id = teacher.id)
                         )
                     }
                 },
@@ -134,4 +209,3 @@ fun TeacherScreen(
         }
     }
 }
-

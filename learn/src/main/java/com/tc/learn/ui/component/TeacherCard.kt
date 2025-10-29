@@ -1,5 +1,7 @@
 package com.tc.learn.ui.component
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +31,7 @@ import com.tc.learn.data.model.Level
 import com.tc.learn.data.model.Subject
 import com.tc.learn.data.model.Teacher
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.zIndex
 import com.tc.learn.R
 
 
@@ -39,11 +42,14 @@ fun TeacherCard(
     imageLoader: ImageLoader,
     onTeacherClick: (Teacher) -> Unit,
     onMapClick: (Teacher) -> Unit,
+    onCalendarClick: (Teacher) -> Unit,
+
 ) {
     Column(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .border(1.dp, color = theme.primaryColor)
             .clickable { onTeacherClick(teacher) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -78,14 +84,15 @@ fun TeacherCard(
     }
 }
 
-
 @Composable
 fun TeacherListCard(
     modifier: Modifier,
     teachers: List<Teacher>,
     onTeacherClick: (Teacher) -> Unit,
 ) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier
+        .fillMaxSize().zIndex(0f), // always above background and list
+    ) {
         items(teachers) { teacher ->
             SearchCard(
                 teacher = teacher,
@@ -148,6 +155,7 @@ fun TeacherImage(
         modifier = Modifier
             .size(100.dp)
             .clip(CircleShape)
+            .background(theme.buttonPrimary)
     )
 }
 

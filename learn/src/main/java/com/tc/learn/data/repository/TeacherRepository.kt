@@ -87,4 +87,18 @@ class TeacherRepository @Inject constructor() {
         return getTeachers().firstOrNull { it.id == id }
     }
 
+    // Get all unique levels from teachers
+    fun getAllLevels(): List<Level> {
+        return getTeachers()
+            .flatMap { it.levels }  // combine all levels
+            .distinct()             // remove duplicates
+    }
+
+    // Get all unique subjects from teachers
+    fun getAllSubjects(): List<Subject> {
+        return getTeachers()
+            .flatMap { it.subjects }  // combine all subjects
+            .distinct()               // remove duplicates
+    }
+
 }

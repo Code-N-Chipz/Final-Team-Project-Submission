@@ -2,6 +2,7 @@
 agp = "8.13.0"
 coilCompose = "2.7.0"
 coilSvg = "2.7.0"
+coilHttp = "2.4.0"
 constraintlayoutCompose = "1.1.0"
 hiltAndroid = "2.57.2"
 kotlin = "2.2.0"
@@ -16,7 +17,7 @@ appcompat = "1.7.1"
 material = "1.13.0"
 jetbrainsKotlinJvm = "2.2.20"
 uiUnit = "1.9.4"
-navigationRuntimeKtx = "2.9.5" 
+navigationRuntimeKtx = "2.9.5"
 navigationComposeVersion = "2.9.5"
 navigationCompose = "2.9.5"
 runtime = "1.9.4"
@@ -40,8 +41,7 @@ androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecy
 
 coil = { module = "io.coil-kt:coil", version.ref = "coilCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
-coil-kt-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilSvg" }
-coil-network = { module = "io.coil-kt:coil-okhttp", version.ref = "coilCompose" }
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilSvg" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }

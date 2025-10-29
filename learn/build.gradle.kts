@@ -79,12 +79,10 @@ dependencies {
 
     //TcMap
     implementation(libs.tcmap)
-//    implementation(project(":core:design"))
+    //Coil
     implementation(libs.coil.compose)
-//    implementation(libs.coil.network)
     implementation(libs.coil)
-
-
-    implementation(libs.coil.kt.coil.svg) // <-- SVG decoder
+    implementation(libs.coil.svg) // <-- SVG decoder
+//    implementation(libs.coil.okhttp)
 
 }

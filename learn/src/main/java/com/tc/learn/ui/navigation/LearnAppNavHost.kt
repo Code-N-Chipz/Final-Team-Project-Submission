@@ -36,7 +36,6 @@ fun LearnAppNavHost(parentNavController: NavController) {
                 onButtonClick = { navigator.navigateTo(NavRoute.Search.route) }
             )
         }
-
         // --- Search Screen ---
         composable(NavRoute.Search.route) {
             val viewModel: TeacherViewModel = hiltViewModel()   // activity-scoped
@@ -50,11 +49,10 @@ fun LearnAppNavHost(parentNavController: NavController) {
                     navigator.navigateTo(NavRoute.Map.passId(teacher.id))
                 },
                 onCalendarClick = { teacher ->
-                    navigator.navigateTo(NavRoute.Calendar.route)
+                    navigator.navigateTo(NavRoute.Calendar.passId(teacher.id))
                 }
             )
         }
-
         // --- Teacher Detail Screen ---
         composable(
             route = NavRoute.TeacherDetail.route,
@@ -64,7 +62,9 @@ fun LearnAppNavHost(parentNavController: NavController) {
             TeacherScreen(
                 navigator = navigator,
                 teacherId = teacherId,
-                onButtonClick = { navigator.navigateTo(NavRoute.Calendar.route) }
+                onButtonClick = {
+                    navigator.navigateTo(NavRoute.Calendar.route)
+                }
             )
         }
 

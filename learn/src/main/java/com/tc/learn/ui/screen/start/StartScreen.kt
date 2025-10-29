@@ -59,13 +59,16 @@ fun StartScreen(
         Spacer(modifier = Modifier.height(32.dp))
         // Image at the top
         AsyncImage(
-            model = R.drawable.start_image,
+            model = R.drawable.teacher_splash_image,
             contentDescription = "Teacher Start Screen Image",
             imageLoader = imageLoader,
             modifier = Modifier
-                .size(100.dp)
+                .size(320.dp)
         )
-
+        Spacer(
+            modifier = Modifier
+                .height(16.dp)
+        )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()

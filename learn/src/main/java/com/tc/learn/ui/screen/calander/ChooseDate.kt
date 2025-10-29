@@ -34,12 +34,18 @@ import java.time.format.DateTimeFormatter
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
-
-
+import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChooseDateEnhancedScreen(
+fun CalendarScreen(
     navigator: AppNavigator,
     childImage: Int = R.drawable.teacher_splash_image
 ) {
@@ -206,4 +212,3 @@ fun ChooseDateEnhancedScreen(
         }
     }
 }
-

@@ -33,8 +33,21 @@ class TeacherViewModel @Inject constructor(
     var maxPrice by mutableStateOf(500f)
     var minStar by mutableStateOf(0f)
 
+    // --- Levels & Subjects ---
+    private val _levels = MutableStateFlow<List<Level>>(emptyList())
+    val levels: MutableStateFlow<List<Level>> = _levels
+
+    private val _subjects = MutableStateFlow<List<Subject>>(emptyList())
+    val subjects: MutableStateFlow<List<Subject>> = _subjects
+
     init {
         loadTeachers()
+        loadLevelsAndSubjects()
+    }
+
+    private fun loadLevelsAndSubjects() {
+        _levels.value = repository.getAllLevels()
+        _subjects.value = repository.getAllSubjects()
     }
 //    fun getTeacherById(id: String?): Teacher? = repository.getTeacherById(id)
     fun getTeacherById(id: String): Teacher? {

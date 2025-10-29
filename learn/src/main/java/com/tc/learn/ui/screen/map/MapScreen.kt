@@ -79,7 +79,15 @@ fun MapScreen (
                 val location = LatLng(teacher.latitude, teacher.longitude)
                 Marker(
                     state = MarkerState(position = location),
-                    title = teacher.name
+                    title = teacher.name,
+                    onClick = {
+                        // Navigate to appointment page with the teacher ID
+
+                        //Should this page just be shown over the top of the maps page?
+
+                        navigator.navigateTo("appointment/${teacher.id}")
+                        true // return true to indicate that the click event is consumed
+                    }
                 )
             }
 

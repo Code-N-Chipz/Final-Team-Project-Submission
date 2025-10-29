@@ -31,7 +31,7 @@ import com.tc.tcmap.ui.MapType
 import com.tc.tcmap.ui.TcMap
 import theme.backgroundColor
 import theme.secondaryColor
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.tc.doctor.ui.DoctorDest
 import com.tc.ui.CommonButton
 import com.tc.ui.WeekCalendar

@@ -5,11 +5,11 @@ sealed class NavRoute(val route: String) {
     object Start : NavRoute("start")
 
     object Search : NavRoute("search")
-    object Calendar: NavRoute("calendar")
+//    object Calendar: NavRoute("calendar")
 
-//    object Calendar: NavRoute("calendar") {
-//        fun passId(id: String) = "calendar/$id"
-//    }
+    object Calendar: NavRoute("calendar") {
+        fun passId(id: String) = "calendar/$id"
+    }
     object Map : NavRoute("map/{id}"){
         fun passId(id: String) = "map/$id"
     }

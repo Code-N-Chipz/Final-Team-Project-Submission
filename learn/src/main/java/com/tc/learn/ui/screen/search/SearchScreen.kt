@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.ImageLoader
 import coil.compose.AsyncImage
@@ -45,6 +46,7 @@ import com.tc.learn.ui.component.TeacherCard
 import com.tc.learn.ui.navigation.AppNavigator
 import com.tc.learn.ui.screen.filter.DropdownMenuDemo
 import com.tc.learn.ui.viewmodel.TeacherViewModel
+import theme.backgroundColor
 import theme.primaryColor
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -54,33 +56,22 @@ fun SearchScreen(
     viewModel: TeacherViewModel = hiltViewModel(),
     onTeacherClick: (Teacher) -> Unit,
     onMapClick: (Teacher) -> Unit,
-    onCalendarClick: (List<Teacher>) -> Unit,
+    onCalendarClick: (Teacher) -> Unit,
     navigator: AppNavigator,
 ) {
+
     val teachers by viewModel.teachers.collectAsState()
-    var nameQuery by remember { mutableStateOf("") }
-    var selectedLevels by remember { mutableStateOf<List<Level>>(emptyList()) }
-    var selectedSubjects by remember { mutableStateOf<List<Subject>>(emptyList()) }
-    var locationQuery by remember { mutableStateOf("") }
-    val imageLoader: ImageLoader = viewModel.imageLoader as ImageLoader
+    val imageLoader: ImageLoader = viewModel.imageLoader
 
-    // Dropdown states
-    var expandedLesson by remember { mutableStateOf(false) }
-    var expandedLevel by remember { mutableStateOf(false) }
-    var selectedLesson by remember { mutableStateOf<String?>(null) }
-    var selectedLevel by remember { mutableStateOf<String?>(null) }
-    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
-
-    // Sample data (replace with data from repo, via viewmodel)
-    val lessons = listOf("Math", "English", "Physics")
-    val levels = listOf("Beginner", "Intermediate", "Advanced")
 
     // Wrap entire content in the background + overlay structure
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(theme.primaryColor)
+            .background(backgroundColor)
     ) {
+
+
         //Background Image
         AsyncImage(
             //Draw image of search_screen_bg.png
@@ -88,147 +79,56 @@ fun SearchScreen(
             contentDescription = "Search Background",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(150.dp), // adjust height
+                .height(150.dp) // adjust height
+                .zIndex(0f),
             contentScale = ContentScale.Crop
         )
 
         // --- Overlay content box (above background) ---
         OverlayerBox(
             modifier = Modifier
-                .padding(top = 100.dp), // adjust as needed
-            navigator = navigator,
-            onTeacherClick = onTeacherClick,
-            onMapClick = onMapClick
+                .padding(top = 100.dp) // adjust as needed
+            .zIndex (2f), // always above background and list
+        navigator = navigator,
+        onTeacherClick = onTeacherClick,
+        onMapClick = onMapClick,
+        teachers = teachers,
+        imageLoader = imageLoader,
         )
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-
-        Spacer(
-            modifier = Modifier
-                .height(4.dp)
-        )
-
-        //Choose date
         Column(
             modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            Text(text = "Choose Date")
 
-            //Go to Calendar Screen
-//            Button(onClick = { onCalendarClick(teachers) })
-            ButtonWithTextAndIcon(
-                text = "Choose Date",
-                onClick = { onCalendarClick(teachers) },
-                iconPainter = painterResource(id = com.tc.design.R.drawable.calendar_grey_icon)
-            )
-            DropdownMenuDemo(
-                options = levels,
-                selectedOption = selectedLevel.toString(),
-                onSelect = { selectedLevel = it }
-            )
-
-            DropdownMenuDemo(
-                options = lessons,
-                selectedOption = selectedLesson.toString(),
-                onSelect = { selectedLesson = it }
-            )
-
-            // --- Name search ---
-            OutlinedTextField(
-                value = nameQuery,
-                onValueChange = { nameQuery = it },
-                label = { Text("Search by name") },
-                modifier = Modifier.width(60.dp)
-            )
-
-            // --- Location search ---
-            OutlinedTextField(
-                value = locationQuery,
-                onValueChange = { locationQuery = it },
-                label = { Text("Location") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-//            // --- Search button ---
-//            Button(
-//                onClick = {
-//                    viewModel.filterTeachers(
-//                        levels = selectedLevels,
-//                        subjects = selectedSubjects,
-//                        nameQuery = nameQuery,
-//                        locationQuery = locationQuery
-//                    )
-//                },
-//                modifier = Modifier.fillMaxWidth()
-//            ) {
-//                Text("Search")
-//            }
-
-            ButtonWithTextOnly(
-                "Search",
-                onClick = {
-                    viewModel.filterTeachers(
-                        levels = selectedLevels,
-                        subjects = selectedSubjects,
-                        nameQuery = nameQuery,
-                        locationQuery = locationQuery
-                    )
-                },
+            Spacer(
                 modifier = Modifier
+                    .height(80.dp)
             )
-
-            // --- Row with Search & Filter ---
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Button(
-                    onClick = {
-                        viewModel.filterTeachers(
-                            levels = selectedLevels,
-                            subjects = selectedSubjects,
-                            nameQuery = nameQuery,
-                            locationQuery = locationQuery
-                        )
-                    }
-                ) {
-                    Text("Search")
-                }
-
-//            // Small filter button
-//            Button(
-//                onClick = { /* Open filter dialog/sheet */ },
-//                modifier = Modifier.height(48.dp) // keeps height consistent with search
-//            ) {
-//                Text("Filter")
-//            }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            //Filter button needs to go here
-            // --- LazyColumn list of TeacherCards ---
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(teachers) { teacher ->
-                    TeacherCard(
-                        modifier = Modifier.fillMaxWidth(),
-                        teacher = teacher,
-                        imageLoader = imageLoader,
-                        onTeacherClick = { onTeacherClick(teacher) },
-                        onMapClick = { onMapClick(teacher) }
-                    )
-                }
-            }
-
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        //Filter button needs to go here
+        // --- LazyColumn list of TeacherCards ---
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxSize()
+                .zIndex(-2f)
+        ) {
+            items(teachers) { teacher ->
+                TeacherCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    teacher = teacher,
+                    imageLoader = imageLoader,
+                    onTeacherClick = { onTeacherClick(teacher) },
+                    onMapClick = { onMapClick(teacher) },
+                    onCalendarClick = { onCalendarClick(teacher) }
+                )
+            }
+        }
+
     }
 }
+
+
