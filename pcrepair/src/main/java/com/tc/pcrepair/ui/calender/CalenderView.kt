@@ -43,7 +43,8 @@ import java.util.Locale
 fun CalenderView(
     viewModel: CalenderViewModel,
     modifier: Modifier = Modifier,
-    onConfirmed: (LocalDate, String) -> Unit = { _, _ -> }
+//    onConfirmed: (LocalDate, String) -> Unit = { _, _ -> }
+    onConfirmed: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
     val isPreview = LocalInspectionMode.current
@@ -120,7 +121,7 @@ fun CalenderView(
         state.error?.let { Text(text = it, color = Color.Red, modifier = Modifier.padding(vertical = 8.dp)) }
 
         Button (
-            onClick = { viewModel.confirmSelection(onSuccess = onConfirmed, onError = {}) },
+            onClick =  onConfirmed,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
         ) {
@@ -135,7 +136,8 @@ fun CalenderView(
 fun CalenderPreview() {
     val vm = remember { CalenderViewModel(null) }
     Surface {
-        CalenderView(viewModel = vm, onConfirmed = { d, t -> /* preview */ })
+//        CalenderView(viewModel = vm, onConfirmed = { d, t -> /* preview */ })
+        CalenderView(vm, onConfirmed = {})
     }
 }
 

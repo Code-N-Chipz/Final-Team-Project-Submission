@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tc.mechanic.ui.MechanicEntryPoint
 import com.tc.mechanic.ui.MechanicNavGraph
+import com.tc.pcrepair.ui.PCRepairEntryPoint
 
 
 //import com.tc.tinder.presentation.navigation.TinderNavHost
@@ -36,7 +37,7 @@ fun AppNavHost() {
         composable("screen_doctor") { SimpleScreen("Doctor Screen") }
         composable("screen_pet") { SimpleScreen("Pet Screen") }
         composable("screen_mechanic") { MechanicEntryPoint() }
-        composable("screen_pc_repair") {SimpleScreen("PcRepair Screen")}
+        composable("screen_pc_repair") { PCRepairEntryPoint() }
         composable("screen_learn") { SimpleScreen("Learn Screen") }
         composable("screen_handy_man") { SimpleScreen("Handy Man Screen")}
 //        composable("screen_laundry") { LaundryApp(parentNavController = navController) }

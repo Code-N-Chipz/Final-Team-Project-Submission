@@ -61,6 +61,7 @@ dependencies {
 //    implementation(project(":tinder"))
     implementation(project(":uber"))
     implementation(project(":mechanic"))
+    implementation(project(":pcrepair"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

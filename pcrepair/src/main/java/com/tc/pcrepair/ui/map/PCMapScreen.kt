@@ -1,7 +1,7 @@
 package com.tc.pcrepair.ui.map
 
-import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -50,11 +51,14 @@ import com.tc.pcrepair.data.PcRepairLocationData
 
 
 @Composable
-fun MapScreen() {
+fun PCMapScreen(
+    viewModel: PCMapScreenViewModel = viewModel(),
+    onSelection: () -> Unit
+) {
     val context = LocalContext.current
     val userLocation = LatLng(-26.2041, 28.0473) // Johannesburg
 
-    val babysitters = listOf(
+    val pc_repaire = listOf(
         PcRepairLocationData(
             name = "Jenny Jones",
             imageUrl = R.drawable.jenny.toString(),
@@ -96,11 +100,11 @@ fun MapScreen() {
             cameraPositionState = cameraPositionState,
             uiSettings = MapUiSettings(zoomControlsEnabled = false)
         ) {
-            babysitters.forEach { sitter ->
-                val location = LatLng(sitter.latitude, sitter.longitude)
+            pc_repaire.forEach { repair ->
+                val location = LatLng(repair.latitude, repair.longitude)
                 Marker (
                     state = MarkerState(position = location),
-                    title = sitter.name
+                    title = repair.name
                 )
             }
 
@@ -181,12 +185,13 @@ fun MapScreen() {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            babysitters.take(2).forEachIndexed { index, pcRepair ->
+            pc_repaire.take(2).forEachIndexed { index, pcRepair ->
                 PcRepairCard(
                     pcRepair = pcRepair,
                     modifier = Modifier
                         .padding(horizontal = 6.dp)
-                        .weight(1f)
+                        .weight(1f),
+                    onSelection
                 )
             }
         }
@@ -194,13 +199,17 @@ fun MapScreen() {
 }
 
 @Composable
-fun PcRepairCard(pcRepair: PcRepairLocationData, modifier: Modifier = Modifier) {
+fun PcRepairCard(
+    pcRepair: PcRepairLocationData,
+    modifier: Modifier = Modifier,
+    onSelection: () -> Unit) {
     Card (
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = modifier
             .height(90.dp)
+            .clickable( onClick = onSelection)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -237,6 +246,6 @@ fun PcRepairCard(pcRepair: PcRepairLocationData, modifier: Modifier = Modifier) 
 
 @Preview(showSystemUi = true)
 @Composable
-fun PreviewMapScreen() {
-    MapScreen()
+fun PCPreviewMapScreen() {
+    PCMapScreen(onSelection = {})
 }

@@ -1,4 +1,4 @@
-package com.tc.pcrepair.ui.selectcar
+package com.tc.pcrepair.ui.selectpc
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

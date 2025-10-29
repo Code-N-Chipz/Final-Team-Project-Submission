@@ -211,7 +211,7 @@ fun MechanicCardView(viewModel: MapViewModel, onSuccess: () -> Unit, mechanic: M
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = modifier
             .height(90.dp)
-            .clickable{ viewModel.submit(onSuccess = { onSuccess }, onError = {}) }
+            .clickable( onClick = onSuccess )
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

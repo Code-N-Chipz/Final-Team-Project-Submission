@@ -1,4 +1,4 @@
-package com.tc.pcrepair.ui.selectcar
+package com.tc.pcrepair.ui.selectpc
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tc.pcrepair.data.PcRepairFormState
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -102,10 +103,11 @@ private fun DropdownField(
 
 @Composable
 fun PcRepairFormScreen(
-    viewModel: PcRepairSelectorViewModel,
-    typeOptions: List<String>,
-    problemOptions: List<String>,
-    onNext: (PcRepairFormState) -> Unit,
+    viewModel: PcRepairSelectorViewModel = viewModel (),
+    typeOptions: List<String> = listOf("Laptop", "DeskTop", "Tab"),
+    problemOptions: List<String> =listOf("Not Working", "Screen Broken", "Water Damage", "Heating", "Battery"),
+//    onNext: (PcRepairFormState) -> Unit,
+    onNext: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -218,7 +220,7 @@ fun PcRepairFormScreen(
         state.error?.let { Text(text = it, color = Color.Red) }
 
         Button (
-            onClick = { viewModel.submit(onSuccess = { onNext(it) }) },
+            onClick =  onNext,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
         ) {

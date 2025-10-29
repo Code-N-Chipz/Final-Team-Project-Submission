@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 
-class MechanicSearchViewModel () : ViewModel() {
+class MechanicSearchViewModel  : ViewModel() {
     private val _uiState = MutableStateFlow(MechanicSearchData())
     val uiState: StateFlow<MechanicSearchData> = _uiState.asStateFlow()
 

@@ -22,11 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tc.pcrepair.R
 
 
 @Composable
 fun PcRepairStarterScreen(
+    viewModel: PcRepairStarterViewModel = viewModel(),
     onLetsGo: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -79,8 +81,8 @@ fun PcRepairStarterScreen(
     }
 }
 
-@Preview(showBackground = true, name = "Mechanic Intro Preview")
+@Preview(showBackground = true, name = "PC Intro Preview")
 @Composable
-fun MechanicIntroPreview() {
+fun PCIntroPreview() {
     PcRepairStarterScreen(onLetsGo = {})
 }
