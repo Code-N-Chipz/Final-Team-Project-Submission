@@ -52,15 +52,11 @@ rules for commit messages etc.
 
 ### Tutorial on Git
 ```zsh
-# Prerequisite) only need to do this on initial setup once
+# 1) only need to do this on initial setup once
 # A) Remote 'development' already exists
 git fetch origin
 # B) Create local 'development' branch tracking remote 'development'
 git checkout -b development origin/development
-
-# 1) Sync development
-git checkout development
-git pull origin development
 
 # 2) Create a working branch from development
 # this creates a local branch and switches to it
@@ -116,7 +112,12 @@ git push
 git fetch origin
 # (while your feature branch is checked out) rewrites your local feature branch on top of the latest remote‑tracking development. 
 # you are rebasing your feature branch onto it (image below)
-git rebase origin/development
+
+git checkout development
+# update local development branch to be up to date with remote development
+git pull origin development
+# rebase your feature branch onto latest development
+git rebase feature/pet/2210
 
 # Resolve conflicts if any (continuation of step 7), then:
 # - these conflicts will only happen if you and someone else modified the same lines in the same files
@@ -124,26 +125,12 @@ git rebase origin/development
 git add -A
 git rebase --continue
 
-# 8) Push rebased branch safely (only your branch; never use --force on shared branches)
-# - is needed after a rebase because history changed. It safely updates only your remote branch if the remote hasn’t advanced (updated) unexpectedly.
-# - After a rebase, your branch’s commit IDs change, so you’ll push with --force-with-lease.
-# - It ensures that the remote branch is only overwritten if its state has not changed since the last fetch.
-# - Preventing Overwrites: If a collaborator has pushed new commits to the remote branch since the last fetch, git push --force-with-lease will detect this and prevent the push, thus preventing accidental overwriting of their work. 
-#   - In contrast, git push --force would blindly overwrite the remote branch, potentially leading to lost work.
-git push --force-with-lease
+# 8) Push rebased development branch to remote development
+git push
 
 # ---------- ALL REVIEW FEEDBACK ADDRESSED AND CONFLICTS RESOLVED --------------
 # -------- END OF FEATURE BRANCH -> REVIEWERS MIGHT REQUEST A CHANGE -----------
 # --------------- BUT STOP MAKING OTHER CHANGES TO BRANCH ----------------------
-
-# 8.5) Squash commits if needed - Handled by Gabe and Chris?
-    # - Squashing combines multiple commits into one, useful for cleaning up commit history before merging.
-    # - Typically done by reviewer or maintainer before merging.
-    # 1. Locally, run `git rebase -i origin/development`
-    # 2. In the editor, change "pick" to "squash" (or "s") for commits you want to combine
-    # 3. Save and close the editor
-    # 4. Edit the commit message as needed, then save and close
-    # 5. Push the squashed commits with `git push --force-with-lease`
 
 # 9) After PR is merged, delete local and remote branch
 # switch back to development (local)
@@ -153,15 +140,10 @@ git pull origin development
 # delete local feature branch
 git branch -d feature/pet/2210 
 # delete remote feature branch
-git push origin --delete feature/pet/2210 
+git push -d origin feature/pet/2210
 
 # 10) Repeat starting from step 2
-``` 
-
-#### Rebase vs Merge
-![img_2.png](img_2.png)
-![img.png](img.png)
-
+```
 
 #### CODEOWNERS (auto-assign reviewers)
 - A CODEOWNERS file maps paths to owners. 

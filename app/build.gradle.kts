@@ -57,8 +57,11 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
-//    implementation(project(":laundry"))
-//    implementation(project(":tinder"))
+    implementation(project(":doctor"))
+
+    implementation(project(":eat"))
+    implementation(project(":laundry"))
+    implementation(project(":tinder"))
     implementation(project(":uber"))
     implementation(project(":mechanic"))
     implementation(project(":pcrepair"))
@@ -72,9 +75,4 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-    implementation(project(":core:di"))
-
-    // Hilt - Dependency Injection
-//    implementation("com.google.dagger:hilt-android:2.57.1")
-//    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
 }

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
         maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
         google()
         mavenCentral()
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
     }
 }
 
@@ -45,5 +46,3 @@ include(":babysitter")
 include(":houseclean")
 include(":home")
 include(":auth")
-
-

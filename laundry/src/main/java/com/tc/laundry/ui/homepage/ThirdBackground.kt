@@ -69,7 +69,7 @@ fun ThirdBackground(
                 tint = primaryColor,
                 modifier = Modifier
                     .clickable{
-                        navController
+                        navController.navigate("your_laundry")
                     }
             )
         }
@@ -91,7 +91,7 @@ private fun CardView(
         modifier = modifier
             .fillMaxWidth()
             .clickable{
-                navController.navigate("map")
+                navController.navigate("")
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
@@ -103,7 +103,7 @@ private fun CardView(
             horizontalAlignment = Alignment.Start,
             ) {
             Image(
-                painter = painterResource(R.drawable.background),
+                painter = painterResource(R.drawable.laundry_girl),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()

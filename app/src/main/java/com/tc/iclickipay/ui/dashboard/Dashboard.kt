@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.tc.eat.presentation.navigation.EatNavigation
 import com.tc.iclickipay.R
 
 
@@ -25,7 +26,7 @@ import com.tc.iclickipay.R
 fun Dashboard(
     modifier: Modifier = Modifier,
     navController: NavController
-){
+) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -35,15 +36,18 @@ fun Dashboard(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        items(iconItems){ item ->
+        items(iconItems) { item ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
                     .aspectRatio(1f)
-                    .clickable{
-                        navController.navigate(item.id)
+                    .clickable {
+                        if (item.id.equals("screen_eat"))
+                            navController.navigate(EatNavigation)
+                        else
+                            navController.navigate(item.id)
                     }
-            ){
+            ) {
                 Image(
                     painter = painterResource(item.drawableResId),
                     contentDescription = null,
