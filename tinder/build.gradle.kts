@@ -65,8 +65,10 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.activity:activity-compose")
-    implementation("androidx.navigation:navigation-compose:2.7.5")
-    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil.compose)
+//    implementation(libs.coil.network)
 
     // tests
     testImplementation(libs.junit)

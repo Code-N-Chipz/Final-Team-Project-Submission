@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -28,7 +29,8 @@
         </activity>
          <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="Xyzzzz" />
+            android:value="AIzaSyCUGd4WhI_8ZqQ-bRnWDRbtq1X7wEaKJD8"
+             tools:replace="android:value" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

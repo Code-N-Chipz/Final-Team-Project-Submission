@@ -58,7 +58,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.tc.tcmap.domain.MarkerInfo
 import com.tc.tcmap.domain.PersonInfo
 import com.tc.tcmap.ui.MapType

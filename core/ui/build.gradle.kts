@@ -54,7 +54,8 @@ dependencies {
 
     // coil for images
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
+//    implementation(libs.coil.network)
+    implementation(libs.coil)
 
 //    Unit testing
     testImplementation(libs.junit)

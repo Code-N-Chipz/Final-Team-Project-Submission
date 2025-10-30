@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         google {
@@ -8,18 +9,23 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
         gradlePluginPortal()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+}
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
         google()
         mavenCentral()
         maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
+        maven { url = uri("https://raw.githubusercontent.com/LoserHasToFall98/tcmap/master/") }
     }
 }
+
 
 rootProject.name = "ICLICKIPAY"
 include(":app")

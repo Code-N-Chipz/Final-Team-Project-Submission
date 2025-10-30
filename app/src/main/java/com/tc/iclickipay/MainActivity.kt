@@ -11,14 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.tc.iclickipay.ui.dashboard.AppNavHost
 import com.tc.iclickipay.ui.dashboard.Dashboard
 import com.tc.iclickipay.ui.theme.ICLICKIPAYTheme
+import com.tc.learn.ui.navigation.LearnAppNavHost
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+
+
         setContent {
             ICLICKIPAYTheme {
 

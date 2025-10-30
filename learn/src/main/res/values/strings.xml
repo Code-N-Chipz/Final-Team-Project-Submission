@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- START PAGE -->
+    <string name="learn_start_page">learn</string>
+    <string name="learn_info_start_page">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis sit amet odio in egestas. Pellen tesque ultricies justo.</string>
+    <string name="learn_button_start_page">Let\'s go</string>
+
+    <!-- HOME PAGE -->
+    <string name="learn_favorites_home_page_second_background">Favorites</string>
+    <string name="learn_orders_home_page_second_background">Orders</string>
+    <string name="learn_search_home_page_overlayer_box">Search location name</string>
+    <string name="learn_choose_dates_home_page_overlayer_box">CHOOSE DATES</string>
+    <string name="learn_KG_home_page_overlayer_box">KG</string>
+    <string name="learn_dry_home_page_overlayer_box">dry</string>
+    <string name="learn_ironing_home_page_overlayer_box">IRONING</string>
+    <string name="learn_search_button_home_page_overlayer_box">Search</string>
+
+    <!-- YOUR learn PAGE -->
+    <string name="learn_header_your_learn_page">Your learn</string>
+    <string name="learn_learn_kg_your_learn_page">learn/kg</string>
+    <string name="learn_dry_cleaning_your_learn_page">Dry cleaning</string>
+    <string name="learn_ironing_your_learn_page">Ironing</string>
+    <string name="learn_ironing_yes_your_learn_page">Yes</string>
+    <string name="learn_ironing_no_your_learn_page">No</string>
+    <string name="learn_availability_your_learn_page">Availability</string>
+    <string name="learn_next_button_your_learn_page">Next</string>
+
+    <!-- FILTERS PAGE -->
+    <string name="learn_header_filters_page">Filters</string>
+    <string name="learn_header_action_clear_filters_page">Clear</string>
+    <string name="learn_sort_by_filters_page">Sort by</string>
+    <string name="learn_sort_by_drop_down_recommend_filters_page">Recommend</string>
+    <string name="learn_price_kg_filters_page">Price/Kg</string>
+    <string name="learn_Rate_filters_page">Rate</string>
+    <string name="learn_apply_button_filters_page">Apply</string>
+
+    <!-- PlACE ORDER PAGE-->
+    <string name="learn_place_order_button_place_order_page">Place order</string>
+
+</resources>

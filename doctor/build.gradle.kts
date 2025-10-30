@@ -49,13 +49,16 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:di"))
 
-
     // Pradyumn Maps
     implementation("com.tc:tcmap:1.0.0")
 
     // coil for images
+    implementation(libs.coil)
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
+//    implementation(libs.coil.okhttp)
+    implementation(libs.coil.svg)
+
+
 
     implementation(libs.androidx.compose.ui.unit)
     implementation(libs.androidx.navigation.runtime.ktx)

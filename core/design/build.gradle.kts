@@ -32,9 +32,6 @@ android {
         compose = true
     }
 
-    composeOptions {
-
-    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

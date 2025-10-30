@@ -58,8 +58,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.constraintlayout.compose)
+
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
+//    implementation(libs.coil.network)
+    implementation(libs.coil)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

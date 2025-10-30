@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android") version "2.57.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
 
 }
@@ -63,6 +65,7 @@ dependencies {
     implementation(project(":laundry"))
     implementation(project(":tinder"))
     implementation(project(":uber"))
+    implementation(project(":learn"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -71,6 +74,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
 }
