@@ -26,5 +26,5 @@ val textSecondary = Color(0xFFFF791BL)      // Secondary text color (orange)
 val textTertiary = Color(0xFFC4C8CFL)       // Tertiary text color (grey)
 val textQuaternary = Color(0xFF000000L)     // Quaternary text (black)
 
-val textPenternary = Color(0xFF9D9D9D)     // Quaternary text (black)
+val textPenternary = Color(0xFF2A2A2A)     // Quaternary text (black)
 

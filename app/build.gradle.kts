@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
-
+    
 }
 
 android {
@@ -38,12 +38,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         compose = true
     }
+}
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -65,6 +65,7 @@ dependencies {
     implementation(project(":uber"))
     implementation(project(":mechanic"))
     implementation(project(":pcrepair"))
+  
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

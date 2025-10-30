@@ -76,6 +76,8 @@ fun WeekCalendar(
     imageUrl: String,
     name: String,
     onBackClick: () -> Unit = {}
+    business: Any,
+    onBackClick: () -> Unit?
 ) {
 
     fun timeSlots(range: ClosedRange<LocalTime>, step: Long): List<LocalTime> {
@@ -99,6 +101,7 @@ fun WeekCalendar(
 
     Column {
         TopBar(onBackClick, name, imageUrl)
+        TopBar(onBackClick, business.toString())
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
         MonthYearUi(
             initialDate,
@@ -420,5 +423,7 @@ private fun WeekCalendarPreview(){
         onBackClick = {},
         name = "Jenny",
         imageUrl = ""
+        business = "Preview Business",
+        onBackClick = {}
     )
 }
