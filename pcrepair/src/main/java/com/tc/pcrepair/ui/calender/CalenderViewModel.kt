@@ -31,7 +31,7 @@ class CalenderViewModel(
     private fun generateTimesFor(date: LocalDate): List<String> {
         // example: every 30 minutes from 13:00 to 17:00
         val list = mutableListOf<String>()
-        for (h in 13..16) {
+        for (h in 8..20) {
             list.add(String.format(Locale.US, "%02d:00 PM", if (h > 12) h - 12 else h))
             list.add(String.format(Locale.US, "%02d:30 PM", if (h > 12) h - 12 else h))
         }

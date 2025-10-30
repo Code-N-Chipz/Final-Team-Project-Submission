@@ -41,11 +41,11 @@ fun PcRepairStarterScreen(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(54.dp))
 
             // Illustration placeholder
             Image(
-                painter = painterResource(R.drawable.pc_repair),
+                painter = painterResource(R.drawable.ic_pc_repair),
                 contentDescription = "PcRepair Illustration",
                 modifier = Modifier
                     .fillMaxWidth()

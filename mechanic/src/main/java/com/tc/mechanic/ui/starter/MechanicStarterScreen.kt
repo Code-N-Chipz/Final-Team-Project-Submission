@@ -41,7 +41,7 @@ fun MechanicStarterScreen(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(54.dp))
 
             // Illustration placeholder
             Image(

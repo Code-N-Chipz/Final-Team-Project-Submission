@@ -401,6 +401,7 @@ fun DiscreteTimeSlider(
                 Box(
                     modifier = Modifier
                         .weight(1f)
+//                        .height(15.dp)
                         .fillMaxHeight()
                         .pointerInput(idx, widthPx) {
                             detectDragGestures(

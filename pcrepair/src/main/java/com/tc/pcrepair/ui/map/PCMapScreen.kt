@@ -61,28 +61,28 @@ fun PCMapScreen(
     val pc_repaire = listOf(
         PcRepairLocationData(
             name = "Jenny Jones",
-            imageUrl = R.drawable.jenny.toString(),
+            imageUrl = R.drawable.jenny,
             rating = 4.8f,
             latitude = -26.2030,
             longitude = 28.0465
         ),
         PcRepairLocationData(
             name = "Jean Down",
-            imageUrl = R.drawable.jean.toString(),
+            imageUrl = R.drawable.jean,
             rating = 4.8f,
             latitude = -26.2060,
             longitude = 28.0500
         ),
         PcRepairLocationData(
             name = "Person 3",
-            imageUrl = R.drawable.person_3.toString(),
+            imageUrl = R.drawable.person_3,
             rating = 4.7f,
             latitude = -26.2050,
             longitude = 28.0430
         ),
         PcRepairLocationData(
             name = "Person 4",
-            imageUrl = R.drawable.person_4.toString(),
+            imageUrl = R.drawable.person_4,
             rating = 4.7f,
             latitude = -26.2050,
             longitude = 28.0430

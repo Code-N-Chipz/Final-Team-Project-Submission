@@ -1,6 +1,6 @@
 package com.tc.mechanic.ui.map
 
-import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -48,9 +48,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.tc.mechanic.R
-import com.tc.mechanic.data.FiltersUiState
 import com.tc.mechanic.data.MechanicLocationData
-import com.tc.mechanic.ui.filter.FilterViewModel
 
 
 @Composable
@@ -65,28 +63,28 @@ fun MapScreen(
     val mechanics = listOf(
         MechanicLocationData(
             name = "Jenny Jones",
-            imageUrl = R.drawable.jenny.toString(),
+            imageUrl = R.drawable.jenny,
             rating = 4.8f,
             latitude = -26.2030,
             longitude = 28.0465
         ),
         MechanicLocationData(
             name = "Jean Down",
-            imageUrl = R.drawable.jean.toString(),
+            imageUrl = R.drawable.jean,
             rating = 4.8f,
             latitude = -26.2060,
             longitude = 28.0500
         ),
         MechanicLocationData(
             name = "Person 3",
-            imageUrl = R.drawable.person_3.toString(),
+            imageUrl = R.drawable.person_3,
             rating = 4.7f,
             latitude = -26.2050,
             longitude = 28.0430
         ),
         MechanicLocationData(
             name = "Person 4",
-            imageUrl = R.drawable.person_4.toString(),
+            imageUrl = R.drawable.person_4,
             rating = 4.7f,
             latitude = -26.2050,
             longitude = 28.0430
@@ -217,6 +215,15 @@ fun MechanicCardView(viewModel: MapViewModel, onSuccess: () -> Unit, mechanic: M
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(12.dp)
         ) {
+//            its working with the preview, but Async image doesnt work in preview
+//            Image(
+//                painter = painterResource(mechanic.imageUrl),
+//                contentDescription = mechanic.name,
+//                contentScale = ContentScale.Crop,
+//                modifier = Modifier
+//                    .size(50.dp)
+//                    .clip(CircleShape)
+//            )
             AsyncImage(
                 model = mechanic.imageUrl,
                 contentDescription = mechanic.name,

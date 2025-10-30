@@ -123,6 +123,7 @@ fun CalenderView(
         Button (
             onClick =  onConfirmed,
             modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF7A00))
         ) {
             Text(text = if (state.loading) "Confirming..." else "Confirm", color = Color.White)
