@@ -45,6 +45,30 @@ class TeacherViewModel @Inject constructor(
         loadLevelsAndSubjects()
     }
 
+    fun filterTeachersByLevelAndSubject(selectedLevel: Level?, selectedSubject: Subject?) {
+        _teachers.value = repository.filterTeachersByLevelAndSubject(
+            level = selectedLevel,
+            subject = selectedSubject
+        )
+    }
+
+    fun filterTeachersByLevelSubjectAndName(
+        selectedLevelName: String?,
+        selectedSubjectName: String?,
+        nameQuery: String
+    ) {
+        val levelObj = _levels.value.firstOrNull { it.name == selectedLevelName }
+        val subjectObj = _subjects.value.firstOrNull { it.name == selectedSubjectName }
+
+        _teachers.value = repository.filterTeachersByLevelSubjectAndName(
+            level = levelObj,
+            subject = subjectObj,
+            nameQuery = nameQuery
+        )
+    }
+
+
+
     private fun loadLevelsAndSubjects() {
         _levels.value = repository.getAllLevels()
         _subjects.value = repository.getAllSubjects()

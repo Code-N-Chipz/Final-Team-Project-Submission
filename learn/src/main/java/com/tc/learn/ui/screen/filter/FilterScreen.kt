@@ -1,5 +1,6 @@
 package com.tc.learn.ui.screen.filter
 
+import android.R.attr.label
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.tc.learn.ui.navigation.AppNavigator
 import androidx.compose.material3.Slider
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tc.learn.ui.viewmodel.TeacherViewModel
 import theme.backgroundColor
@@ -133,5 +135,53 @@ fun DropdownMenuDemo(
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TextWithDropdown(
+    modifier: Modifier = Modifier,
+    options: List<String>,
+    selectedOption: String,
+    onSelect: (String) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var text by remember { mutableStateOf(selectedOption) }
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier
+    ) {
+        // 🔹 The TextField that looks editable but opens dropdown
+        OutlinedTextField(
+            value = text,
+            onValueChange = {
+                text = it
+                expanded = true
+            },
+            label = { "Text here?" },
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            modifier = Modifier
+                .menuAnchor() // important for positioning
+                .fillMaxWidth(),
+            singleLine = true,
+            textStyle =  LocalTextStyle.current.copy(fontSize = 14.sp),
+        )
+
+        // 🔹 Dropdown content
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option) },
+                    onClick = { }
+                )
+            }
+        }
     }
 }

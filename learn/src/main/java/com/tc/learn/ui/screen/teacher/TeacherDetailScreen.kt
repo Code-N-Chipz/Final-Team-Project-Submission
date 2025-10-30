@@ -197,7 +197,8 @@ fun TeacherScreen(
                 onClick = {
                     if (selectedSubject != null && selectedLevel != null) {
                         navigator.navigateTo(
-                            NavRoute.Booking.passParams(id = teacher.id)
+//                            NavRoute.Booking.passParams(id = teacher.id)
+                            NavRoute.Calendar.passId(teacher.id)
                         )
                     }
                 },

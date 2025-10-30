@@ -24,7 +24,7 @@ sealed class NavRoute(val route: String) {
 //            "booking/$teacherId/$subject/$level"
 //    }
     object Booking : NavRoute("booking/{id}") {
-        fun passParams(id: String) = "booking/$id"
+        fun passId(id: String) = "booking/$id"
     }
 
 

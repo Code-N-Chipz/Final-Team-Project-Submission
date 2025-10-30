@@ -1,7 +1,6 @@
 package com.tc.learn.ui.screen.search
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,15 +11,14 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.ImageLoader
 import com.tc.learn.data.model.Teacher
@@ -44,9 +41,10 @@ import com.tc.learn.ui.navigation.AppNavigator
 import com.tc.learn.R
 import com.tc.learn.data.model.Level
 import com.tc.learn.data.model.Subject
-import com.tc.learn.ui.component.ButtonWithTextOnly
+import com.tc.learn.ui.common.HorizontalSpacerGrayLine
 import com.tc.learn.ui.screen.filter.DropdownMenuDemo
 import com.tc.learn.ui.viewmodel.TeacherViewModel
+import theme.backgroundColor
 import java.time.LocalDate
 
 
@@ -60,104 +58,136 @@ fun OverlayerBox(
     teachers: List<Teacher>,
     imageLoader: ImageLoader,
 ) {
-    val teachers: List<Teacher> = teachers
     var nameQuery by remember { mutableStateOf("") }
-    var selectedLevels by remember { mutableStateOf<List<Level>>(emptyList()) }
-    var selectedSubjects by remember { mutableStateOf<List<Subject>>(emptyList()) }
-    var locationQuery by remember { mutableStateOf("") }
-    val imageLoader: ImageLoader = viewModel.imageLoader
+    var selectedSubject by remember { mutableStateOf<String?>(null) }
+    var selectedLevel by remember { mutableStateOf<String?>(null) }
+    var selectedDate by remember { mutableStateOf<String?>(null) }
 
-    // Dropdown states
-    var expandedsubject by remember { mutableStateOf(false) }
-    var expandedLevel by remember { mutableStateOf(false) }
-    var selectedsubject by remember { mutableStateOf<String?>("Select subject") }
-    var selectedLevel by remember { mutableStateOf<String?>("Select Education") }
-    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
-
-    // Sample data (replace with data from repo, via viewmodel)
-//    val subjects = listOf("Math", "English", "Physics")
-//    val levels = listOf("Beginner", "Intermediate", "Advanced")
     val levels by viewModel.levels.collectAsState()
     val subjects by viewModel.subjects.collectAsState()
 
-//    Surface (modifier = Modifier) {
-        Box(
-            modifier = modifier
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        tonalElevation = 8.dp,
+        shadowElevation = 8.dp,
+        shape = RoundedCornerShape(16.dp),
+        color = Color.White
+    ) {
+        Column(
+            modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .clip(RoundedCornerShape(16.dp))  // <-- rounded corners
-                .background(Color.White)           // background after clipping
-                .zIndex(1f)
-                .padding(horizontal = 16.dp)
-
+                .background(Color.White)
+                .padding(16.dp)
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            // --- Location Header ---
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Johannesburg, 1 Road Ubuntu",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                Text(
+                    text = "Johannesburg, 1 Road Ubuntu",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Icon(
+                    painter = painterResource(R.drawable.location_crosshair_icon),
+                    contentDescription = null,
+                    modifier = Modifier.clickable { navigator.navigateTo("map") }
+                )
+            }
 
-                    Icon(
-                        painter = painterResource(R.drawable.location_crosshair_icon),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clickable(
-                                onClick = { }
-                            )
+            HorizontalSpacerGrayLine()
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // --- 3 Dropdown Row ---
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Column 1: Choose Date
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "CHOOSE DATE",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 14.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    DropdownMenuDemo(
+                        modifier = Modifier.fillMaxWidth(),
+                        options = listOf("2025-03-20", "2025-03-21", "2025-03-22"),
+                        selectedOption = selectedDate ?: "Select Date",
+                        onSelect = { selectedDate = it }
                     )
                 }
 
-                HorizontalSpacerGrayLine()
-
-//            TeacherCard(
-//                modifier = Modifier,
-//                teacher = teacher,
-//                imageLoader = imageLoader,
-//                onTeacherClick = onTeacherClick
-//            ) {
-//
-//            }
-                HorizontalSpacerGrayLine()
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier
-                ) {
-
+                // Column 2: Lesson
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Lesson",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 14.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    // Lesson Dropdown
                     DropdownMenuDemo(
-                        modifier = Modifier,
-                        options = levels.map { it.name },
-                        selectedOption = selectedLevel ?: "Select Level",
-                        onSelect = { name ->
-                            selectedLevel = levels.firstOrNull { it.name == name } as String?
+                        modifier = Modifier.fillMaxWidth(),
+                        options = subjects.map { it.name },
+                        selectedOption = selectedSubject ?: "Select Lesson",
+                        onSelect = { selected ->
+                            selectedSubject = selected
+                            viewModel.filterTeachersByLevelSubjectAndName(
+                                selectedLevelName = selectedLevel,
+                                selectedSubjectName = selectedSubject,
+                                nameQuery = nameQuery
+                            )
                         }
                     )
-
-                    DropdownMenuDemo(
-                        modifier = Modifier.background(theme.backgroundColor),
-                        options = subjects.map { it.name },
-                        selectedOption = selectedsubject ?: "Select Subject",
-                        onSelect = { name ->
-                            selectedsubject = subjects.firstOrNull { it.name == name } as String?
-                        },
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                Search(onClickSearchIcon = { }, nameQuery = nameQuery)
+                // Column 3: Level
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Level",
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 14.sp
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    // Level Dropdown
+                    DropdownMenuDemo(
+                        modifier = Modifier.fillMaxWidth(),
+                        options = levels.map { it.name },
+                        selectedOption = selectedLevel ?: "Select Level",
+                        onSelect = { selected ->
+                            selectedLevel = selected
+                            viewModel.filterTeachersByLevelSubjectAndName(
+                                selectedLevelName = selectedLevel,
+                                selectedSubjectName = selectedSubject,
+                                nameQuery = nameQuery
+                            )
+                        }
+                    )
+                }
             }
+            //Search bar on text change, update the TeacherList
+            SearchTextBox(
+                value = nameQuery,
+                onValueChange = { query ->
+                    nameQuery = query
+                    viewModel.filterTeachersByLevelSubjectAndName(
+                        selectedLevelName = selectedLevel,
+                        selectedSubjectName = selectedSubject,
+                        nameQuery = nameQuery
+                    )
+                },
+                placeholder = "Search teacher or lesson"
+            )
         }
-//    }
+    }
 }
+
 
 //@Composable
 //private fun TeacherInfo(
@@ -200,9 +230,8 @@ fun OverlayerBox(
 //    }
 //}
 
-@Suppress("UnusedPrivateMember")
 @Composable
-private fun Info(
+fun Info(
     modifier: Modifier = Modifier,
     text: String = "",
 ) {
@@ -226,52 +255,41 @@ private fun Info(
 }
 
 @Composable
-private fun Search(
-    modifier: Modifier = Modifier,
-    onClickSearchIcon: () -> Unit = {},
+fun Search(
     nameQuery: String,
+    onNameQueryChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    onClickSearchIcon: () -> Unit,
 ) {
-    var nameQuery by remember { mutableStateOf("") }
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable(
-                onClick = onClickSearchIcon
+    OutlinedTextField(
+        value = nameQuery,
+        onValueChange = onNameQueryChange,
+        singleLine = true,
+        placeholder = {
+            Text(
+                text = stringResource(R.string.learn_search_home_page_overlayer_box),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Gray
             )
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-                .align(Alignment.Center)
-        ) {
-//            Text(
-//                text = stringResource(R.string.learn_search_home_page_overlayer_box),
-//                fontSize = 14.sp,
-//                fontWeight = FontWeight.Medium,
-//                color = Color.Gray
-//            )
-
-            SearchTextBox(
-                value = nameQuery,
-                onValueChange = { nameQuery = it },
-                placeholder = stringResource(R.string.learn_search_home_page_overlayer_box)
-            )
-
+        },
+        trailingIcon = {
             Icon(
                 painter = painterResource(R.drawable.magnifying_glass_grey_icon),
-                contentDescription = null,
+                contentDescription = "Search Icon",
                 tint = Color.Gray
             )
-        }
-    }
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .height(52.dp)
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(12.dp)
+    )
 }
 
-@Suppress("UnusedPrivateMember")
 @Composable
-private fun VerticalSpacerGrayLine(
+fun VerticalSpacerGrayLine(
     modifier: Modifier = Modifier,
 ) {
     Spacer(
@@ -298,6 +316,7 @@ fun HorizontalSpacerGrayLine(
             .background(color)
     )
 }
+
 @Composable
 fun SearchTextBox(
     value: String,
@@ -327,6 +346,5 @@ fun SearchTextBox(
         modifier = modifier
             .fillMaxWidth()
             .height(52.dp),
-        shape = RoundedCornerShape(12.dp)
     )
 }

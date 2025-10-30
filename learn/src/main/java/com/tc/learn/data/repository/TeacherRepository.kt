@@ -20,6 +20,30 @@ class TeacherRepository @Inject constructor() {
         }
     }
 
+    // Filter teachers by a single level and a single subject
+    fun filterTeachersByLevelAndSubject(
+        level: Level? = null,
+        subject: Subject? = null
+    ): List<Teacher> {
+        return getTeachers().filter { teacher ->
+            val matchesLevel = level == null || teacher.levels.contains(level)
+            val matchesSubject = subject == null || teacher.subjects.contains(subject)
+            matchesLevel && matchesSubject
+        }
+    }
+    // Filter teachers by level, subject, and name
+    fun filterTeachersByLevelSubjectAndName(
+        level: Level? = null,
+        subject: Subject? = null,
+        nameQuery: String = ""
+    ): List<Teacher> {
+        return getTeachers().filter { teacher ->
+            val matchesLevel = level == null || teacher.levels.contains(level)
+            val matchesSubject = subject == null || teacher.subjects.contains(subject)
+            val matchesName = nameQuery.isBlank() || teacher.name.contains(nameQuery, ignoreCase = true)
+            matchesLevel && matchesSubject && matchesName
+        }
+    }
     // Filter by ANY of multiple subjects
     fun getTeachersBySubjects(subjects: List<Subject>): List<Teacher> {
         if (subjects.isEmpty()) return getTeachers()
@@ -27,7 +51,6 @@ class TeacherRepository @Inject constructor() {
             teacher.subjects.any { it in subjects }
         }
     }
-
     // Search by name (case-insensitive)
     fun searchTeachersByName(query: String): List<Teacher> {
         if (query.isBlank()) return getTeachers()
@@ -35,7 +58,6 @@ class TeacherRepository @Inject constructor() {
             teacher.name.contains(query, ignoreCase = true)
         }
     }
-
     // Search by location (case-insensitive)
     //Needs to be updated to maps inclusion
 
