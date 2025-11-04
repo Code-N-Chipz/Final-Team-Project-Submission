@@ -9,4 +9,6 @@ sealed class MechanicRoute(val route: String) {
     object Search : MechanicRoute("mechanic_search")
     object Summery : MechanicRoute("Summery")
     object Calender : MechanicRoute("Calender")
+
+    object Dashboard: MechanicRoute("dashboard")
 }

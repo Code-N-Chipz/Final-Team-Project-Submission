@@ -224,7 +224,7 @@ fun OrderSummaryScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { viewModel.placeOrder(onPlaceOrder) },
+                onClick = onPlaceOrder,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),

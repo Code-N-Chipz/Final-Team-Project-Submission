@@ -83,7 +83,7 @@ dependencies {
 
 //    Importing Map
 //    implementation(libs.tcmap)
-//    implementation(project(":core:di"))
+//    implementation(project(":app"))
     implementation("com.google.maps.android:maps-compose:2.10.0")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
